@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Créé mon compte
+{% endblock %}
+
+{% block content %}
+	<div class="center">
+
+		<h1>
+			Crée un compte
+		</h1>
+
+		{% for flashError in app.flashes('verify_email_error') %}
+			<div class="alert alert-danger" role="alert">
+				{{ flashError }}
+			</div>
+		{% endfor %}
+		{{ form_start(registrationForm) }}
+		{{ form_row(registrationForm.email) }}
+		{{ form_row(registrationForm.password.first, {
+            'attr': { 'placeholder': 'Mot De Passe' }
+        }) }}
+		{{ form_row(registrationForm.password.second, {
+            'attr': { 'placeholder': 'Confirmez Mot De Passe' }
+        }) }}
+		{{ form_row(registrationForm.agreeTerms, { label: "J'accepte les CGU" }) }}
+
+		<button type="submit" class="btn submit">
+			S'inscrire
+		</button>
+		{{ form_end(registrationForm) }}
+	</div>
+
+
+{% endblock %}

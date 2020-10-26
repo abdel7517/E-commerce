@@ -1,0 +1,65 @@
+{% extends "base.html.twig" %}
+{% block content %}
+	{% set i = 1 %}
+	{% for order in orders %}
+		<div class='history'>
+			<p>
+				Commande n°
+				{{ i }}
+				datant du
+				{{ order.date|date("d/m/y") }}
+			</p>
+			<table>
+				<th>
+					Produit
+				</th>
+				<th>
+					Prix
+				</th>
+				<th>
+					Quantité
+				</th>
+				<th>
+					Total
+				</th>
+				<tbody>
+
+					{% for cart in order.cart %}
+						<tr>
+							<td>
+								{{ cart.product.name}}
+							</td>
+							<td>
+								{{cart.product.price}}
+							</td>
+							<td>
+								{{cart.quantity}}
+							</td>
+							<td>
+								{{cart.quantity * cart.product.price}}
+							</td>
+						</tr>
+					{% endfor %}
+					{% if order.expedition == 'livraison' %}
+					<tr>
+								<td>
+									Livraison
+								</td>
+								<td>
+									90€
+								</td>
+								<td>
+									1
+								</td>
+								<td>
+									90€
+								</td>
+							</tr>
+					{% endif %}
+				</tbody>
+			</table>
+		</div>
+		{% set i = i + 1 %}
+		<br>
+	{% endfor %}
+{% endblock %}

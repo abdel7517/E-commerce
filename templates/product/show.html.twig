@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Produit
+{% endblock %}
+{% block show %}
+	<h1 class='h1_show'>
+		{{ product.name }}
+	</h1>
+
+
+	<section class="h-flex-show padding">
+		<div id="images-containers">
+			<img class="border" id="imageMain" src=" {{ asset('/uploads/'~ product.image.name ) }} " alt="" srcset="" width="150px">
+			<div class="flex justifyW60">
+				{% for image in product.images %}
+					<div>
+						<img class="border other-img" id="images" src=" {{ asset('/uploads/'~ image.name ) }} " onclick="changeMainImage('{{asset('/uploads/'~ image.name ) }}')" alt="">
+					</div>
+				{% endfor %}
+
+			</div>
+		</div>
+
+		<div id="description">
+			<p class='loc'>
+				<a href=" {{ path('product_index') }} ">
+					Boutique
+				</a>
+				/
+				<a href=" {{ path('product_category', {'category': main_category }) }} ">
+					{{   main_category}}
+				</a>
+				/
+				<a href="{{ path('product_products', {'category_product': product.categorie, 'main_category': main_category}) }}">
+					{{ product.categorie }}
+				</a>
+				/
+				<span class="actual-loc">
+					{{ product.reference }}
+				</span>
+			</p>
+		</p>
+		<p class='TC'>
+			Référence :
+			{{ product.reference }}
+		</p>
+		<p id="price" class="font-size TC">
+			{{ product.price }}
+			€
+		</p>
+		<p class="panier TC">
+			<a href=" {{ path('cart_add', {'id': product.id, 'category': 'produit'}) }} " class="font-size">
+				Ajoutez au panier
+				<i class="fas fa-shopping-cart"></i>
+			</a>
+		</p>
+		<p class='TC category'>
+			catégories:
+			{{ product.categorie}}
+		</p>
+		<p class='TC description'>
+			Description:
+			<br>
+			{{ product.description }}
+		</p>
+	</div>
+
+
+</section>
+<a href="{{ path('product_products', {'category_product': product.categorie, 'main_category': main_category}) }}" class='to_back'>
+	<i class="fas fa-long-arrow-alt-left"></i>
+	Retour
+</a>
+
+
+{% if is_granted('ROLE_ADMIN') %}
+	<a href="{{ path('product_edit', {'id': product.id}) }}">
+		editer
+	</a>
+	{{ include('product/_delete_form.html.twig') }}
+{% endif %}{% endblock %}{% block js %}
+<script src="{{ asset('/js/main.js')}}"></script>{% endblock %}

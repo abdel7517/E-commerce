@@ -1,0 +1,32 @@
+{% extends "admin/baseAdmin.html.twig" %}
+
+           
+    {% block content %}
+  
+        {% for category in categories %}
+
+                   <!-- Single Catagory -->
+                <div class="single-products-catagory clearfix">
+                    <a href="{{ path('admin_product_category', { 'category': category.name }) }}">
+
+                  
+                                <img src=" {{ asset('/uploads/'~ category.image.name  ) }} " alt="" srcset="" width="150px">
+                      
+
+                        <!-- Hover Content -->
+                        <div class="hover-content">
+                            <div class="line"></div>
+                      
+                            <h4>{{ category.name }}</h4>
+                        </div>
+                    </a>
+                </div>
+
+                {% else %}
+                    <tr>
+                        <td colspan="5">no records found</td>
+                    </tr>
+        {% endfor %}
+    
+    {% endblock %}
+               

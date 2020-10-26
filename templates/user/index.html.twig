@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Hello UserController!
+{% endblock %}
+
+{% block content %}
+	<div class="flex user-index">
+		<p>
+			<a href=" {{ path('user_history') }} " class="text-history">
+				Historique de mes commandes
+				<i class="fas fa-history"></i>
+			</a>
+		</p>
+	</div>
+
+{% endblock %}

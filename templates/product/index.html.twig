@@ -1,0 +1,39 @@
+{% extends 'baseProduct.html.twig' %}
+
+{% block title %}Product index{% endblock %}
+
+{% block body %}
+
+  
+
+    <h1>Nos Produits</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Prix</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.price }}</td>
+                <td>
+                    <a href="{{ path('product_show', {'id': product.id}) }}">Voir</a>
+                     <a href=" {{ path('cart_add', {'id': 'produit'}) }} ">Ajoutez au panier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+  
+{% endblock %}

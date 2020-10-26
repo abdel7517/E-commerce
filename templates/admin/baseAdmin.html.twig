@@ -1,0 +1,57 @@
+{% extends "base.html.twig" %}
+
+{% block navMenu %}
+        <div class="main-content-wrapper d-flex clearfix">
+
+        <!-- Mobile Nav (max width 767px)-->
+        <div class="mobile-nav">
+            <!-- Navbar Brand -->
+            <div class="amado-navbar-brand">
+                <a href="{{ path('MyApp_index') }}"><img src="img/core-img/logo.png" alt=""></a>
+            </div>
+            <!-- Navbar Toggler -->
+            <div class="amado-navbar-toggler">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+
+        <!-- Header Area Start -->
+        <header class="header-area clearfix">
+            <!-- Close Icon -->
+            <div class="nav-close">
+                <i class="fa fa-close" aria-hidden="true"></i>
+            </div>
+            <!-- Logo -->
+            <div class="logo">
+                <a href="{{ path('admin_index') }}"><img src="img/core-img/logo.png" alt=""></a>
+            </div>
+            <!-- Amado Nav -->
+            <nav class="amado-nav">
+               <ul>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ path('admin_index') }}">Acceuil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href=" {{ path('admin_category') }} ">Gestion produit</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href=" {{ path('admin_add') }} ">Ajout Produit</a>
+                    </li>
+
+                 
+
+                    
+                </ul>
+            </nav>
+      
+            <!-- Social Button -->
+            <div class="social-info d-flex justify-content-between">
+                <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            </div>
+        </header>
+        <!-- Header Area End -->
+
+{% endblock %}

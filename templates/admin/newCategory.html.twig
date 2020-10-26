@@ -1,0 +1,56 @@
+{% extends 'admin/baseAdmin.html.twig' %}
+
+{% block title %}
+	Ajoutez une categorie
+{% endblock %}
+{% block content %}
+	<div class="w100">
+		<h1>
+			Catégories
+		</h1>
+
+		<div class="flex justify-around">
+
+			{{ form_start(formMain) }}
+			Ajoutez categories principale
+
+			<button class="btn">
+				{{ button_label|default('Valider') }}
+			</button>
+			{{ form_end(formMain) }}
+
+			<div>
+				Ajoutez une catégories segondaire
+				{{ include('product/_form.html.twig') }}
+			</div>
+
+			{{ form_start(formD) }}
+			Supprimer une catégories
+			{{ form_row(formD.categorie, {
+            label: 'Catégories à supprimer'
+        		}) }}
+			<button class="btn">
+				{{ button_label|default('Valider') }}
+			</button>
+			{{ form_end(formD) }}
+
+			{{ form_start(formDMain) }}
+			Supprimer une catégories
+			{{ form_row(formDMain.MainCategorie, {
+            label: 'Catégories à supprimer'
+        		}) }}
+			<button class="btn">
+				{{ button_label|default('Valider') }}
+			</button>
+			{{ form_end(formDMain) }}
+
+
+		</div>
+
+		<a href="{{ path('admin_add') }}">
+			<button class="btn">
+				éditer produit
+			</button>
+		</a>
+	</div>
+{% endblock %}

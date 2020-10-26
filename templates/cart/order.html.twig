@@ -1,0 +1,130 @@
+{% extends 'base.html.twig' %}
+{% block stripe %}
+{% endblock %}
+{% block title %}
+	Hello CartController!
+{% endblock %}
+
+{% block content %}
+	<div class=" p-3 center flex facturation">
+		<section class='expedition_container'>
+			<div class="cart">
+
+				<h1 class='grey'>
+					Votre panier
+				</h1>
+
+				{% if items | length > 0  %}
+
+					<table>
+						<tr>
+							<th>
+								Produit
+							</th>
+							<th>
+								Prix
+							</th>
+							<th>
+								Quantité
+							</th>
+							<th>
+								Total
+							</th>
+						</tr>
+						<tbody>
+							{% for item in items %}
+								<tr>
+									<td>
+										{{ item.product.name}}
+									</td>
+									<td>
+										{{item.product.price}}
+										€
+									</td>
+									<td>
+										<a href="{{ path("cart_subQ", {"id": item.product.id }) }} ">
+											<i class="fas fa-minus-circle"></i>
+										</a>
+										{{item.quantity}}
+										<a href="{{ path("cart_addQ", {"id": item.product.id }) }} ">
+											<i class="fas fa-plus-circle"></i>
+										</a>
+									</td>
+									<td>
+										{{item.quantity * item.product.price}}
+										€
+									</td>
+									<td class="border-none">
+										<a href=" {{ path('cart_remove', {'id': item.product.id }) }} " class="btn btn-danger btn-sn ">
+											Suprimer
+										</a>
+									</td>
+								</tr>
+							{% endfor %}
+							<tr class='recup' id="livraison">
+								<td>
+									Livraison
+								</td>
+								<td>
+									90 €
+								</td>
+								<td>
+									1
+								</td>
+								<td>
+									90 €
+								</td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<td colspan="3" class="text-right border-none">
+								Total :
+							</td>
+							<td>
+								<span id="total">
+									{{ total }}
+								</span>
+								€
+							</td>
+						</tfoot>
+					</table>
+				</div>
+				<section class="expedition">
+					<h1 class="grey">
+						Détails de facturation
+					</h1>
+					{{ form_start(form_livraison) }}
+					{{ form_row(form_livraison.name)}}
+					{{ form_row(form_livraison.numberAdress) }}
+					{{ form_row(form_livraison.nameAdress )}}
+					{{ form_row(form_livraison.postalCode )}}
+					{{ form_row(form_livraison.country)}}
+					{{ form_row(form_livraison.expedition) }}
+
+					<button type="submit" class="btn submit-order">
+						Payer
+					</button>
+					{{ form_end(form_livraison) }}
+
+				</section>
+
+			{% else %}
+				<p>
+					Surprise, c'est vide !
+				</p>
+			{% endif %}
+		</section>
+
+
+		{# {{ form_start(form, {attr: {id: form.vars.id}}) }}
+										<div class="form-group" width="60% !important">
+										  <label for="card-element">
+										    Credit or Debit Card
+										  </label>
+										  <div id="card-element" class="form-control  form-control-lg" width="300px !important"></div>
+										  <div id="card-errors" class="help-block" role="alert"></div>
+										</div>
+										{{ form_end(form) }} #}
+
+	</div>
+{% endblock %}

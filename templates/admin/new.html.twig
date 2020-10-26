@@ -1,0 +1,30 @@
+{% extends 'admin/baseAdmin.html.twig' %}
+
+{% block title %}
+	Ajoutez un produit
+{% endblock %}
+{% block content %}
+	<section>
+		<h1>
+			Ajoutez un produit
+		</h1>
+
+		<div>
+
+			{{ include('product/_form.html.twig') }}
+			<p>
+				La première image choisit sera c'elle affichez dans la page produits
+			</p>
+
+			<a href="{{ path('admin_index') }}">
+				Retour
+			</a>
+			<a href=" {{ path('admin_edit_category') }} ">
+				<button class="btn">
+					Gérez mes categories
+				</button>
+			</a>
+		</div>
+	</section>
+
+{% endblock %}

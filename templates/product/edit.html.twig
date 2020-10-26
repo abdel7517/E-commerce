@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Edit Product
+{% endblock %}
+
+{% block body %}
+	<div class="w100">
+		<h1>
+			Edit Product
+		</h1>
+
+		<div class="flex justify">
+
+			{{ include('product/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+			{{ form_start(formImage) }}
+			<button class="btn">
+				{{ button_label|default('Modifier les images') }}
+			</button>
+			{{ form_end(formImage) }}
+            
+		</div>
+
+		<a href="{{ path('product_index') }}">
+			<button class="btn">
+				Retour
+			</button>
+		</a>
+	</div>
+
+	{{ include('product/_delete_form.html.twig') }}
+{% endblock %}

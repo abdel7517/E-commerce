@@ -1,0 +1,158 @@
+{% extends "base.html.twig" %}
+{% block banniere %}
+{% endblock %}
+{% block content  %}
+
+
+	<section class="h-flex">
+		<img src="/img/bann.png" alt="" class="banniere-img">
+		<div class="presentation">
+
+			<h1>
+				STAFF DECO
+			</h1>
+			<p class='under-tittle'>
+				<span class="text1">
+					Nous sommes une entreprise spécialisé dans le
+					<strong>
+						Staff Décoratif.
+					</strong>
+				</span>
+				<br/>
+				<span class="text2">
+					Nous vous proposons un large choix de produits, disponible via notre boutique en ligne ou à notre Showroom.
+					<br/>
+					Nos équipes sont à votre dispostion pour vous conseillez, ou prendre totalement en main vos travaux.
+					<br>
+					<a href="#FAQ" class="LUT text2">
+						Qu'est que le staff ? Pourquoi utilisez du staff ?
+					</a>
+				</span>
+			</p>
+			<p class="call-to-action">
+				<i class="fas fa-arrow-circle-right"></i>
+				<a href="{{ path('product_index') }}">
+					<span class="tcta">
+						Nos Produits
+					</span>
+				</a>
+				<i class="fas fa-arrow-circle-left"></i>
+			</p>
+		</div>
+	</div>
+</section>
+<div class="trait"></div>
+
+<section>
+	<div id='FAQ'></div>
+	<h2 class='h2'>
+		Qu'est ce que le
+		<strong class='normal'>
+			Staff
+		</strong>
+		?
+	</h2>
+	<p class='w100 TC TH3'>
+		Le
+		<strong>
+			STAFF
+		</strong>
+		est un mélange de
+		<strong>
+			plâtre
+		</strong>
+		et de
+		<strong>
+			filasse
+		</strong>
+		façonné de magnière
+		<strong>
+			100 % artisanal
+		</strong>
+		pour créer des
+		<strong>
+			faux plafonds
+		</strong>
+		,
+		<strong>
+			corniches
+		</strong>
+		,
+		<strong>
+			moulures
+		</strong>
+		..
+		<br>
+		Ils est souvant utilisé pour la conception d'éléments de style
+		<strong>
+			Hausmannien
+		</strong>
+		.
+	</p>
+	<h3>
+		Pourquoi utilisez du
+		<strong class='normal'>
+			Staff
+		</strong>
+		?
+	</h3>
+	<p class='w100 TC TH3'>
+		Le
+		<strong>
+			STAFF
+		</strong>
+		est une alliance de produits
+		<strong>
+			100% naturelles
+		</strong>
+		. De part sa composition unique, le <strong>STAFF</strong> est un excellent isolant thermique et phonique ! 
+	</p>
+</section>
+<div class="trait TB"></div>
+
+<h4 class=" TC">
+	Quels types d'éléments recherchez vous ?
+</h4>
+<section class="content">
+	{% for category in mainCategory %}
+
+		<!-- Single Catagory -->
+		<div class="single-products-catagory  single-catagory clearfix zoom">
+			<a href="{{ path('product_category', { 'category': category.name }) }}">
+
+
+				<img
+				src=" {{ asset('/uploads/'~ category.image.name ) }} " alt="" srcset="" width="150px">
+
+
+				<!-- Hover Content -->
+				<div class="hover-content">
+					<div class="line"></div>
+
+					<h2>
+						{{ category.name }}
+					</h2>
+				</div>
+			</a>
+		</div>
+	{% endfor %}
+</section>
+
+{# 
+						<div id="carousel">
+							<img src={{ asset("/img/salonHausmanien.webp")}} id="slide">
+						</img> #}
+{# <div>
+							<div class="trait"></div>
+							<div id="container-button">
+								<div class="icon prevBtn" id="prevBtn">
+									<i class="far fa-arrow-alt-circle-left"></i>
+								</div>
+								<div class="icon pauseBtn" id="pauseBtn">
+									<i class="far fa-pause-circle"></i>
+								</div>
+								<div class="icon nextBtn" id="nextBtn">
+									<i class="far fa-arrow-alt-circle-right"></i>
+								</div>
+							</div>
+						</div> #}</section>{% endblock %}{% block js %}<script src="{{ asset('/js/slider.js')}}"></script><script src="{{ asset('/js/main.js')}}"></script>{% endblock %}

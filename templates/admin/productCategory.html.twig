@@ -1,0 +1,46 @@
+{% extends "admin/baseAdmin.html.twig" %}
+
+    
+    {% block content %}
+  
+         {% for product in products %}
+
+                <div class="single-products-catagory clearfix">
+                    <a href="{{ path('admin_show_product', {'id': product.id, 'category': category}) }}">
+
+                    {% set i = 0 %}
+
+                    {% for image in product.images %}
+
+                       
+                            {% if i == 0  %}
+                             <div>
+                                <img src=" {{ asset('/uploads/'~ image.name ) }} " alt="" srcset="" width="150px">
+                            </div>
+                             {% set i = 1 %}
+                                 
+                        {% endif %}
+                           
+                        {% endfor %}
+
+                        <!-- Hover Content -->
+                        <div class="hover-content">
+                            <div class="line"></div>
+                            <p>{{ product.price }} €</p>
+                            <p>
+                                                        <a href=" {{ path('cart_add', {'id': product.id, 'category': category }) }} ">Ajoutez au panier</a>
+                            </p>
+                            <h4>{{ product.name }}</h4>
+                        </div>
+                    </a>
+                </div>
+
+                {% else %}
+                    <tr>
+                        <td colspan="5">no records found</td>
+                    </tr>
+        {% endfor %}
+    
+    
+    {% endblock %}
+               

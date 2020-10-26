@@ -1,0 +1,47 @@
+{% extends "product/baseProduct.html.twig" %}
+
+{% block banniere %}
+	Produits
+{% endblock %}
+{% block content %}
+
+	<section class="content all">
+
+		{% for product in products %}
+
+			<!-- Single Catagory -->
+			<div class="single-products-catagory clearfix show border zoom">
+				<a href="{{ path('product_show', {'id': product.id, 'category': product.categorie}) }}">
+
+
+					<div>
+						<img src="{{ asset('/uploads/'~ product.image.name) }}" alt="" srcset="" class="img">
+					</div>
+
+
+					<!-- Hover Content -->
+					<div class="hover-content">
+						<div class="line"></div>
+						<p>
+							{{ product.price }}
+							€
+						</p>
+
+						<h4>
+							{{ product.name }}
+						</h4>
+					</div>
+				</a>
+			</div>
+
+		{% else %}
+			<tr>
+				<td colspan="5">
+					no records found
+				</td>
+			</tr>
+		{% endfor %}
+	</section>
+
+
+{% endblock %}

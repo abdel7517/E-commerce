@@ -1,0 +1,46 @@
+{% extends "product/baseProduct.html.twig" %}
+{% block banniere %}
+	Produits
+{% endblock %}
+
+{% block content %}
+	<section class="w100">
+		<p class="TC TT">
+			Découvrez nos produits
+		</p>
+		<p class="TC"></p>
+
+	</section>
+	<section class="content">
+		{% for category in categories %}
+
+			<!-- Single Catagory -->
+			<div class="single-products-catagory  single-catagory clearfix zoom">
+				<a href="{{ path('product_category', { 'category': category.name }) }}">
+
+
+					<img
+					src=" {{ asset('/uploads/'~ category.image.name ) }} " alt="" srcset="" width="150px">
+
+
+					<!-- Hover Content -->
+					<div class="hover-content">
+						<div class="line"></div>
+
+						<h2>
+							{{ category.name }}
+						</h2>
+					</div>
+				</a>
+			</div>
+
+		{% else %}
+			<tr>
+				<td colspan="5">
+					no records found
+				</td>
+			</tr>
+		{% endfor %}
+	</section>
+
+{% endblock %}

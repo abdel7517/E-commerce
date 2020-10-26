@@ -1,0 +1,42 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    images_directory: '%kernel.project_dir%/public/uploads'
+    stripe_public_key: 'pk_test_51H06eZFU8MGGDPG6mB5Kwmm0MerKqlvk0pDJt8KnKfluI81heMRUoM94t9nPepxwYEk39JfwIftdUKDJ4oS1SSFq00Qx5coDcF'
+    stripe_secret_key: 'sk_test_51H06eZFU8MGGDPG68M7NVo9LudXgyv7oHqTSWBnaHU7lLm2YeEZPPLNCZXJkiEQCLvYVT5FM1YZyjgW6rfONvu4r00DWUvREbE'
+    payment:
+        currency: EUR
+        decimal: true
+        premium_amount: 1
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+    # Cart:
+    #     class: App\Service\Cart\Cart
+
+    # ServiceProduct:
+    #     class: App\Service\Product\ServiceProduct
+    #     autowire: false
+    #     arguments:
+    #         - '@App\Service\Cart\Cart'
+  

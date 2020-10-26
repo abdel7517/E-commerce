@@ -1,0 +1,65 @@
+{% extends "product/baseProduct.html.twig" %}
+
+{% block banniere %}
+	Produits
+{% endblock %}
+{% block content %}
+
+
+	<p class="loc">
+		<a href=" {{ path('product_index') }} ">
+			Boutique
+		</a>
+		/
+		<a href=" {{ path('product_category', {'category': main_category }) }} ">
+			{{   main_category}}
+		</a>
+		/
+		<a href=" {{ path('product_products', {'category_product': main_category, 'main_category': category }) }}">
+			<span class="actual-loc">
+
+				{{ category }}
+			</span>
+		</a>
+
+	</p>
+	<section class="content all">
+
+		{% for product in products %}
+
+			<!-- Single Catagory -->
+			<div class="single-products-catagory clearfix show border zoom">
+				<a href="{{ path('product_show', {'id': product.id, 'main_category': main_category}) }}">
+
+
+					<div>
+						<img src="{{ asset('/uploads/'~ product.image.name) }}" alt="" srcset="" class="img">
+					</div>
+
+
+					<!-- Hover Content -->
+					<div class="hover-content">
+						<div class="line"></div>
+						<p>
+							{{ product.price }}
+							€
+						</p>
+
+						<h4>
+							{{ product.name }}
+						</h4>
+					</div>
+				</a>
+			</div>
+
+		{% else %}
+			<tr>
+				<td colspan="5">
+					no records found
+				</td>
+			</tr>
+		{% endfor %}
+	</section>
+
+
+{% endblock %}
