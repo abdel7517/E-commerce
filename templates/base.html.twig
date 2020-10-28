@@ -21,8 +21,19 @@
 
 				<!-- Core Style CSS -->
 				<link rel="stylesheet" href="{{ asset('/css/core-style.css') }}">
-				<link rel="stylesheet" href="{{asset('style.css')}}">
+				<link
+				rel="stylesheet" href="{{asset('style.css')}}">
+				<!-- Global site tag (gtag.js) - Google Analytics -->
+				<script async src="https://www.googletagmanager.com/gtag/js?id=G-P9XHY3SBR1"></script>
+				<script>
+					window.dataLayer = window.dataLayer || [];
+function gtag() {
+dataLayer.push(arguments);
+}
+gtag('js', new Date());
 
+gtag('config', 'G-P9XHY3SBR1');
+				</script>
 			</head>
 		{% endblock %}
 
@@ -79,10 +90,10 @@
 									</li>
 
 									{# {% for categorie in categories %}
-																																																						                            <li class="nav-item">
-																																																						                                <a class="nav-link" href=" {{ path('cart_index') }} "> {{ categorie.name }}  </span></a>
-																																																						                            </li>
-																																																						                        {% endfor %} #}
+																																																															                            <li class="nav-item">
+																																																															                                <a class="nav-link" href=" {{ path('cart_index') }} "> {{ categorie.name }}  </span></a>
+																																																															                            </li>
+																																																															                        {% endfor %} #}
 
 								</ul>
 
@@ -141,11 +152,11 @@
 									</li>
 
 									{# <li>
-																																																						                                    <form  action='{{ path('product_search') }}' method='GET' class="input-icons" >
-																																																						                                    <input class="form-control form-control-sm mr-3 w-75 input-field" type="text" placeholder="Recherchez" name="search"
-																																																						                                        aria-label="Search">
-																																																						                                    </form>
-																																																						                                </li> #}
+																																																															                                    <form  action='{{ path('product_search') }}' method='GET' class="input-icons" >
+																																																															                                    <input class="form-control form-control-sm mr-3 w-75 input-field" type="text" placeholder="Recherchez" name="search"
+																																																															                                        aria-label="Search">
+																																																															                                    </form>
+																																																															                                </li> #}
 
 
 								</ul>
@@ -180,9 +191,7 @@
 								<i class="fa fa-close" aria-hidden="true"></i>
 							</div>
 							<!-- Logo -->
-							<div class="logo">
-								
-							</div>
+							<div class="logo"></div>
 							<!-- Amado Nav -->
 							<nav class="amado-nav">
 								<ul>
@@ -357,7 +366,7 @@
 				<script src="/js/plugins.js"></script>
 				<!-- Active js -->
 				<script src="/js/active.js"></script>
-				<script  src="{{ asset('/js/main.js')}}"></script>
+				<script src="{{ asset('/js/main.js')}}"></script>
 
 
 			</body>
