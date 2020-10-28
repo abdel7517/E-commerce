@@ -27,7 +27,7 @@ class RegistrationFormType extends AbstractType
                 'label'=> false, 'attr' => ['placeholder' => 'Votre nom' ],
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => 'Veuillez acceptez les C.G.U.',
                     ]),
                 ],
             ])
