@@ -1,158 +1,138 @@
 {% extends "base.html.twig" %}
-{% block banniere %}
+{% block navBar %}
+ <!--/.Navbar-->
+    <div class="main-content-wrapper d-flex clearfix">
+        <nav class="justify-content-center nav-top ">
+            <ul class='flex-nav'>
+                <img src="{{ asset('img/logoStaffdeco.png') }}" alt="logo staffdeco" class="logo ">
+
+
+                <li class="nav-item  ">
+                    <a class="nav-link un" href=" {{ path('MyApp_index') }} ">
+                        Accueil
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href=" {{ path('MyApp_presentation') }} ">
+                        Présentation
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="produits.html">
+                         Produits
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href=" {{ path('MyApp_realisation') }} ">
+                        Réalisations
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('MyApp_contact') }}">
+                        Contact
+                    </a>
+                </li>
+            </ul>
+            <div class="ornement"><img src=" {{asset('img/angle.png')}} " alt="logo staffdeco" class="angle logo "></div>
+            </nav>
+        </div>
 {% endblock %}
+{% block banniere %}
+   <!-- banniere -->
+        <section class="h-flex">
+            <div class="presentation">
+                <div class='title-flex'>
+                    <div class="trait trait-left">
+                        <img src=" {{ asset('img/trait.svg') }}" alt="">
+                    </div>
+                    <h1 class='h1-presentation'>
+                        Nos Produits
+                    </h1>
+                    <div class="trait trait-right">
+                        <img src=" {{ asset('img/trait.svg') }}" alt="" >
+                    </div>
+					
+        </section>
+{% endblock %}
+
 {% block content  %}
+     <div class="container-main">
+                <p class='under-tittle tl'>
+                    Le Staff est un matériau qui va vous permettre de réaliser des décors avec une extrême finesse. Nous vous proposons un large choix de produits et pouvons également personnaliser selon vos envies. N’hésitez pas à consulter notre catalogue en bas de page.
+                </p>
 
+                <section class="produits">
 
-	<section class="h-flex">
-		<img src="/img/bann.png" alt="" class="banniere-img">
-		<div class="presentation">
+                    <div class="flex-center single-produits">
+                        <div class=" overlay-image _ax container-img">
+                            <a href="asset/catalogue/rosace.pdf" target="_blank">
+                                <img class=" image _ay img-produits rosace-produit" src="asset/img/rosace.jpeg" alt="Alt text" />
+                                <div class=" text _2 ">
+                                    <a href="asset/catalogue/rosace.pdf" target="_blank" class="eyes-back">
+                                        <img src="asset/img/oeil.svg" alt="" srcset="">
+                                    </a>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="text-produits">
+                            <p class="title-produit"><strong>Les rosaces</strong></p> Elles vont donner du caractère et du charme à votre plafond. Elles donnent l’impression que c’est votre plafond qui a été sculpté.
 
-			<h1>
-				STAFF DECO
-			</h1>
-			<p class='under-tittle'>
-				<span class="text1">
-					Nous sommes une entreprise spécialisé dans le
-					<strong>
-						Staff Décoratif.
-					</strong>
-				</span>
-				<br/>
-				<span class="text2">
-					Nous vous proposons un large choix de produits, disponible via notre boutique en ligne ou à notre Showroom.
-					<br/>
-					Nos équipes sont à votre dispostion pour vous conseillez, ou prendre totalement en main vos travaux.
-					<br>
-					<a href="#FAQ" class="LUT text2">
-						Qu'est que le staff ? Pourquoi utilisez du staff ?
-					</a>
-				</span>
-			</p>
-			<p class="call-to-action">
-				<i class="fas fa-arrow-circle-right"></i>
-				<a href="{{ path('product_index') }}">
-					<span class="tcta">
-						Nos Produits
-					</span>
-				</a>
-				<i class="fas fa-arrow-circle-left"></i>
-			</p>
-		</div>
-	</div>
-</section>
-<div class="trait"></div>
+                        </div>
+                    </div>
 
-<section>
-	<div id='FAQ'></div>
-	<h2 class='h2'>
-		Qu'est ce que le
-		<strong class='normal'>
-			Staff
-		</strong>
-		?
-	</h2>
-	<p class='w100 TC TH3'>
-		Le
-		<strong>
-			STAFF
-		</strong>
-		est un mélange de
-		<strong>
-			plâtre
-		</strong>
-		et de
-		<strong>
-			filasse
-		</strong>
-		façonné de manière
-		<strong>
-			100 % artisanal
-		</strong>
-		pour créer des
-		<strong>
-			faux plafonds
-		</strong>
-		,
-		<strong>
-			corniches
-		</strong>
-		,
-		<strong>
-			moulures
-		</strong>
-		..
-		<br>
-		Il est souvant utilisé pour la conception d'éléments de style
-		<strong>
-			Hausmannien
-		</strong>
-		.
-	</p>
-	<h3>
-		Pourquoi utilisez du
-		<strong class='normal'>
-			Staff
-		</strong>
-		?
-	</h3>
-	<p class='w100 TC TH3'>
-		Le
-		<strong>
-			STAFF
-		</strong>
-		est une alliance de produits
-		<strong>
-			100% naturelles
-		</strong>
-		. De part sa composition unique, le <strong>STAFF</strong> est un excellent isolant thermique et phonique ! 
-	</p>
-</section>
-<div class="trait TB"></div>
+                    <div class="flex-center single-produits">
+                        <div class=" overlay-image _ax container-img">
+                            <a href="asset/catalogue/corniches.pdf" target="_blank">
+                                <img class=" image _ay img-produits " src="asset/img/corniches.png" alt="Alt text" />
+                                <div class=" text _2 ">
+                                    <a href="asset/catalogue/corniches.pdf" target="_blank" class="eyes-back">
+                                        <img src="asset/img/oeil.svg" alt="" srcset="">
+                                    </a>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="text-produits">
+                            <p class="title-produit"><strong>Les corniches</strong></p> Les corniches vont se poser sur le pourtour du plafond. Elles vont donner de l’élégance à votre plafond et le mettre en valeur.
+                        </div>
+                    </div>
 
-<h4 class="h4 TC">
-	Quels types d'éléments recherchez vous ?
-</h4>
-<section class="content">
-	{% for category in mainCategory %}
+                    <div class="flex-center single-produits">
+                        <div class=" overlay-image _ax container-img">
+                            <a href="asset/catalogue/moulureAngle.pdf" target="_blank">
+                                <img class=" image _ay img-produits " src="asset/img/moulure.jpeg" alt="Alt text" />
+                                <div class=" text _2 ">
+                                    <a href="asset/catalogue/moulureAngle.pdf" target="_blank" class="eyes-back">
+                                        <img src="asset/img/oeil.svg" alt="" srcset="">
+                                    </a>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="text-produits">
+                            <p class="title-produit"><strong>Les moulures</strong></p> Qui n’a jamais rêvé avoir des moulures au plafond ? Elles apporteront une touche d’élégance à votre intérieur.
+                        </div>
+                    </div>
 
-		<!-- Single Catagory -->
-		<div class="single-products-catagory  single-catagory clearfix zoom">
-			<a href="{{ path('product_category', { 'category': category.name }) }}">
+                    <div class="flex-center single-produits">
+                        <div class=" overlay-image _ax container-img">
+                            <a href="asset/catalogue/chapiteau.pdf" target="_blank">
+                                <img class=" image _ay img-produits colonne " src="asset/img/colonne.jpeg" alt="Alt text" />
+                                <div class=" text _2 ">
+                                    <a href="asset/catalogue/chapiteau.pdf" class="eyes-back"  target="_blank">
+                                        <img src="asset/img/oeil.svg" alt="" srcset="">
+                                    </a>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="text-colonne">
+                            <p class="title-produit"> <strong>Les colonnes et pilastres</strong> </p>Les colonnes et les pilastres sont deux éléments très différents. En effet, le pilastre est encastré dans un mur, tandis que la colonne est un élément isolé. Les colonnes et les
+                            pilastres donnent un effet majestueux à votre habitation.
+                        </div>
+                    </div>
+                </section>
+            </div>
+{% endblock %}
 
-
-				<img
-				src=" {{ asset('/uploads/'~ category.image.name ) }} " alt="" srcset="" width="150px">
-
-
-				<!-- Hover Content -->
-				<div class="hover-content">
-					<div class="line"></div>
-
-					<h2>
-						{{ category.name }}
-					</h2>
-				</div>
-			</a>
-		</div>
-	{% endfor %}
-</section>
-
-{# 
-						<div id="carousel">
-							<img src={{ asset("/img/salonHausmanien.webp")}} id="slide">
-						</img> #}
-{# <div>
-							<div class="trait"></div>
-							<div id="container-button">
-								<div class="icon prevBtn" id="prevBtn">
-									<i class="far fa-arrow-alt-circle-left"></i>
-								</div>
-								<div class="icon pauseBtn" id="pauseBtn">
-									<i class="far fa-pause-circle"></i>
-								</div>
-								<div class="icon nextBtn" id="nextBtn">
-									<i class="far fa-arrow-alt-circle-right"></i>
-								</div>
-							</div>
-						</div> #}</section>{% endblock %}{% block js %}<script src="{{ asset('/js/slider.js')}}"></script><script src="{{ asset('/js/main.js')}}"></script>{% endblock %}

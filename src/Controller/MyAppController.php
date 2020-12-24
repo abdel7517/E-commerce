@@ -24,6 +24,7 @@ class MyAppController extends AbstractController
         $this->allCategoryRepository = $allCategoryRepository;
         $this->mainCategoryRepository = $mainCategoryRepository;
     }
+
     /**
      * @Route("/good", name="MyApp_good")
      */
@@ -78,23 +79,44 @@ class MyAppController extends AbstractController
      */
     public function index()
     {
-        
-
-
-
-        return $this->render(
-            "index.html.twig",
-            [
-                'nbProduct' => $this->cart->getNbOfArticle(),
-                'categories' => $this->allCategoryRepository->findAll(),
-                'mainCategory' => $this->mainCategoryRepository->findAll(),
-            ]
-        );
+        return $this->render("index.html.twig");
     }
 
+    /** 
+     * @Route("/presentation", name="MyApp_presentation")
+     */
+    public function prsentation()
+    {
+           return $this->render("presentation.html.twig");
+    }
 
     /** 
-     * 
+     * @Route("/produits", name="MyApp_produit")
+     */
+    public function produit()
+    {
+           return $this->render("produit.html.twig");
+    }
+
+    /** 
+     * @Route("/realisation", name="MyApp_realisation")
+     */
+    public function realisation()
+    {
+           return $this->render("realisation.html.twig");
+    }
+
+     /** 
+     * @Route("/contact", name="MyApp_contact")
+     */
+    public function contact()
+    {
+           return $this->render("contact.html.twig");
+    }
+
+   
+
+    /** 
      * @Route("/admin", name="MyApp_admin")
      */
     public function admin()
@@ -104,17 +126,5 @@ class MyAppController extends AbstractController
             'categories'=> $this->allCategoryRepository->findAll()]);
 
     }
-
-    /** 
-     * 
-     * @Route("/contact", name="MyApp_contact")
-     */
-    public function contact()
-    {
-           return $this->render("contact/index.html.twig", 
-            ['nbProduct'=> $this->cart->getNbOfArticle(),
-            'categories'=> $this->allCategoryRepository->findAll()]);
-    }
-
 
 }

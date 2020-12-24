@@ -1,0 +1,97 @@
+{% extends "base.html.twig" %}
+{% block navBar %}
+    <!--/.Navbar-->
+    <div class="main-content-wrapper d-flex clearfix">
+        <nav class="justify-content-center nav-top ">
+            <ul class='flex-nav'>
+                <img src="{{ asset('img/logoStaffdeco.png') }}" alt="logo staffdeco" class="logo ">
+
+
+                <li class="nav-item  ">
+                    <a class="nav-link " href=" {{ path('MyApp_index') }} ">
+                        Accueil
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href=" {{ path('MyApp_presentation') }} ">
+                        Présentation
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="produits.html">
+                         Produits
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link un" href=" {{ path('MyApp_realisation') }} ">
+                        Réalisations
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('MyApp_contact') }}">
+                        Contact
+                    </a>
+                </li>
+            </ul>
+            <div class="ornement"><img src=" {{asset('img/angle.png')}} " alt="logo staffdeco" class="angle logo "></div>
+            </nav>
+        </div>
+{% endblock %}
+{% block banniere %}
+   <!-- banniere -->
+        <section class="h-flex">
+            <div class="presentation">
+                <div class='title-flex'>
+                    <div class="trait trait-left">
+                        <img src=" {{ asset('img/trait.svg') }}" alt="">
+                    </div>
+                    <h1 class='h1-presentation'>
+                        Réalisations
+                    </h1>
+                    <div class="trait trait-right">
+                        <img src=" {{ asset('img/trait.svg') }}" alt="" >
+                    </div>
+					
+        </section>
+{% endblock %}
+{% block content %}
+     <section class="realisation">
+        <p class="intro">Découvrez nos plus belles réalisations </p>
+        <p class="category"><strong>Nos rosaces</strong></p>
+        <div class="container-realisation">
+            <img src=" {{ asset('img/realisations/rosace/rosace 1.jpg') }} " class="img-realisation first" alt="">
+            <img src=" {{ asset('img/realisations/rosace/rosace 2.jpg') }} " class="img-realisation" alt="">
+            <img src=" {{ asset('img/realisations/rosace/rosace 3.jpg') }} " class="img-realisation" alt="">
+            <img src=" {{ asset('img/realisations/rosace/rosace 4.jpg') }} " class="img-realisation" alt="">
+            <img src=" {{ asset('img/realisations/rosace/rosace 5.jpg') }} " class="img-realisation" alt="">
+
+        </div>
+        <p class="category"><strong>Les corniches</strong></p>
+        <div class="container-realisation">
+            <img src=" {{ asset('img/realisations/corniche/corniche 1.jpg') }} " class="img-realisation first" alt="">
+            <img src=" {{ asset('img/realisations/corniche/corniche 2.jpg') }} " class="img-realisation" alt="">
+            <img src=" {{ asset('img/realisations/corniche/corniche 3.jpg') }} " class="img-realisation" alt="">
+
+        </div>
+        <p class="category"><strong> Les moulures</strong></p>
+        <div class="container-realisation">
+            <img src=" {{ asset('img/realisations/moulure/moulure1.jpg') }} " class="img-realisation first" alt="" srcset="">
+            <img src=" {{ asset('img/realisations/moulure/moulure2.jpg') }} " class="img-realisation" alt="" srcset="">
+            <img src=" {{ asset('img/realisations/moulure/moulure 3.jpg') }} " class="img-realisation" alt="" srcset="">
+            <img src=" {{ asset('img/realisations/moulure/moulure5.jpg') }} " class="img-realisation"  alt="" srcset="">
+            <img src=" {{ asset('img/realisations/moulure/moulure6.jpg') }} " alt="" srcset="" class="img-realisation">
+        </div>
+        <p class="category"><strong>Les colonnes et pilastres</strong></p>
+        <div class="container-realisation">
+            <img src=" {{ asset('img/realisations/colonneEtPilastre/colonne1.jpg') }} " class="img-realisation first" alt="" srcset="">
+            <img src=" {{ asset('img/realisations/colonneEtPilastre/colonne2.jpg') }} " class="img-realisation" alt="" srcset="">
+            <img src=" {{ asset('img/realisations/colonneEtPilastre/colonne3.jpg') }} " class="img-realisation" alt="" srcset="">
+            <img src=" {{ asset('img/realisations/colonneEtPilastre/colonne4.jpg') }} " class="img-realisation" alt="" srcset="">
+        </div>
+        <p><strong></strong></p>
+    </section>
+{% endblock %}

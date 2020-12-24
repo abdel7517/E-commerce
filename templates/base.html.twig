@@ -1,377 +1,120 @@
-{% block page %}
-	<!DOCTYPE html>
-	<html lang="en">
-		{% block head %}
-			<head>
-				<meta charset="UTF-8">
-				<meta name="description" content="">
-				<meta http-equiv="X-UA-Compatible" content="IE=edge">
-				<meta
-				name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-				<!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-				<script src="https://kit.fontawesome.com/62d6a78e4f.js" crossorigin="anonymous"></script>
-				<!-- Title  -->
-				<title>
-					Staff Déco
-				</title>
+{% block base %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{asset('style.css')}}">
+    <link rel="stylesheet" href="{{asset('lib/bootstrap/css/bootstrap.min.css')}}">
+    <meta name="format-detection" content="telephone=no">
+    <title>Staff Déco</title>
+</head>
+<body>
+       <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent22">
+  
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{{ path('MyApp_index') }}">Accueil </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href=" {{ path('MyApp_presentation') }}">Présentation</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="produits.html">Produits</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="realisations.html">Réalisations</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+        </ul>
+        <!-- Links -->
+    
+      </div>
+      <!-- Collapsible content -->
+       <!--Navbar-->
+    <nav class="navbar navbar-dark  indigo darken-2">
+        <!-- Navbar brand -->
+        <img src=" {{ asset('img/logoStaffdeco.png') }} " alt="logo staffdeco" class="logo">
+    
+        <!-- Collapse button -->
+        <button class="navbar-toggler third-button" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent22"
+        aria-controls="navbarSupportedContent22" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="animated-icon3"><span></span><span></span><span></span></div>
+        </button>
+  </nav>
+ 
+ {% block navBar %}
+    
+ {% endblock %}
 
-				<!-- Favicon  -->
-				<link
-				rel="icon" href="img/core-img/favicon.ico">
+        
 
-				<!-- Core Style CSS -->
-				<link rel="stylesheet" href="{{ asset('/css/core-style.css') }}">
-				<link
-				rel="stylesheet" href="{{asset('style.css')}}">
-				<!-- Global site tag (gtag.js) - Google Analytics -->
-				<script async src="https://www.googletagmanager.com/gtag/js?id=G-P9XHY3SBR1"></script>
-				<script>
-					window.dataLayer = window.dataLayer || [];
-function gtag() {
-dataLayer.push(arguments);
-}
-gtag('js', new Date());
+     {% block banniere %}
+      
+     {% endblock %}
 
-gtag('config', 'G-P9XHY3SBR1');
-				</script>
-			</head>
+		{% block content %}
 		{% endblock %}
 
-		{% block body %}
-			<body>
-				<!-- Search Wrapper Area Start -->
-				<div class="search-wrapper section-padding-100">
-					<div class="search-close">
-						<i class="fa fa-close" aria-hidden="true"></i>
-					</div>
-					<div class="container">
-						<div class="row">
-							<div class="col-12">
-								<div class="search-content">
-									<form action="#" method="get">
-										<input type="search" name="search" id="search" placeholder="Type your keyword...">
-										<button type="submit">
-											<img src="img/core-img/search.png" alt="">
-										</button>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- Search Wrapper Area End -->
-				{% block nav %}
-					<!-- ##### Main Content Wrapper Start ##### -->
-					<div class="main-content-wrapper d-flex clearfix">
-						<nav class="nav-top">
+        <footer>
+            <img src=" {{ asset('img/rosace.png') }}" alt="deco" class="rosace">
+            <div class="ml-footer first">
+                <p class="mt-footer">
+                    NOUS DECOUVRIR
+                </p>
+                <p class="page" >
+                    <img src=" {{ asset('img/fleche.png') }}" alt="deco" class="fleche"> Accueil
+                </p>
+                <p class="page"> 
+                    <img src=" {{ asset('img/fleche.png') }}" alt="deco" class="fleche"> Présentation
+                </p>
+                <p class="page">
+                    <img src=" {{ asset('img/fleche.png') }}" alt="deco" class="fleche"> Produits
+                </p>
+                <p class="page">
+                    <img src=" {{ asset('img/fleche.png') }}" alt="deco" class="fleche"> Réalisations
+                </p>
+                <p class="page">
+                    <img src=" {{ asset('img/fleche.png') }}" alt="deco" class="fleche"> Mentions légales
+                </p>
+            </div>
+            <div class="ml-footer">
+                <p class="mt-footer">
+                    NOUS CONTACTER
+                </p>
+                <div class="flex contact">
+                    <span class="image"><img src=" {{ asset('img/loca.png') }} " alt="deco" class="localisation"></span>
+                    <span>
+                        60, rue Marcel Dassault
+                        <br>
+                        93140 Bondy
+                    </span>
+                </div>
+                <div class="flex contact">
+                <span class="image"><img src=" {{ asset('img/mail.png') }}" alt="deco" class="localisation"></span>
+                    <span>
+                        contact@staffdeco.fr
+                    </span>
+                </div>
+                <div class="flex contact">
+                    <span class="image"><img src=" {{ asset('img/phone.png') }}" alt="deco" class="localisation phone"></span>
+                    <span class="number">
+                        06 12 34 03 33
+                    </span>
+                </div>
+            </div>
+        </footer>
+       
+    
+    <script src=" {{ asset('lib/bootstrap/js/bootstrap.min.js') }} "></script>
+    <script src=" {{ asset('lib/jquery/js/jquery-2.2.4.min.js') }} "></script>
+	{% block js %}{% endblock %}
+	
+</body>
+</html>
 
-							<div class='left-nav flex-nav'>
-
-								<img src=" {{ asset('/img/staffdecologo.webp') }} " alt="logo staffdeco" class="logo">
-
-								<ul class='flex-nav'>
-
-									<li class="nav-item ">
-										<a class="nav-link" href="{{ path('MyApp_index') }}">
-											Acceuil
-										</a>
-									</li>
-
-									<li class="nav-item">
-										<a class="nav-link" href=" {{ path('product_index') }} ">
-											Nos Produits
-										</a>
-									</li>
-
-									<li class="nav-item">
-										<a class="nav-link" href=" {{ path('MyApp_contact') }} ">
-											Contact
-										</a>
-									</li>
-
-									{# {% for categorie in categories %}
-																																																															                            <li class="nav-item">
-																																																															                                <a class="nav-link" href=" {{ path('cart_index') }} "> {{ categorie.name }}  </span></a>
-																																																															                            </li>
-																																																															                        {% endfor %} #}
-
-								</ul>
-
-							</div>
-
-							<div class="right-nav flex-nav">
-
-								<ul class='flex-nav'>
-
-									<li>
-										<form class="input-group" action='{{ path('product_search') }}' method='GET'>
-											<input type="text" class="form-control" placeholder="Chercher" name="search">
-											<div class="input-group-append">
-												<button class="btn btn-secondary" type="submit">
-													<i class="fa fa-search"></i>
-												</button>
-											</div>
-										</form>
-									</li>
-
-									<li class="nav-item">
-										<a class="nav-link" href=" {{ path('cart_index') }} ">
-											<i class="fas fa-shopping-cart"></i>
-											<span>
-												{{ nbProduct }}
-											</span>
-										</a>
-									</li>
-
-
-									<li class="nav-item">
-
-										{% if app.user != null  %}
-
-											<li class="nav-item">
-												<a class="nav-link" href=" {{ path('app_logout') }} ">
-													Se déconnecter
-												</a>
-											</li>
-
-										{% else %}
-
-											<li class="nav-item">
-												<a class="nav-link" href="{{ path('app_login') }}">
-													Se connecter
-												</a>
-											</li>
-
-										{% endif %}
-									</li>
-
-									<li class="nav-item active">
-										<a class="nav-link" href=" {{ path('user_index') }} ">
-											<i class="fas fa-user-circle"></i>
-										</a>
-									</li>
-
-									{# <li>
-																																																															                                    <form  action='{{ path('product_search') }}' method='GET' class="input-icons" >
-																																																															                                    <input class="form-control form-control-sm mr-3 w-75 input-field" type="text" placeholder="Recherchez" name="search"
-																																																															                                        aria-label="Search">
-																																																															                                    </form>
-																																																															                                </li> #}
-
-
-								</ul>
-
-
-							</div>
-
-						</nav>
-
-						<!-- Mobile Nav (max width 767px)-->
-						<div
-							class="mobile-nav">
-							<!-- Navbar Brand -->
-							<div class="amado-navbar-brand">
-								<a href="{{ path("MyApp_index") }}">
-									<img src="{{asset('img/staffdecologo.webp')}}" class="logo" alt="">
-								</a>
-							</div>
-							<!-- Navbar Toggler -->
-							<div class="amado-navbar-toggler">
-								<span></span>
-								<span></span>
-								<span></span>
-							</div>
-						</div>
-
-						<!-- Header Area Start -->
-						<header
-							class="header-area clearfix">
-							<!-- Close Icon -->
-							<div class="nav-close">
-								<i class="fa fa-close" aria-hidden="true"></i>
-							</div>
-							<!-- Logo -->
-							<div class="logo"></div>
-							<!-- Amado Nav -->
-							<nav class="amado-nav">
-								<ul>
-									<li class="nav-item">
-										<a class="nav-link" href=" {{ path('cart_index') }} ">
-											<i class="fas fa-shopping-cart"></i>
-											<span>
-												{{ nbProduct }}
-											</span>
-										</a>
-									</li>
-									<li class="nav-item ">
-										<a class="nav-link" href=" {{ path('user_index') }} ">
-											<i class="fas fa-user-circle"></i>
-										</a>
-									</li>
-
-									<li class="nav-item ">
-										<a class="nav-link" href="{{ path('MyApp_index') }}">
-											Acceuil
-										</a>
-									</li>
-
-									<li class="nav-item">
-										<a class="nav-link" href=" {{ path('product_index') }} ">
-											Nos Produits
-										</a>
-									</li>
-
-									<li class="nav-item">
-										<a class="nav-link" href=" {{ path('MyApp_contact') }} ">
-											Contact
-										</a>
-									</li>
-
-									<li class="nav-item">
-
-										{% if app.user != null  %}
-
-											<li class="nav-item">
-												<a class="nav-link" href=" {{ path('app_logout') }} ">
-													Se déconnecter
-												</a>
-											</li>
-
-										{% else %}
-
-											<li class="nav-item">
-												<a class="nav-link" href="{{ path('app_login') }}">
-													Se connecter
-												</a>
-											</li>
-
-										{% endif %}
-									</li>
-
-
-									<li>
-										<form class="input-group" action='{{ path('product_search') }}' method='GET'>
-											<input type="text" class="form-control" placeholder="Chercher" name="search">
-											<div class="input-group-append">
-												<button class="btn btn-secondary" type="submit">
-													<i class="fa fa-search"></i>
-												</button>
-											</div>
-										</form>
-									</li>
-
-
-								</ul>
-							</nav>
-
-
-							<!-- Social Button -->
-							<div class="social-info d-flex justify-content-between">
-								<a href="#">
-									<i class="fa fa-pinterest" aria-hidden="true"></i>
-								</a>
-								<a href="#">
-									<i class="fa fa-instagram" aria-hidden="true"></i>
-								</a>
-								<a href="#">
-									<i class="fa fa-facebook" aria-hidden="true"></i>
-								</a>
-								<a href="#">
-									<i class="fa fa-twitter" aria-hidden="true"></i>
-								</a>
-							</div>
-						</header>
-						<!-- Header Area End -->
-					{% endblock %}
-
-					{% block content %}
-					{% endblock %}
-				</div>
-				{% block show %}
-				{% endblock %}
-				<!-- ##### Main Content Wrapper End ##### -->
-
-				<!-- ##### Newsletter Area Start ##### -->
-				<section class="newsletter-area section-padding-100-0">
-					<div class="container">
-						<div
-							class="row align-items-center">
-							<!-- Newsletter Text -->
-							<div class="col-12 col-lg-6 col-xl-7">
-								<div class="newsletter-text mb-100">
-									<h2>
-										Inscrivez vous à notre Newsletter
-									</h2>
-									<p>
-										Découvrer nos dernières nouveautés en avant première ..
-									</p>
-								</div>
-							</div>
-							<!-- Newsletter Form -->
-							<div class="col-12 col-lg-6 col-xl-5">
-								<div class="newsletter-form mb-100">
-									<form action="#" method="post">
-										<input type="email" name="email" class="nl-email" placeholder="Votre Email ">
-										<input type="submit" value="Subscribe">
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
-				<!-- ##### Newsletter Area End ##### -->
-
-				<!-- ##### Footer Area Start ##### -->
-				<footer class="footer_area clearfix">
-					<div class="container">
-						<div
-							class="row align-items-center">
-							<!-- Single Widget Area -->
-							<div class="col-12 col-lg-4">
-								<div
-									class="single_widget_area">
-									<!-- Logo -->
-									<div class="footer-logo mr-50">
-										<a href="index.html">
-											<img src="/img/staffdecologo.webp" alt="">
-										</a>
-									</div>
-									<!-- Copywrite Text -->
-									<p class="copywrite">
-										Copyright &copy;
-										<script>
-											document.write(new Date().getFullYear());
-										</script>
-										Tous droits réservés | Staff Déco
-									</p>
-								</div>
-							</div>
-							<!-- Single Widget Area -->
-							<div class="col-12 col-lg-8">
-								<div
-									class="single_widget_area"><!-- Footer Menu -->
-
-								</div>
-							</div>
-						</div>
-					</div>
-				</footer>
-				<!-- ##### Footer Area End ##### -->
-
-				<!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
-				<script src="/js/jquery/jquery-2.2.4.min.js"></script>
-
-
-				<!-- Plugins js -->
-				<script src="/js/plugins.js"></script>
-				<!-- Active js -->
-				<script src="/js/active.js"></script>
-				<script src="{{ asset('/js/main.js')}}"></script>
-
-
-			</body>
-		{% endblock %}
-		{% block js %}
-		{% endblock %}
-	</html>
 {% endblock %}
