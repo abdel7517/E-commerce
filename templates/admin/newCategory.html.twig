@@ -5,9 +5,6 @@
 {% endblock %}
 {% block content %}
 	<div class="w100">
-		<h1>
-			Catégories
-		</h1>
 
 		<div class="flex justify-around">
 
@@ -25,7 +22,7 @@
 			</div>
 
 			{{ form_start(formD) }}
-			Supprimer une catégories
+			Supprimer une catégories segondaire
 			{{ form_row(formD.categorie, {
             label: 'Catégories à supprimer'
         		}) }}
@@ -35,7 +32,7 @@
 			{{ form_end(formD) }}
 
 			{{ form_start(formDMain) }}
-			Supprimer une catégories
+			Supprimer une catégories princiaple
 			{{ form_row(formDMain.MainCategorie, {
             label: 'Catégories à supprimer'
         		}) }}

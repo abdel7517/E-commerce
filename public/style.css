@@ -715,6 +715,7 @@ h1 {
 .under-tittle {
     margin-top: 1em !important;
     text-align: center;
+    font-size: 1em !important;
 }
 
 .containers {
@@ -934,9 +935,9 @@ h3,
     color: #6c757d !important;
 }
 
-.single-products-catagory a img {
+/* .single-products-catagory a img {
     height: 29em !important;
-}
+} */
 
 .line {
     background-color: #6c757d !important;
@@ -1264,7 +1265,7 @@ footer {
 
 /* Presentation */
 .container-main *{
-    font-size: 1.1em;
+    font-size: 1.31em;
 }
 .container-main {
     width: 70%;
@@ -1363,7 +1364,8 @@ aside {
 }
 
 .img-produits {
-    width: 4em;
+    width: 4.1em;
+    max-height: 4em;
 }
 
 .title-produit {
@@ -1371,7 +1373,7 @@ aside {
 }
 
 .text-produits {
-    font-size: 0.4em;
+    font-size: 0.45em;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1379,6 +1381,7 @@ aside {
     text-align: left;
     margin-left: 1em;
     width: 66%;
+    text-align: center;
 }
 
 .text-colonne {
@@ -1396,18 +1399,15 @@ aside {
     margin-top: 0.05em;
 }
 
-.eyes-back {
-    line-height: 1;
-    text-align: center;
-    width: 36px;
-    height: 36px;
-    background: #fff;
-    border-radius: 50%;
+.eyes{
+    width: 1.2em !important;
     display: none;
 }
 
-.single-produits:hover .eyes-back {
+
+.single-produits:hover .eyes {
     display: inline-block;
+
 }
 
 .rosace-produit {
@@ -1522,6 +1522,12 @@ textarea {
     color: black;
 }
 
+/* admin */
+form {
+    border: 2px solid black;
+    padding: 1em;
+    margin: 1em;
+}
 
 /* nav phone */
 .navbar-collapse{

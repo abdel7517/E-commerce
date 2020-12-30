@@ -67,30 +67,30 @@
 
                 <section class="produits">
 
-                    <div class="flex-center single-produits">
+                    {% for category in categories %}
+                        <div class="flex-center single-produits">
                         <div class=" overlay-image _ax container-img">
-                            <a href="asset/catalogue/rosace.pdf" target="_blank">
-                                <img class=" image _ay img-produits rosace-produit" src="asset/img/rosace.jpeg" alt="Alt text" />
-                                <div class=" text _2 ">
-                                    <a href="asset/catalogue/rosace.pdf" target="_blank" class="eyes-back">
-                                        <img src="asset/img/oeil.svg" alt="" srcset="">
-                                    </a>
+                                                {# <a href=" {{ path('product_products', {'category_product': category.name, 'main_category': category.mainCategory }) }} "> #}
+                                <img class=" image _ay img-produits rosace-produit" src=" {{ asset('uploads/'~category.image.name) }} " alt="Alt text" />
+                                <div class=" text _2 eyes">
+                                        <img src=" {{ asset('img/oeil.svg') }} " alt="" srcset=""  >
                                 </div>
-                            </a>
+                        {# <a/> #}
                         </div>
                         <div class="text-produits">
-                            <p class="title-produit"><strong>Les rosaces</strong></p> Elles vont donner du caractère et du charme à votre plafond. Elles donnent l’impression que c’est votre plafond qui a été sculpté.
-
+                            <p class="title-produit"><strong> {{ category.name }} </strong></p> Elles vont donner du caractère et du charme à votre plafond. Elles donnent l’impression que c’est votre plafond qui a été sculpté.
                         </div>
                     </div>
 
-                    <div class="flex-center single-produits">
+                    {% endfor %}
+
+                    {# <div class="flex-center single-produits">
                         <div class=" overlay-image _ax container-img">
-                            <a href="asset/catalogue/corniches.pdf" target="_blank">
-                                <img class=" image _ay img-produits " src="asset/img/corniches.png" alt="Alt text" />
+                            <a href=" {{ asset('catalogue/corniches.pdf') }} " target="_blank">
+                                <img class=" image _ay img-produits " src=" {{ asset('img/corniches.png') }} " alt="Alt text" />
                                 <div class=" text _2 ">
-                                    <a href="asset/catalogue/corniches.pdf" target="_blank" class="eyes-back">
-                                        <img src="asset/img/oeil.svg" alt="" srcset="">
+                                    <a href=" {{ asset('catalogue/corniches.pdf') }} " target="_blank" class="eyes-back">
+                                        <img src=" {{ asset('img/oeil.svg') }} " alt="" srcset="">
                                     </a>
                                 </div>
                             </a>
@@ -102,11 +102,11 @@
 
                     <div class="flex-center single-produits">
                         <div class=" overlay-image _ax container-img">
-                            <a href="asset/catalogue/moulureAngle.pdf" target="_blank">
-                                <img class=" image _ay img-produits " src="asset/img/moulure.jpeg" alt="Alt text" />
+                            <a href=" {{ asset('catalogue/moulureAngle.pdf') }} " target="_blank">
+                                <img class=" image _ay img-produits " src=" {{ asset('img/moulure.jpeg') }} " alt="Alt text" />
                                 <div class=" text _2 ">
-                                    <a href="asset/catalogue/moulureAngle.pdf" target="_blank" class="eyes-back">
-                                        <img src="asset/img/oeil.svg" alt="" srcset="">
+                                    <a href=" {{ asset('catalogue/moulureAngle.pdf') }} " target="_blank" class="eyes-back">
+                                        <img src=" {{ asset('img/oeil.svg') }} " alt="" srcset="">
                                     </a>
                                 </div>
                             </a>
@@ -118,20 +118,20 @@
 
                     <div class="flex-center single-produits">
                         <div class=" overlay-image _ax container-img">
-                            <a href="asset/catalogue/chapiteau.pdf" target="_blank">
-                                <img class=" image _ay img-produits colonne " src="asset/img/colonne.jpeg" alt="Alt text" />
+                            <a href=" {{ asset('catalogue/chapiteau.pdf') }} " target="_blank">
+                                <img class=" image _ay img-produits colonne " src=" {{ asset('img/colonne.jpeg') }} " alt="Alt text" />
                                 <div class=" text _2 ">
-                                    <a href="asset/catalogue/chapiteau.pdf" class="eyes-back"  target="_blank">
-                                        <img src="asset/img/oeil.svg" alt="" srcset="">
+                                    <a href= "{{ asset('catalogue/chapiteau.pdf') }} " class="eyes-back"  target="_blank">
+                                        <img src=" {{ asset('img/oeil.svg') }} " alt="" srcset="">
                                     </a>
                                 </div>
                             </a>
                         </div>
-                        <div class="text-colonne">
+                        <div class="text-produits">
                             <p class="title-produit"> <strong>Les colonnes et pilastres</strong> </p>Les colonnes et les pilastres sont deux éléments très différents. En effet, le pilastre est encastré dans un mur, tandis que la colonne est un élément isolé. Les colonnes et les
                             pilastres donnent un effet majestueux à votre habitation.
                         </div>
-                    </div>
+                    </div> #}
                 </section>
             </div>
 {% endblock %}

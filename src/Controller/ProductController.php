@@ -59,23 +59,35 @@ class ProductController extends AbstractController
         );
     }
 
-    /**
-     * @Route("/category/{category}", name="product_category", methods={"GET"})
+    // /**
+    //  * @Route("/category/{category}", name="product_category", methods={"GET"})
+    //  */
+    // public function categoryPage(String $category)
+    // {
+    //     return $this->render(
+    //         "category/category.html.twig",
+    //         [
+    //             'nbProduct' =>  $this->cart->getNbOfArticle(),
+    //             'categories' => $this->categoryRepository->findByMainCategory($category),
+    //             'categorie' => $category
+    //         ]
+    //     );
+    // }
+
+
+   /**
+     * @Route("/category", name="product_category", methods={"GET"})
      */
-    public function categoryPage(String $category)
+    public function categoryPage()
     {
         return $this->render(
-            "category/category.html.twig",
+            "index.html.twig",
             [
                 'nbProduct' =>  $this->cart->getNbOfArticle(),
-                'categories' => $this->categoryRepository->findByMainCategory($category),
-                'categorie' => $category
+                'categories' => $this->categoryRepository->findAll(),
             ]
         );
     }
-
-
-
 
 
     /**

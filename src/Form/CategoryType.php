@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 Class CategoryType extends AbstractType
 {
@@ -23,6 +24,7 @@ Class CategoryType extends AbstractType
                 'data_class' => null,
                 'mapped'=>false
             ])
+            ->add('description', TextareaType::class)
             ->add('image', FileType::class, ['data_class' => null,  'mapped'=>false]);
             
            
