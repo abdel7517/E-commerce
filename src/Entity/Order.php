@@ -73,6 +73,8 @@ class Order
      */
     private $orderCode;
 
+   
+
     public function getId(): ?int
     {
         return $this->id;
@@ -209,4 +211,5 @@ class Order
 
         return $this;
     }
+
 }

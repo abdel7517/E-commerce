@@ -1,0 +1,43 @@
+{% extends "base.html.twig" %}
+
+
+		{% block content  %}
+			<div class="container-main">
+				<p class='under-tittle tl'>
+					Le Staff est un matériau qui va vous permettre de réaliser des décors avec une extrême finesse. Nous vous proposons un large choix de produits et pouvons également personnaliser selon vos envies. N’hésitez pas à consulter notre catalogue en bas de page.
+				</p>
+
+				<section class="products flex">
+
+					{% for product in products %}
+
+						<div class="single-produits">
+
+							<div class=" overlay-image _ax container-img">
+								<a href=" {{ path('product_show', {'id': product.id }) }} ">
+
+									<img class=" image _ay img-produits rosace-produit" src=" {{ asset('uploads/'~ product.image.name) }} " alt="Alt text"/>
+									<div class=" text _2 eyes">
+										<img src=" {{ asset('img/oeil.svg') }} " alt="" srcset="">
+									</div>
+								</a>
+
+							</div>
+							<div class="texte-produits ">
+								<p class="title-produit">
+									<strong>
+										<span class="name">{{ product.name }}</span>
+                                        <br>
+                                        <span class="reference">{{ product.reference }}</span>
+                                        <br>
+									</strong>
+								</p>
+							</div>
+						</div>
+
+
+					{% endfor %}
+
+				</section>
+			</div>
+		{% endblock %}

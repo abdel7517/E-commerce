@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Order;
 use App\Service\Cart\Cart;
 use App\Controller\AdminController;
+use App\Controller\ProductController;
 use App\Repository\AllCategoryRepository;
 use App\Repository\MainCategoryRepository;
 use Symfony\Component\BrowserKit\Response;
@@ -16,22 +17,31 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class MyAppController extends AbstractController
 {
 
-    protected $cart, $allCategoryRepository, $mainCategoryRepository;
+    protected $cart, $allCategoryRepository, $mainCategoryRepository, $productController;
 
-    public function __construct(Cart $cart, AllCategoryRepository $allCategoryRepository, MainCategoryRepository $mainCategoryRepository)
+    public function __construct(Cart $cart, AllCategoryRepository $allCategoryRepository, MainCategoryRepository $mainCategoryRepository, ProductController $productController)
     {
         $this->cart = $cart;
         $this->allCategoryRepository = $allCategoryRepository;
         $this->mainCategoryRepository = $mainCategoryRepository;
+        $this->productController = $productController;
     }
 
     /**
-     * @Route("/good", name="MyApp_good")
-     */
-    public function good(Request $request)
+     * @Route("/", name="MyApp_index")
+    */
+    public function index()
+    {
+        return $this->productController->categoryPage();
+    }
+
+    /**
+     * @Route("/good/{orderCode}", name="MyApp_good")
+    */
+    public function good(Request $request, string $orderCode)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $orderCode = $request->get('s');
+        // $orderCode = $request->get('s');
         $ID = $request->get('t');
 
 
@@ -52,7 +62,6 @@ class MyAppController extends AbstractController
                 'mainCategory' => $this->mainCategoryRepository->findAll(),
                 'orderCode' => $orderCode,
                 'id' => $ID,
-             
             ]
         );
     }
@@ -74,13 +83,6 @@ class MyAppController extends AbstractController
         );
     }
 
-    /**
-     * @Route("/", name="MyApp_index")
-     */
-    public function index()
-    {
-        return $this->render("index.html.twig");
-    }
 
     /** 
      * @Route("/presentation", name="MyApp_presentation")

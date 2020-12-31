@@ -24,6 +24,10 @@ h1 {
     color: black;
 }
 
+a {
+    font-size: inherit !important;
+}
+
 .normal {
     font-weight: normal;
 }
@@ -65,7 +69,7 @@ h1 {
 }
 
 .description {
-    background: rgba(90, 113, 112, 1);
+    background: rgb(223, 191, 109);
     color: white;
     padding: 0.5em;
     border-radius: 1em;
@@ -140,7 +144,7 @@ h1 {
 }
 
 @media only screen and (max-width: 1148px) {
-    .text-produits {
+    .text-categorie {
         margin-bottom: 1em;
         position: inherit !important;
         margin-top: 1em;
@@ -385,6 +389,11 @@ a {
     home
 */
 
+.cart{
+    WIDTH: 1.5em;
+    POSITION: RELATIVE;
+    TOP: .4EM;
+}
 
 /* .navbar{
     display: none !important;
@@ -935,9 +944,9 @@ h3,
     color: #6c757d !important;
 }
 
-/* .single-products-catagory a img {
+.single-products-catagory a img {
     height: 29em !important;
-} */
+}
 
 .line {
     background-color: #6c757d !important;
@@ -958,6 +967,7 @@ h3,
 }
 
 .h-flex-show {
+    padding-top: 1em;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
@@ -991,16 +1001,15 @@ h3,
 }
 
 .border {
-    border: 1px solid black;
+    border: 1px solid rgb(223, 191, 109) !important;
 }
 
 .panier {
-    background: rgba(90, 113, 112, 1);
+    background: rgb(223, 191, 109);
     padding: 0.3em;
     width: 13em;
     margin: auto;
     text-align: center;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(90, 113, 112, 1);
 }
 
 .font-size {
@@ -1052,12 +1061,16 @@ h3,
     margin-bottom: 3em;
 }
 
-.fa-minus-circle,
-.fa-plus-circle {
-    font-size: 1.2em;
+.less,
+.more {
+    width: 1em;
     margin: 0.2em;
+    position: relative;
+    top: 0.3em;
 }
-
+td a {
+    text-decoration: none !important;
+}
 .border-none {
     border: none !important;
 }
@@ -1335,7 +1348,7 @@ aside {
 }
 
 
-/* produits */
+/* categorys */
 
 .overlay-image {
     position: relative;
@@ -1372,7 +1385,7 @@ aside {
     margin-bottom: 0.5em;
 }
 
-.text-produits {
+.text-categorie {
     font-size: 0.45em;
     display: flex;
     flex-direction: column;
@@ -1418,6 +1431,19 @@ aside {
     margin-top: 0.8em;
 }
 
+/* 
+    product
+*/
+.products{
+    justify-content: space-between !important;
+}
+.texte-produits{
+    font-size: 0.35em;
+    text-align: center;
+}
+.reference{
+    font-size: 1em;
+}
 /* realisations */
 
 .realisation{
@@ -1479,7 +1505,6 @@ aside {
 }
 
 input {
-    border: none;
     margin-left: 0.1em !important;
 }
 
@@ -1523,11 +1548,14 @@ textarea {
 }
 
 /* admin */
+
 form {
     border: 2px solid black;
     padding: 1em;
     margin: 1em;
 }
+
+
 
 /* nav phone */
 .navbar-collapse{

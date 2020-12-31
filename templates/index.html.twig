@@ -1,138 +1,89 @@
 {% extends "base.html.twig" %}
-{% block navBar %}
- <!--/.Navbar-->
-    <div class="main-content-wrapper d-flex clearfix">
-        <nav class="justify-content-center nav-top ">
-            <ul class='flex-nav'>
-                <img src="{{ asset('img/logoStaffdeco.png') }}" alt="logo staffdeco" class="logo ">
 
 
-                <li class="nav-item  ">
-                    <a class="nav-link " href="https://www.staffdeco.fr/nv/index.html">
-                        Accueil
-                    </a>
-                </li>
+		{% block content  %}
+			<div class="container-main">
+				<p class='under-tittle tl'>
+					Le Staff est un matériau qui va vous permettre de réaliser des décors avec une extrême finesse. Nous vous proposons un large choix de produits et pouvons également personnaliser selon vos envies. N’hésitez pas à consulter notre catalogue en bas de page.
+				</p>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="https://www.staffdeco.fr/nv/presentation.html">
-                        Présentation
-                    </a>
-                </li>
+				<section class="categorys">
 
-                <li class="nav-item">
-                    <a class="nav-link un" href="https://boutique.staffdeco.fr/">
-                         Produits
-                    </a>
-                </li>
+					{% for category in categories %}
 
-                <li class="nav-item">
-                    <a class="nav-link" href="https://boutique.staffdeco.fr/realisation">
-                        Réalisations
-                    </a>
-                </li>
+						<div class="flex-center single-produits">
 
-                <li class="nav-item">
-                    <a class="nav-link" href="https://www.staffdeco.fr/nv/contact.html">
-                        Contact
-                    </a>
-                </li>
-            </ul>
-            <div class="ornement"><img src=" {{asset('img/angle.png')}} " alt="logo staffdeco" class="angle logo "></div>
-            </nav>
-        </div>
-{% endblock %}
-{% block banniere %}
-   <!-- banniere -->
-        <section class="h-flex">
-            <div class="presentation">
-                <div class='title-flex'>
-                    <div class="trait trait-left">
-                        <img src=" {{ asset('img/trait.svg') }}" alt="">
-                    </div>
-                    <h1 class='h1-presentation'>
-                        Nos Produits
-                    </h1>
-                    <div class="trait trait-right">
-                        <img src=" {{ asset('img/trait.svg') }}" alt="" >
-                    </div>
-					
-        </section>
-{% endblock %}
+							<div class=" overlay-image _ax container-img">
+								<a href=" {{ path('product_products', {'category_product': category.name, 'main_category': category.mainCategory }) }} ">
 
-{% block content  %}
-     <div class="container-main">
-                <p class='under-tittle tl'>
-                    Le Staff est un matériau qui va vous permettre de réaliser des décors avec une extrême finesse. Nous vous proposons un large choix de produits et pouvons également personnaliser selon vos envies. N’hésitez pas à consulter notre catalogue en bas de page.
-                </p>
+									<img class=" image _ay img-produits rosace-produit" src=" {{ asset('uploads/'~category.image.name) }} " alt="Alt text"/>
+									<div class=" text _2 eyes">
+										<img src=" {{ asset('img/oeil.svg') }} " alt="" srcset="">
+									</div>
+								</a>
 
-                <section class="produits">
+							</div>
+							<div class="text-categorie">
+								<p class="title-produit">
+									<strong>
+										{{ category.name }}
+									</strong>
+								</p>
+								{{ category.description }}
+							</div>
+						</div>
 
-                    {% for category in categories %}
-                        <div class="flex-center single-produits">
-                        <div class=" overlay-image _ax container-img">
-                                                {# <a href=" {{ path('product_products', {'category_product': category.name, 'main_category': category.mainCategory }) }} "> #}
-                                <img class=" image _ay img-produits rosace-produit" src=" {{ asset('uploads/'~category.image.name) }} " alt="Alt text" />
-                                <div class=" text _2 eyes">
-                                        <img src=" {{ asset('img/oeil.svg') }} " alt="" srcset=""  >
-                                </div>
-                        {# <a/> #}
-                        </div>
-                        <div class="text-produits">
-                            <p class="title-produit"><strong> {{ category.name }} </strong></p> Elles vont donner du caractère et du charme à votre plafond. Elles donnent l’impression que c’est votre plafond qui a été sculpté.
-                        </div>
-                    </div>
 
-                    {% endfor %}
+					{% endfor %}
 
-                    {# <div class="flex-center single-produits">
-                        <div class=" overlay-image _ax container-img">
-                            <a href=" {{ asset('catalogue/corniches.pdf') }} " target="_blank">
-                                <img class=" image _ay img-produits " src=" {{ asset('img/corniches.png') }} " alt="Alt text" />
-                                <div class=" text _2 ">
-                                    <a href=" {{ asset('catalogue/corniches.pdf') }} " target="_blank" class="eyes-back">
-                                        <img src=" {{ asset('img/oeil.svg') }} " alt="" srcset="">
-                                    </a>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="text-produits">
-                            <p class="title-produit"><strong>Les corniches</strong></p> Les corniches vont se poser sur le pourtour du plafond. Elles vont donner de l’élégance à votre plafond et le mettre en valeur.
-                        </div>
-                    </div>
-
-                    <div class="flex-center single-produits">
-                        <div class=" overlay-image _ax container-img">
-                            <a href=" {{ asset('catalogue/moulureAngle.pdf') }} " target="_blank">
-                                <img class=" image _ay img-produits " src=" {{ asset('img/moulure.jpeg') }} " alt="Alt text" />
-                                <div class=" text _2 ">
-                                    <a href=" {{ asset('catalogue/moulureAngle.pdf') }} " target="_blank" class="eyes-back">
-                                        <img src=" {{ asset('img/oeil.svg') }} " alt="" srcset="">
-                                    </a>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="text-produits">
-                            <p class="title-produit"><strong>Les moulures</strong></p> Qui n’a jamais rêvé avoir des moulures au plafond ? Elles apporteront une touche d’élégance à votre intérieur.
-                        </div>
-                    </div>
-
-                    <div class="flex-center single-produits">
-                        <div class=" overlay-image _ax container-img">
-                            <a href=" {{ asset('catalogue/chapiteau.pdf') }} " target="_blank">
-                                <img class=" image _ay img-produits colonne " src=" {{ asset('img/colonne.jpeg') }} " alt="Alt text" />
-                                <div class=" text _2 ">
-                                    <a href= "{{ asset('catalogue/chapiteau.pdf') }} " class="eyes-back"  target="_blank">
-                                        <img src=" {{ asset('img/oeil.svg') }} " alt="" srcset="">
-                                    </a>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="text-produits">
-                            <p class="title-produit"> <strong>Les colonnes et pilastres</strong> </p>Les colonnes et les pilastres sont deux éléments très différents. En effet, le pilastre est encastré dans un mur, tandis que la colonne est un élément isolé. Les colonnes et les
-                            pilastres donnent un effet majestueux à votre habitation.
-                        </div>
-                    </div> #}
-                </section>
-            </div>
-{% endblock %}
-
+					{# <div class="flex-center single-produits">
+																												                        <div class=" overlay-image _ax container-img">
+																												                            <a href=" {{ asset('catalogue/corniches.pdf') }} " target="_blank">
+																												                                <img class=" image _ay img-produits " src=" {{ asset('img/corniches.png') }} " alt="Alt text" />
+																												                                <div class=" text _2 ">
+																												                                    <a href=" {{ asset('catalogue/corniches.pdf') }} " target="_blank" class="eyes-back">
+																												                                        <img src=" {{ asset('img/oeil.svg') }} " alt="" srcset="">
+																												                                    </a>
+																												                                </div>
+																												                            </a>
+																												                        </div>
+																												                        <div class="text-produits">
+																												                            <p class="title-produit"><strong>Les corniches</strong></p> Les corniches vont se poser sur le pourtour du plafond. Elles vont donner de l’élégance à votre plafond et le mettre en valeur.
+																												                        </div>
+																												                    </div>
+																												
+																												                    <div class="flex-center single-produits">
+																												                        <div class=" overlay-image _ax container-img">
+																												                            <a href=" {{ asset('catalogue/moulureAngle.pdf') }} " target="_blank">
+																												                                <img class=" image _ay img-produits " src=" {{ asset('img/moulure.jpeg') }} " alt="Alt text" />
+																												                                <div class=" text _2 ">
+																												                                    <a href=" {{ asset('catalogue/moulureAngle.pdf') }} " target="_blank" class="eyes-back">
+																												                                        <img src=" {{ asset('img/oeil.svg') }} " alt="" srcset="">
+																												                                    </a>
+																												                                </div>
+																												                            </a>
+																												                        </div>
+																												                        <div class="text-produits">
+																												                            <p class="title-produit"><strong>Les moulures</strong></p> Qui n’a jamais rêvé avoir des moulures au plafond ? Elles apporteront une touche d’élégance à votre intérieur.
+																												                        </div>
+																												                    </div>
+																												
+																												                    <div class="flex-center single-produits">
+																												                        <div class=" overlay-image _ax container-img">
+																												                            <a href=" {{ asset('catalogue/chapiteau.pdf') }} " target="_blank">
+																												                                <img class=" image _ay img-produits colonne " src=" {{ asset('img/colonne.jpeg') }} " alt="Alt text" />
+																												                                <div class=" text _2 ">
+																												                                    <a href= "{{ asset('catalogue/chapiteau.pdf') }} " class="eyes-back"  target="_blank">
+																												                                        <img src=" {{ asset('img/oeil.svg') }} " alt="" srcset="">
+																												                                    </a>
+																												                                </div>
+																												                            </a>
+																												                        </div>
+																												                        <div class="text-produits">
+																												                            <p class="title-produit"> <strong>Les colonnes et pilastres</strong> </p>Les colonnes et les pilastres sont deux éléments très différents. En effet, le pilastre est encastré dans un mur, tandis que la colonne est un élément isolé. Les colonnes et les
+																												                            pilastres donnent un effet majestueux à votre habitation.
+																												                        </div>
+																												                    </div> #}
+				</section>
+			</div>
+		{% endblock %}

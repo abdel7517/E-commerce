@@ -99,6 +99,7 @@ class CartController extends AbstractController
         ]);
     }
 
+ 
 
 
     /**
@@ -109,44 +110,46 @@ class CartController extends AbstractController
 
         
         $order = new Order();
+        $orderCode = uniqid();
+
         $form = $this->createForm(
             OrderType::class,
             $order,
             [
-                'action' => $this->generateUrl('cart_pay'),
+                'action' => $this->generateUrl('MyApp_good', ['orderCode' => $orderCode]),
             ]
         );
         $form->handleRequest($request);
 
         $price =  $this->cart->getTotalCart();
-        if($form->get('expedition')->getData() === "livraison")
-        {
-            $price += 90;
-        }
+        // if($form->get('expedition')->getData() === "livraison")
+        // {
+        //     $price += 90;
+        // }
 
-        // 'Basic NTdkNWQ1NzAtZDExZS00NzMzLWIxMzQtNDA3MjQzNTdkYjU3OmVLYjNoZkVLelE1SDM2WGU3MjRWR0RUMzI1OTUwVg=='
-        $response = $this->client->request(
-            'POST',
-            // 'https://www.vivapayments.com/api/orders/',
-            'https://demo.vivapayments.com/api/orders/',
-            [
-                'headers' => ['authorization' => 'Basic ZDA2ODhjMGItYTk4MC00OTI2LTgyNmYtZDFlMWFlMTkwOGI5Oks4bzo4Xg=='],
-                'body' => [
-                    'amount' => ($price * 100),
-                    'email' => $this->getUser()->getEmail(),
-                    'fullname' => $this->getUser()->getName(),
-                    'requestLang' => 'fr'
+        // // 'Basic NTdkNWQ1NzAtZDExZS00NzMzLWIxMzQtNDA3MjQzNTdkYjU3OmVLYjNoZkVLelE1SDM2WGU3MjRWR0RUMzI1OTUwVg=='
+        // $response = $this->client->request(
+        //     'POST',
+        //     // 'https://www.vivapayments.com/api/orders/',
+        //     'https://demo.vivapayments.com/api/orders/',
+        //     [
+        //         'headers' => ['authorization' => 'Basic ZDA2ODhjMGItYTk4MC00OTI2LTgyNmYtZDFlMWFlMTkwOGI5Oks4bzo4Xg=='],
+        //         'body' => [
+        //             'amount' => ($price * 100),
+        //             'email' => $this->getUser()->getEmail(),
+        //             'fullname' => $this->getUser()->getName(),
+        //             'requestLang' => 'fr'
 
-                ],
+        //         ],
 
-            ]
-        );
+        //     ]
+        // );
 
-        $content = $response->getContent();
-        $content = $response->toArray();
-        $orderCode = $content['OrderCode'];
+        // $content = $response->getContent();
+        // $content = $response->toArray();
+        // $orderCode = $content['OrderCode'];
         // $url = 'https://www.vivapayments.com/web/checkout?ref='. $orderCode . '&Lang=fr';
-        $url = 'https://demo.vivapayments.com/web/checkout?ref=' . $orderCode . '&Lang=fr';
+        // $url = 'https://demo.vivapayments.com/web/checkout?ref=' . $orderCode . '&Lang=fr';
 
 
 
@@ -180,11 +183,8 @@ class CartController extends AbstractController
             $entityManager->flush();
         }
 
+        return $this->redirectToRoute('MyApp_good', ['orderCode' => $orderCode]);
+        // return $this->redirect($url);
 
-
-
-
-
-        return $this->redirect($url);
     }
 }

@@ -1,120 +1,219 @@
 {% block base %}
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{asset('style.css')}}">
-    <link rel="stylesheet" href="{{asset('lib/bootstrap/css/bootstrap.min.css')}}">
-    <meta name="format-detection" content="telephone=no">
-    <title>Staff Déco</title>
-</head>
-<body>
-       <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent22">
-  
-        <!-- Links -->
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="https://www.staffdeco.fr/nv/index.html">Accueil </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://www.staffdeco.fr/nv/presentation.html">Présentation</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="phttps://boutique.staffdeco.fr/">Produits</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://boutique.staffdeco.fr/realisation">Réalisations</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://www.staffdeco.fr/nv/contact.html">Contact</a>
-          </li>
-        </ul>
-        <!-- Links -->
-    
-      </div>
-      <!-- Collapsible content -->
-       <!--Navbar-->
-    <nav class="navbar navbar-dark  indigo darken-2">
-        <!-- Navbar brand -->
-        <img src=" {{ asset('img/logoStaffdeco.png') }} " alt="logo staffdeco" class="logo">
-    
-        <!-- Collapse button -->
-        <button class="navbar-toggler third-button" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent22"
-        aria-controls="navbarSupportedContent22" aria-expanded="false" aria-label="Toggle navigation">
-        <div class="animated-icon3"><span></span><span></span><span></span></div>
-        </button>
-  </nav>
- 
- {% block navBar %}
-    
- {% endblock %}
+	<!DOCTYPE html>
+	<html lang="fr">
+		<head>
+			<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<link rel="stylesheet" href="{{asset('style.css')}}">
+			<link rel="stylesheet" href="{{asset('lib/bootstrap/css/bootstrap.min.css')}}">
+			<meta name="format-detection" content="telephone=no">
+			<title>
+				Staff Déco
+			</title>
+		</head>
+		<body>
+			<!-- Collapsible content -->
+			<div
+				class="collapse navbar-collapse" id="navbarSupportedContent22">
 
-        
+				<!-- Links -->
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="https://www.staffdeco.fr/nv/index.html">
+							Accueil
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="https://www.staffdeco.fr/nv/presentation.html">
+							Présentation
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="phttps://boutique.staffdeco.fr/">
+							Produits
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="https://boutique.staffdeco.fr/realisation">
+							Réalisations
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="https://www.staffdeco.fr/nv/contact.html">
+							Contact
+						</a>
+					</li>
+				</ul>
+				<!-- Links -->
 
-     {% block banniere %}
-      
-     {% endblock %}
+			</div>
+			<!-- Collapsible content -->
+			<!--Navbar-->
+			<nav
+				class="navbar navbar-dark  indigo darken-2">
+				<!-- Navbar brand -->
+				<img
+				src=" {{ asset('img/logoStaffdeco.png') }} " alt="logo staffdeco" class="logo">
 
-		{% block content %}
+				<!-- Collapse button -->
+				<button class="navbar-toggler third-button" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent22" aria-controls="navbarSupportedContent22" aria-expanded="false" aria-label="Toggle navigation">
+					<div class="animated-icon3">
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+				</button>
+			</nav>
+
+			{% block navBar %}
+				<!--/.Navbar-->
+				<div class="main-content-wrapper d-flex clearfix">
+					<nav class="justify-content-center nav-top ">
+						<ul class='flex-nav'>
+							<img src="{{ asset('img/logoStaffdeco.png') }}" alt="logo staffdeco" class="logo ">
+
+
+							<li class="nav-item  ">
+								<a class="nav-link " href="https://www.staffdeco.fr/nv/index.html">
+									Accueil
+								</a>
+							</li>
+
+							<li class="nav-item">
+								<a class="nav-link" href="https://www.staffdeco.fr/nv/presentation.html">
+									Présentation
+								</a>
+							</li>
+
+							<li class="nav-item">
+								<a class="nav-link un" href="https://boutique.staffdeco.fr/">
+									Produits
+								</a>
+							</li>
+
+							<li class="nav-item">
+								<a class="nav-link" href="https://boutique.staffdeco.fr/realisation">
+									Réalisations
+								</a>
+							</li>
+
+							<li class="nav-item">
+								<a class="nav-link" href="https://www.staffdeco.fr/nv/contact.html">
+									Contact
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href=" {{ path('cart_index') }} ">
+									<img src=" {{ asset('img/cart.png') }} " alt="" class="cart">
+									<span>
+										{{ nbProduct }}
+									</span>
+								</a>
+							</li>
+
+
+						</ul>
+						<div class="ornement">
+							<img src=" {{asset('img/angle.png')}} " alt="logo staffdeco" class="angle logo ">
+						</div>
+					</nav>
+				</div>
+			{% endblock %}
+
+
+			{% block banniere %}
+				<!-- banniere -->
+				<section class="h-flex">
+					<div class="presentation">
+						<div class='title-flex'>
+							<div class="trait trait-left">
+								<img src=" {{ asset('img/trait.svg') }}" alt="">
+							</div>
+							<h1 class='h1-presentation'>
+								Nos Produits
+							</h1>
+							<div class="trait trait-right">
+								<img src=" {{ asset('img/trait.svg') }}" alt="">
+							</div>
+
+						</section>
+					{% endblock %}
+
+					{% block content %}
+					{% endblock %}
+
+					{% block footer %}
+
+						<footer>
+							<img src=" {{ asset('img/rosace.png') }}" alt="deco" class="rosace">
+							<div class="ml-footer first">
+								<p class="mt-footer">
+									NOUS DECOUVRIR
+								</p>
+								<p class="page">
+									<img src=" {{ asset('img/fleche.png') }}" alt="deco" class="fleche">
+									Accueil
+								</p>
+								<p class="page">
+									<img src=" {{ asset('img/fleche.png') }}" alt="deco" class="fleche">
+									Présentation
+								</p>
+								<p class="page">
+									<img src=" {{ asset('img/fleche.png') }}" alt="deco" class="fleche">
+									Produits
+								</p>
+								<p class="page">
+									<img src=" {{ asset('img/fleche.png') }}" alt="deco" class="fleche">
+									Réalisations
+								</p>
+								<p class="page">
+									<img src=" {{ asset('img/fleche.png') }}" alt="deco" class="fleche">
+									Mentions légales
+								</p>
+							</div>
+							<div class="ml-footer">
+								<p class="mt-footer">
+									NOUS CONTACTER
+								</p>
+								<div class="flex contact">
+									<span class="image">
+										<img src=" {{ asset('img/loca.png') }} " alt="deco" class="localisation">
+									</span>
+									<span>
+										60, rue Marcel Dassault
+										<br>
+										93140 Bondy
+									</span>
+								</div>
+								<div class="flex contact">
+									<span class="image">
+										<img src=" {{ asset('img/mail.png') }}" alt="deco" class="localisation">
+									</span>
+									<span>
+										contact@staffdeco.fr
+									</span>
+								</div>
+								<div class="flex contact">
+									<span class="image">
+										<img src=" {{ asset('img/phone.png') }}" alt="deco" class="localisation phone">
+									</span>
+									<span class="number">
+										06 12 34 03 33
+									</span>
+								</div>
+							</div>
+						</footer>
+					{% endblock %}
+
+
+					<script src=" {{ asset('lib/bootstrap/js/bootstrap.min.js') }} "></script>
+					<script src=" {{ asset('lib/jquery/js/jquery-2.2.4.min.js') }} "></script>
+					{% block js %}
+					{% endblock %}
+
+				</body>
+			</html>
+
 		{% endblock %}
-
-        <footer>
-            <img src=" {{ asset('img/rosace.png') }}" alt="deco" class="rosace">
-            <div class="ml-footer first">
-                <p class="mt-footer">
-                    NOUS DECOUVRIR
-                </p>
-                <p class="page" >
-                    <img src=" {{ asset('img/fleche.png') }}" alt="deco" class="fleche"> Accueil
-                </p>
-                <p class="page"> 
-                    <img src=" {{ asset('img/fleche.png') }}" alt="deco" class="fleche"> Présentation
-                </p>
-                <p class="page">
-                    <img src=" {{ asset('img/fleche.png') }}" alt="deco" class="fleche"> Produits
-                </p>
-                <p class="page">
-                    <img src=" {{ asset('img/fleche.png') }}" alt="deco" class="fleche"> Réalisations
-                </p>
-                <p class="page">
-                    <img src=" {{ asset('img/fleche.png') }}" alt="deco" class="fleche"> Mentions légales
-                </p>
-            </div>
-            <div class="ml-footer">
-                <p class="mt-footer">
-                    NOUS CONTACTER
-                </p>
-                <div class="flex contact">
-                    <span class="image"><img src=" {{ asset('img/loca.png') }} " alt="deco" class="localisation"></span>
-                    <span>
-                        60, rue Marcel Dassault
-                        <br>
-                        93140 Bondy
-                    </span>
-                </div>
-                <div class="flex contact">
-                <span class="image"><img src=" {{ asset('img/mail.png') }}" alt="deco" class="localisation"></span>
-                    <span>
-                        contact@staffdeco.fr
-                    </span>
-                </div>
-                <div class="flex contact">
-                    <span class="image"><img src=" {{ asset('img/phone.png') }}" alt="deco" class="localisation phone"></span>
-                    <span class="number">
-                        06 12 34 03 33
-                    </span>
-                </div>
-            </div>
-        </footer>
-       
-    
-    <script src=" {{ asset('lib/bootstrap/js/bootstrap.min.js') }} "></script>
-    <script src=" {{ asset('lib/jquery/js/jquery-2.2.4.min.js') }} "></script>
-	{% block js %}{% endblock %}
-	
-</body>
+	</body>
 </html>
-
-{% endblock %}

@@ -3,13 +3,14 @@ namespace App\Form;
 
 use App\Entity\Order;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\RadioType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 Class OrderType extends AbstractType
 {
@@ -30,7 +31,7 @@ Class OrderType extends AbstractType
                 'label'=> false, 
                 'choices'  => [
                     'Récupération en boutique Rue Marcel Dassault 93140 Bondy' => "récupération",
-                    'Livraison en Île-de-France : 90 € ' => 'livraison',
+                    // 'Livraison en Île-de-France : 90 € ' => 'livraison',
                 ],
             ]);
             
