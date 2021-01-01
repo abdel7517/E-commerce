@@ -1,5 +1,10 @@
 {% extends 'base.html.twig' %}
 
+{% block lib %}
+
+	<link href="{{ asset('lib/lightbox/css/lightbox.min.css') }}" rel="stylesheet">
+
+{% endblock %}
 
 {% block banniere %}
 	<!-- banniere -->
@@ -18,77 +23,85 @@
 
 			</section>
 		{% endblock %}
-{% block content %}
 
-	<section class="h-flex-show padding">
-		<div id="images-containers">
-			<img class="border" id="imageMain" src=" {{ asset('/uploads/'~ product.image.name ) }} " alt="" srcset="" width="150px">
-			<div class="flex justifyW60">
-				{% for image in product.images %}
-					<div>
-						<img class="border other-img" id="images" src=" {{ asset('/uploads/'~ image.name ) }} " onclick="changeMainImage('{{asset('/uploads/'~ image.name ) }}')" alt="">
+		{% block content %}
+
+			<section class="h-flex-show padding">
+				<div id="images-containers">
+					<a href="{{ asset('/uploads/'~ product.image.name ) }}" data-lightbox="img" data-title="{{product.categorie}}" class="link-preview" title="Voir" class="link-preview">
+						<img class="border" id="imageMain" src=" {{ asset('/uploads/'~ product.image.name ) }} " alt="" srcset="" width="150px">
+					</a>
+					<div class="flex container-img-others">
+						{% for image in product.images %}
+							<div>
+								<a href="{{ asset('/uploads/'~ image.name ) }} " data-lightbox="img" data-title="{{product.categorie}}" class="link-preview" title="Voir" class="link-preview">
+									<img class="border other-img" id="images" src=" {{ asset('/uploads/'~ image.name ) }} " git  alt="">
+								</a>
+								</div>
+							{% endfor %}
+
+						</div>
 					</div>
-				{% endfor %}
 
-			</div>
-		</div>
+					<div id="description">
+						<p class='loc'>
+							<a href=" {{ path('product_index') }} ">
+								Boutique
+							</a>
+							/
+							<a href=" {{ path('product_category', {'category': main_category }) }} ">
+								{{ product.mainCategory }}
+							</a>
+							/
+							<a href="{{ path('product_products', {'category_product': product.categorie, 'main_category': product.mainCategory }) }}">
+								{{ product.categorie }}
+							</a>
+							/
+							<span class="actual-loc">
+								{{ product.reference }}
+							</span>
+						</p>
+					</p>
+					<p class='TC'>
+						Référence :
+						{{ product.reference }}
+					</p>
+					<p id="price" class="font-size TC">
+						{{ product.price }}
+						€
+					</p>
+					<p class="panier TC">
+						<a href=" {{ path('cart_add', {'id': product.id, 'category': 'produit'}) }} " class="font-size">
+							Ajoutez au panier
+							<i class="fas fa-shopping-cart"></i>
+						</a>
+					</p>
+					<p class='TC category'>
+						catégories:
+						{{ product.categorie}}
+					</p>
+					<p class='TC description'>
+						Description:
+						<br>
+						{{ product.description }}
+					</p>
+				</div>
 
-		<div id="description">
-			<p class='loc'>
-				<a href=" {{ path('product_index') }} ">
-					Boutique
-				</a>
-				/
-				<a href=" {{ path('product_category', {'category': main_category }) }} ">
-					{{   main_category}}
-				</a>
-				/
-				<a href="{{ path('product_products', {'category_product': product.categorie, 'main_category': main_category}) }}">
-					{{ product.categorie }}
-				</a>
-				/
-				<span class="actual-loc">
-					{{ product.reference }}
-				</span>
-			</p>
-		</p>
-		<p class='TC'>
-			Référence :
-			{{ product.reference }}
-		</p>
-		<p id="price" class="font-size TC">
-			{{ product.price }}
-			€
-		</p>
-		<p class="panier TC">
-			<a href=" {{ path('cart_add', {'id': product.id, 'category': 'produit'}) }} " class="font-size">
-				Ajoutez au panier
-				<i class="fas fa-shopping-cart"></i>
+
+			</section>
+			<a href="{{ path('product_products', {'category_product': product.categorie, 'main_category': main_category}) }}" class='to_back'>
+				<i class="fas fa-long-arrow-alt-left"></i>
+				Retour
 			</a>
-		</p>
-		<p class='TC category'>
-			catégories:
-			{{ product.categorie}}
-		</p>
-		<p class='TC description'>
-			Description:
-			<br>
-			{{ product.description }}
-		</p>
-	</div>
 
 
-</section>
-<a href="{{ path('product_products', {'category_product': product.categorie, 'main_category': main_category}) }}" class='to_back'>
-	<i class="fas fa-long-arrow-alt-left"></i>
-	Retour
-</a>
-
-
-{% if is_granted('ROLE_ADMIN') %}
-	<a href="{{ path('product_edit', {'id': product.id}) }}">
-		editer
-	</a>
-	{{ include('product/_delete_form.html.twig') }}
-{% endif %}{% endblock %}{% block js %}
-<script src="{{ asset('/js/main.js')}}"></script>{% endblock %}
+			{% if is_granted('ROLE_ADMIN') %}
+				<a href="{{ path('product_edit', {'id': product.id}) }}">
+					editer
+				</a>
+				{{ include('product/_delete_form.html.twig') }}
+			{% endif %}
+		{% endblock %}
+		{% block js %}
+			<script src="{{ asset('lib/lightbox/js/lightbox.min.js') }}"></script>
+		{% endblock %}

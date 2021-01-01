@@ -985,7 +985,7 @@ h3,
 
 #imageMain,
 .other-img {
-    width: 48em;
+    width: 100%;
     margin-bottom: 2em;
     max-height: 450px;
     object-fit: contain;
@@ -995,9 +995,8 @@ h3,
     width: 8em;
 }
 
-.justifyW60 {
-    justify-content: space-between;
-    width: 60%;
+.other-img {
+    margin: 1em;
 }
 
 .border {

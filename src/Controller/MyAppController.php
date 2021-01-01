@@ -41,7 +41,6 @@ class MyAppController extends AbstractController
     public function good(Request $request, string $orderCode)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        // $orderCode = $request->get('s');
         $ID = $request->get('t');
 
 
