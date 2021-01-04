@@ -248,6 +248,7 @@ a {
     }
     .container-main {
         width: 88% !important;
+        margin-top: 3em !important;
     }
     aside {
         margin-left: inherit;
@@ -264,9 +265,7 @@ a {
 }
 
 @media only screen and (max-width: 975px) {
-    .cart-mobile{
-        margin-right: 0.5em;
-    }
+   
     .title-flex {
         padding-top: 0.1em !important;
         height: 1.2em !important;
@@ -1050,6 +1049,7 @@ h3,
 
 .grey {
     color: #6c757d;
+    text-align: center;
 }
 
 .facturation {
@@ -1582,9 +1582,11 @@ form {
 /* nav phone */
 .logo-mobile{
     width: 8em;
+    margin-left: 0.8em;
 }
 .navbar-collapse {
     height: 14em;
+    margin-top: 4em;
 }
 
 .animated-icon1,
