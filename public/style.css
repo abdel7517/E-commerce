@@ -384,6 +384,10 @@ a {
     padding: .5rem 1rem;
 }
 
+/* .cart-nav{
+    width: 5em;
+} */
+
 
 /*
     home
@@ -987,7 +991,9 @@ h3,
 .other-img {
     width: 100%;
     margin-bottom: 2em;
+    padding: 0.2em;
     max-height: 450px;
+    max-width: 450px;
     object-fit: contain;
 }
 
@@ -1367,6 +1373,7 @@ aside {
 
 .single-produits {
     margin-top: 1em;
+    margin: 1em;
 }
 
 .container-img {
@@ -1434,7 +1441,7 @@ aside {
     product
 */
 .products{
-    justify-content: space-between !important;
+    justify-content: center !important;
 }
 .texte-produits{
     font-size: 0.35em;

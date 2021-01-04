@@ -36,8 +36,8 @@
 									Contact
 								</a>
 							</li>
-							<li class="nav-item un">
-								<a class="nav-link" href=" {{ path('cart_index') }} ">
+							<li class="nav-item un ">
+								<a class="nav-link cart-nav" href=" {{ path('cart_index') }} ">
 									<img src=" {{ asset('img/cart.png') }} " alt="" class="cart">
 									<span>
 										{{ nbProduct }}
@@ -151,9 +151,9 @@
 							</table>
 						</div>
 						<section class="expedition">
-							<h1 class="grey">
+							<h2 class="grey">
 								Détails de facturation
-							</h1>
+							</h2>
 							{{ form_start(form_livraison) }}
 							{{ form_row(form_livraison.name)}}
 							{{ form_row(form_livraison.numberAdress) }}
