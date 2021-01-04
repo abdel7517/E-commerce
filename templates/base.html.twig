@@ -6,7 +6,8 @@
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
 			<link rel="stylesheet" href="{{asset('style.css')}}">
 			<link rel="stylesheet" href="{{asset('lib/bootstrap/css/bootstrap.min.css')}}">
-			{% block lib %}{% endblock %}
+			{% block lib %}
+			{% endblock %}
 			<meta name="format-detection" content="telephone=no">
 			<title>
 				Staff Déco
@@ -49,21 +50,25 @@
 
 			</div>
 			<!-- Collapsible content -->
-			<!--Navbar-->
-			<nav
-				class="navbar navbar-dark  indigo darken-2">
+			<!--Navbar MOBILE -->
+			<nav class="navbar navbar-dark  indigo darken-2 nav-top">
 				<!-- Navbar brand -->
-				<img
-				src=" {{ asset('img/logoStaffdeco.png') }} " alt="logo staffdeco" class="logo">
-
 				<!-- Collapse button -->
-				<button class="navbar-toggler third-button" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent22" aria-controls="navbarSupportedContent22" aria-expanded="false" aria-label="Toggle navigation">
-					<div class="animated-icon3">
+					<button class="navbar-toggler third-button" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent22" aria-controls="navbarSupportedContent22" aria-expanded="false" aria-label="Toggle navigation"> <div class="animated-icon3">
 						<span></span>
 						<span></span>
 						<span></span>
 					</div>
 				</button>
+				<img src=" {{ asset('img/logoStaffdeco.png') }} " alt="logo staffdeco" class="logo-mobile">
+				<div class="">
+					<a class="nav-link cart-mobile" href=" {{ path('cart_index') }} ">
+						<img src=" {{ asset('img/cart.png') }} " alt="" class="cart">
+						<span>
+							{{ nbProduct }}
+						</span>
+					</a>
+				</div>
 			</nav>
 
 			{% block navBar %}
