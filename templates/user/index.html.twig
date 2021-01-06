@@ -3,7 +3,23 @@
 {% block title %}
 	Hello UserController!
 {% endblock %}
+	{% block banniere %}
+				<!-- banniere -->
+				<section class="h-flex">
+					<div class="presentation">
+						<div class='title-flex'>
+							<div class="trait trait-left">
+								<img src=" {{ asset('img/trait.svg') }}" alt="">
+							</div>
+							<h1 class='h1-presentation'>
+								Mon Compte
+							</h1>
+							<div class="trait trait-right">
+								<img src=" {{ asset('img/trait.svg') }}" alt="">
+							</div>
 
+						</section>
+					{% endblock %}
 {% block content %}
 	<div class=" user-index">
 	<p>

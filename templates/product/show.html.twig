@@ -70,10 +70,13 @@
 						{{ product.price }}
 						€
 					</p>
-					<p class="panier TC">
+					<p class=" TC">
 						<a href=" {{ path('cart_add', {'id': product.id, 'category': 'produit'}) }} " class="font-size">
+						<button class='btn btn-primary btn-add' >
 							Ajoutez au panier
 							<i class="fas fa-shopping-cart"></i>
+						</button>
+							
 						</a>
 					</p>
 					<p class='TC category'>

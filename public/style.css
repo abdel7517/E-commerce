@@ -1049,6 +1049,10 @@ h3,
     margin-left: 1em;
 }
 
+.btn-add{
+    width: 167px !important;
+}
+
 
 /*
     cart index product
@@ -1181,9 +1185,10 @@ form[name=registration_form] {
 form[name=registration_form] div {
     text-align: center;
 }
+
 .btn-primary {
     margin: 1em;
-    background-color: rgb(236, 197, 97) !important;
+    background-color:rgb(223, 191, 109) !important;
     border: white !important;
     width: 126px;
     margin: auto;
@@ -1618,6 +1623,13 @@ form {
     border: 2px solid black;
     padding: 1em;
     margin: 1em;
+}
+
+/* login page  */
+
+#btn-log{
+    width: 175px !important;
+    margin-top: 1em !important;
 }
 
 
