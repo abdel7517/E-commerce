@@ -1,15 +1,26 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	Créé mon compte
 {% endblock %}
+	{% block banniere %}
+				<!-- banniere -->
+				<section class="h-flex">
+					<div class="presentation">
+						<div class='title-flex'>
+							<div class="trait trait-left">
+								<img src=" {{ asset('img/trait.svg') }}" alt="">
+							</div>
+							<h1 class='h1-presentation'>
+								Authentification
+							</h1>
+							<div class="trait trait-right">
+								<img src=" {{ asset('img/trait.svg') }}" alt="">
+							</div>
 
+						</section>
+					{% endblock %}
 {% block content %}
 	<div class="center">
-
-		<h1>
-			Crée un compte
-		</h1>
 
 		{% for flashError in app.flashes('verify_email_error') %}
 			<div class="alert alert-danger" role="alert">
@@ -24,9 +35,9 @@
 		{{ form_row(registrationForm.password.second, {
             'attr': { 'placeholder': 'Confirmez Mot De Passe' }
         }) }}
-		{{ form_row(registrationForm.agreeTerms, { label: "J'accepte les CGU" }) }}
+		{{ form_row(registrationForm.agreeTerms, { label: "J'accepte les CGU", 'attr':{'class': 'TC'}}) }}
 
-		<button type="submit" class="btn submit">
+		<button type="submit" class="btn btn-primary">
 			S'inscrire
 		</button>
 		{{ form_end(registrationForm) }}

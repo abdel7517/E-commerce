@@ -5,7 +5,14 @@
 {% endblock %}
 
 {% block content %}
-	<div class="flex user-index">
+	<div class=" user-index">
+	<p>
+			<a href=" {{ path('app_logout') }} " class="text-history">
+				Déconnexion
+				<i class="fas fa-history"></i>
+			</a>
+		</p>
+
 		<p>
 			<a href=" {{ path('user_history') }} " class="text-history">
 				Historique de mes commandes

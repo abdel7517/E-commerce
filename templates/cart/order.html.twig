@@ -80,7 +80,8 @@
 							<table>
 								<tr>
 									<th>
-										Produit
+										 produit <br>
+										 (reference)
 									</th>
 									<th>
 										Prix
@@ -96,7 +97,7 @@
 									{% for item in items %}
 										<tr>
 											<td>
-												{{ item.product.name}}
+												{{ item.product.reference}}
 											</td>
 											<td>
 												{{item.product.price}}
@@ -154,7 +155,7 @@
 							<h2 class="grey">
 								Détails de facturation
 							</h2>
-							{{ form_start(form_livraison) }}
+							{{ form_start(form_livraison, {'id': 'form-order'}) }}
 							{{ form_row(form_livraison.name)}}
 							{{ form_row(form_livraison.numberAdress) }}
 							{{ form_row(form_livraison.nameAdress )}}

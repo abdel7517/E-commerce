@@ -12,6 +12,8 @@
 			<table>
 				<th>
 					Produit
+					<br>
+					(reference)
 				</th>
 				<th>
 					Prix
@@ -27,7 +29,7 @@
 					{% for cart in order.cart %}
 						<tr>
 							<td>
-								{{ cart.product.name}}
+								{{ cart.product.reference}}
 							</td>
 							<td>
 								{{cart.product.price}}

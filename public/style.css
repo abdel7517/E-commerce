@@ -57,7 +57,7 @@ a {
 }
 
 .TC {
-    text-align: center;
+    text-align: center !important;
 }
 
 .tl {
@@ -227,7 +227,7 @@ a {
     .h-flex {
         margin-top: 6em !important;
         margin-bottom: 2em;
-        }
+    }
     .ml-footer {
         margin-left: 1em !important;
     }
@@ -267,7 +267,6 @@ a {
 }
 
 @media only screen and (max-width: 975px) {
-   
     .title-flex {
         padding-top: 0.1em !important;
         height: 1.2em !important;
@@ -321,7 +320,6 @@ a {
         width: 90%;
         margin: auto;
     }
-    
 }
 
 @media only screen and (max-width: 690px) {
@@ -436,7 +434,7 @@ a {
     justify-content: space-between;
     z-index: 300;
     position: fixed !important;
-    top: 0;
+    /* top: 0; */
     width: 100%;
     background: white;
     padding: 0.25em;
@@ -1111,6 +1109,7 @@ form[name=order] {
     display: flex;
     flex-direction: column;
     margin-bottom: 1em;
+    border: none !important;
 }
 
 .expedition,
@@ -1118,14 +1117,15 @@ form[name=order] {
     background: white;
     padding: 1em;
     border-radius: 1em;
-    margin-left: 3em;
-    margin-right: 3em;
+    width: 100%;
+    margin-top: 2em;
+    border: none !important;
+}
+
+#order_expedition {
     width: 100%;
 }
 
-#order_expedition{
-    width: 100%;
-}
 .submit-order {
     width: 100%;
     margin: auto;
@@ -1154,9 +1154,13 @@ form[name=registration_form] {
     flex-direction: column;
     margin-bottom: 1em;
 }
-
+form[name=registration_form] div {
+    text-align: center;
+}
 .btn-primary {
     margin: 1em;
+    background-color: rgb(236, 197, 97) !important;
+    border: white !important;
 }
 
 .required {
@@ -1226,6 +1230,7 @@ Conf paiment
     justify-content: center;
     align-items: center;
     width: 100%;
+    text-align: center;
 }
 
 .text-history {
@@ -1445,6 +1450,7 @@ aside {
     display: inline-block;
 }
 
+
 /* .rosace-produit {
     margin-top: 0.22em;
 } */
@@ -1588,13 +1594,18 @@ form {
 
 
 /* nav phone */
-.logo-mobile{
+
+.logo-mobile {
     width: 8em;
     margin-left: 0.8em;
 }
+
 .navbar-collapse {
-    height: 14em;
+    height: 17em;
     margin-top: 4em;
+    position: fixed;
+    background: white;
+    z-index: 2;
 }
 
 .animated-icon1,
