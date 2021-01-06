@@ -440,7 +440,7 @@ a {
     justify-content: space-between;
     z-index: 300;
     position: fixed !important;
-    /* top: 0; */
+    top: 0;
     width: 100%;
     background: white;
     padding: 0.25em;
