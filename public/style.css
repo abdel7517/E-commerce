@@ -74,6 +74,7 @@ a {
     padding: 0.5em;
     border-radius: 1em;
     max-width: 304px;
+    margin: auto;
 }
 
 
@@ -224,8 +225,9 @@ a {
 
 @media only screen and (max-width: 845px) {
     .h-flex {
-        margin: inherit !important;
-    }
+        margin-top: 6em !important;
+        margin-bottom: 2em;
+        }
     .ml-footer {
         margin-left: 1em !important;
     }
@@ -319,6 +321,7 @@ a {
         width: 90%;
         margin: auto;
     }
+    
 }
 
 @media only screen and (max-width: 690px) {
@@ -1117,10 +1120,14 @@ form[name=order] {
     border-radius: 1em;
     margin-left: 3em;
     margin-right: 3em;
+    width: 100%;
 }
 
+#order_expedition{
+    width: 100%;
+}
 .submit-order {
-    width: 25%;
+    width: 100%;
     margin: auto;
     margin-top: 1em;
 }
@@ -1384,6 +1391,7 @@ aside {
     width: 203px;
     height: 214px;
     border: 3px solid rgb(223, 191, 109);
+    margin: auto;
 }
 
 .img-produits {
