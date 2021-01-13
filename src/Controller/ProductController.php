@@ -268,7 +268,7 @@ class ProductController extends AbstractController
 
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('product_index');
+            return $this->categoryPage();
         }
         // if($formImage->isSubmitted() && $formImage->isValid())
         // {  
@@ -283,8 +283,6 @@ class ProductController extends AbstractController
 
 
         // }
-
-
 
         return $this->render('product/edit.html.twig', [
             'product' => $product,

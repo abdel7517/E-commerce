@@ -38,7 +38,7 @@
 						récup.
 					</th>
 					<th>
-						Produit
+						Produit(reference)
 					</th>
 					<th>
 						Prix
@@ -79,7 +79,7 @@
 							{% for cart in order.cart %}
 
 								<td>
-									{{ cart.product.name}}
+									{{ cart.product.reference}}
 								</td>
 								<td>
 									{{cart.product.price}}

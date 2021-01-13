@@ -84,14 +84,6 @@ class MyAppController extends AbstractController
 
 
     /** 
-     * @Route("/presentation", name="MyApp_presentation")
-     */
-    public function prsentation()
-    {
-           return $this->render("presentation.html.twig");
-    }
-
-    /** 
      * @Route("/produits", name="MyApp_produit")
      */
     public function produit()
@@ -99,23 +91,8 @@ class MyAppController extends AbstractController
            return $this->render("produit.html.twig");
     }
 
-    /** 
-     * @Route("/realisation", name="MyApp_realisation")
-     */
-    public function realisation()
-    {
-           return $this->render("realisation.html.twig");
-    }
 
-     /** 
-     * @Route("/contact", name="MyApp_contact")
-     */
-    public function contact()
-    {
-           return $this->render("contact.html.twig");
-    }
-
-   
+  
 
     /** 
      * @Route("/admin", name="MyApp_admin")

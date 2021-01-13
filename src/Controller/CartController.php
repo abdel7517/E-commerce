@@ -9,25 +9,26 @@ use App\Entity\User;
 use App\Entity\Order;
 use App\Form\OrderType;
 use App\Service\Cart\Cart;
+use App\Service\Contact\Mail;
 use App\Repository\CategoryRepository;
+use Symfony\Component\VarDumper\VarDumper;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\VarDumper\VarDumper;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 class CartController extends AbstractController
 {
 
-    protected $allCategoryRepository, $cart, $stripeClient, $client;
+    protected $allCategoryRepository, $cart, $stripeClient, $client, $mailer;
 
-    public function __construct(CategoryRepository $allCategoryRepository, Cart $cart, HttpClientInterface $client)
+    public function __construct(CategoryRepository $allCategoryRepository, Cart $cart, HttpClientInterface $client, Mail $mailer)
     {
-
         $this->allCategoryRepository = $allCategoryRepository;
         $this->cart = $cart;
         $this->client = $client;
+        $this->mailer = $mailer;
     }
 
 
@@ -181,6 +182,10 @@ class CartController extends AbstractController
 
             $entityManager->persist($user);
             $entityManager->flush();
+
+            $this->mailer->send($user->getEmail() ,$form->get('name')->getData(), $orderCode);
+            $this->mailer->notifAdmin();
+
         }
 
         return $this->redirectToRoute('MyApp_good', ['orderCode' => $orderCode]);

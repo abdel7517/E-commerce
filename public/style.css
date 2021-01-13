@@ -133,6 +133,14 @@ a {
     }
 }
 
+@media only screen and (min-width: 1359px) {
+    .trait {
+        position: relative;
+        bottom: 0.35em !important;
+        width: 33%;
+    }
+}
+
 @media only screen and (max-width: 1359px) {
     .ml-footer {
         margin-left: 10em !important;
@@ -317,15 +325,13 @@ a {
         margin: auto;
     }
     /* cart index */
-    form[name=order] div input{
+    form[name=order] div input {
         width: 100% !important;
     }
     .expedition,
     .log {
         margin: 3em 0em 0em 0em;
     }
-    
-
 }
 
 @media only screen and (max-width: 690px) {
@@ -1049,7 +1055,7 @@ h3,
     margin-left: 1em;
 }
 
-.btn-add{
+.btn-add {
     width: 167px !important;
 }
 
@@ -1069,7 +1075,7 @@ h3,
     width: 100% !important;
 }
 
-.container-table{
+.container-table {
     width: 100% !important;
 }
 
@@ -1090,14 +1096,13 @@ h3,
     top: 0.3em;
 }
 
-form[name=order] div input{
+form[name=order] div input {
     width: 58%;
 }
 
-form[name=order] div{
+form[name=order] div {
     text-align: center;
 }
-
 
 td a {
     text-decoration: none !important;
@@ -1125,7 +1130,8 @@ td {
     vertical-align: middle;
     border: 1px solid;
 }
-.back-white{
+
+.back-white {
     background-color: white !important;
 }
 
@@ -1182,13 +1188,14 @@ form[name=registration_form] {
     flex-direction: column;
     margin-bottom: 1em;
 }
+
 form[name=registration_form] div {
     text-align: center;
 }
 
 .btn-primary {
     margin: 1em;
-    background-color:rgb(223, 191, 109) !important;
+    background-color: rgb(223, 191, 109) !important;
     border: white !important;
     width: 126px;
     margin: auto;
@@ -1625,9 +1632,10 @@ form {
     margin: 1em;
 }
 
+
 /* login page  */
 
-#btn-log{
+#btn-log {
     width: 175px !important;
     margin-top: 1em !important;
 }
@@ -1641,8 +1649,8 @@ form {
 }
 
 .navbar-collapse {
-    height: 17em;
-    margin-top: 4em;
+    height: 17.5em;
+    margin-top: -0.3em;
     position: fixed;
     background: white;
     z-index: 2;

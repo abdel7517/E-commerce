@@ -1,15 +1,14 @@
 {% extends "base.html.twig" %}
-
 {% block banniere %}
 	<!-- banniere -->
-	<section class="h-flex order-mobile">
+	<section class="h-flex">
 		<div class="presentation">
 			<div class='title-flex'>
 				<div class="trait trait-left">
 					<img src=" {{ asset('img/trait.svg') }}" alt="">
 				</div>
 				<h1 class='h1-presentation'>
-					Confirmation de commande
+					Reinitialiser votre Mot de Passe
 				</h1>
 				<div class="trait trait-right">
 					<img src=" {{ asset('img/trait.svg') }}" alt="">
@@ -18,15 +17,10 @@
 			</section>
 		{% endblock %}
 		{% block content %}
-			<section class="thank">
-				
-				<p>
-					Vous allez recevoir d'ici peu une confirmation de votre commande par mail
-				</p>
-				<p>
-					conserver votre nuémro de commande <br>
-					<strong>{{ orderCode }}</strong>
-				</p>
-				<p>( l'historique de vos commandes est disponible dans la section Mon Compte )  </p>
-			</section>
+		<p> {{ message }} </p>
+			<form action=" {{ path('user_setPass') }} " method="post" >
+                <input type="text" placeholder='Votre Mail'  name='mail' >
+                <button type="submit" class='btn btn-primary'>Envoyer</button>
+            </form>
+
 		{% endblock %}
