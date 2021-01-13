@@ -78,29 +78,29 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/setPass/{mail}", name="user_mailSetPass")
+     * @Route("/setPass/{id}", name="user_mailSetPass")
      */
-    public function setPass(string $mail, Request $request, UserPasswordEncoderInterface $passwordEncoder ){
+    public function setPass(string $id, Request $request, UserPasswordEncoderInterface $passwordEncoder ){
 
         
         if($request->isMethod('POST')){
             if($_POST['pass'] && $_POST['cpass']){
                 $entityManager = $this->getDoctrine()->getManager();
-                $user = $this->userRepo->findOneBy(['email' => $mail]);
+                $user = $this->userRepo->findOneBy(['id' => $id]);
                 $passWord = $passwordEncoder->encodePassword($user, $_POST['pass']);
                 $user->setPassword( $passWord);
                 $entityManager->persist($user);
                 $entityManager->flush();
                 return $this->render('user/resetPass.html.twig', [
-                    'mail' => $mail,
+                    'id' => $id,
                     'nbProduct'=> $this->cart->getNbOfArticle(),
-                    'message' => $_POST['pass'].' Votre mot de passe à bien était modifier '. $user->getName()
+                    'message' => ' Votre mot de passe à bien était modifier '
                     ]);
             }
 
         }
         return $this->render('user/resetPass.html.twig', [
-            'mail' => $mail,
+            'id' => $id,
             'nbProduct'=> $this->cart->getNbOfArticle(),
             'message' => ''
             ]);
@@ -116,9 +116,16 @@ class UserController extends AbstractController
         
         if($request->isMethod('POST')){
             $mail = $_POST['mail'];
-            $l = $this->generateUrl('user_mailSetPass', ['mail' => $mail], UrlGenerator::ABSOLUTE_URL);
-            $this->mailer->setPass($mail, $l );
-            return $this->render('user/forgotPass.html.twig', ['nbProduct'=> $this->cart->getNbOfArticle(), 'message'=> 'Un mail de reinitialisation à eté envoyer']);
+            $user = $this->userRepo->findOneBy(['email' => $mail]);
+            if($user !== null ){
+
+                $l = $this->generateUrl('user_mailSetPass', ['mail' => $user->getId()], UrlGenerator::ABSOLUTE_URL);
+                $this->mailer->setPass($mail, $l );
+                return $this->render('user/forgotPass.html.twig', ['nbProduct'=> $this->cart->getNbOfArticle(), 'message'=> 'Un mail de reinitialisation à eté envoyer']);
+            }
+            return $this->render('user/forgotPass.html.twig', ['nbProduct'=> $this->cart->getNbOfArticle(), 'message'=> 'Votre mail n\'est rattaché à aucun compte']);
+
+            
         }
         return $this->render('user/forgotPass.html.twig', ['nbProduct'=> $this->cart->getNbOfArticle(), 'message' => '']);
 

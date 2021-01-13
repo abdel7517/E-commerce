@@ -20,7 +20,7 @@
 			<p>
 				{{ message }}
 			</p>
-			<form action="{{ path('user_mailSetPass', { 'mail': mail }) }}" method='post'>
+			<form action="{{ path('user_mailSetPass', { 'id': id }) }}" method='post'>
 				<input type="text" placeholder='nouveau mot de passe ' name='pass'>
 				<input type="text" placeholder='confirmez le mot de passe' name='cpass'>
 				<button type="submit" class="btn btn-primary">
