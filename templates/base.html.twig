@@ -36,7 +36,7 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="https://staffdeco.fr/realisation">
+						<a class="nav-link" href="https://staffdeco.fr/nv/realisation">
 							Réalisations
 						</a>
 					</li>
@@ -53,31 +53,32 @@
 				</ul>
 				<!-- Links -->
 			</div>
-			
+
 			<!-- Collapsible content -->
-		{% block navBarMobile %}
-			<!--Navbar MOBILE -->
-			<nav class="navbar navbar-dark  indigo darken-2 nav-top">
-				<!-- Navbar brand -->
-				<!-- Collapse button -->
-					<button class="navbar-toggler third-button" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent22" aria-controls="navbarSupportedContent22" aria-expanded="false" aria-label="Toggle navigation"> <div class="animated-icon3">
-						<span></span>
-						<span></span>
-						<span></span>
-					</div>
-				</button>
-				<a href="https://boutique.staffdeco.fr/">
-					<img src=" {{ asset('img/logoStaffdeco.png') }} " alt="logo staffdeco" class="logo-mobile">
-				</a>
-				<div class="">
-					<a class="nav-link cart-mobile" href=" {{ path('cart_index') }} ">
-						<img src=" {{ asset('img/cart.png') }} " alt="" class="cart">
-						<span>
-							{{ nbProduct }}
-						</span>
+			{% block navBarMobile %}
+				<!--Navbar MOBILE -->
+				<nav class="navbar navbar-dark  indigo darken-2 nav-top">
+					<!-- Navbar brand -->
+					<!-- Collapse button -->
+						<button class="navbar-toggler third-button" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent22" aria-controls="navbarSupportedContent22" aria-expanded="false" aria-label="Toggle navigation"> <div class="animated-icon3">
+							<span></span>
+							<span></span>
+							<span></span>
+						</div>
+					</button>
+					<a href="https://boutique.staffdeco.fr/">
+						<img src=" {{ asset('img/logoStaffdeco.png') }} " alt="logo staffdeco" class="logo-mobile">
 					</a>
-				</div>
-			</nav>{% endblock %}
+					<div class="">
+						<a class="nav-link cart-mobile" href=" {{ path('cart_index') }} ">
+							<img src=" {{ asset('img/cart.png') }} " alt="" class="cart">
+							<span>
+								{{ nbProduct }}
+							</span>
+						</a>
+					</div>
+				</nav>
+			{% endblock %}
 
 			{% block navBar %}
 				<!--/.Navbar-->
@@ -172,26 +173,40 @@
 								<p class="mt-footer">
 									NOUS DECOUVRIR
 								</p>
+
+
 								<p class="page">
-									<img src=" {{ asset('img/fleche.png') }}" alt="deco" class="fleche">
-									Accueil
+									<a href="https://www.staffdeco.fr/nv/">
+										<img src=" {{ asset('img/fleche.png') }}" alt="deco" class="fleche">
+										Accueil
+									</a>
 								</p>
 								<p class="page">
-									<img src=" {{ asset('img/fleche.png') }}" alt="deco" class="fleche">
-									Présentation
+									<a href="https://www.staffdeco.fr/nv/presentation.html">
+										<img src=" {{ asset('img/fleche.png') }}" alt="deco" class="fleche">
+										Présentation
+									</a>
 								</p>
 								<p class="page">
-									<img src=" {{ asset('img/fleche.png') }}" alt="deco" class="fleche">
-									Produits
+									<a href="https://boutique.staffdeco.fr/">
+										<img src=" {{ asset('img/fleche.png') }}" alt="deco" class="fleche">
+										Produits
+									</a>
 								</p>
 								<p class="page">
-									<img src=" {{ asset('img/fleche.png') }}" alt="deco" class="fleche">
-									Réalisations
+									<a href="https://www.staffdeco.fr/nv/realisations.html">
+										<img src=" {{ asset('img/fleche.png') }}" alt="deco" class="fleche">
+										Réalisations
+									</a>
 								</p>
 								<p class="page">
-									<img src=" {{ asset('img/fleche.png') }}" alt="deco" class="fleche">
-									Mentions légales
+									<a href="https://www.staffdeco.fr/nv/contact.html">
+										<img src=" {{ asset('img/fleche.png') }}" alt="deco" class="fleche">
+										Mentions légales
+									</a>
 								</p>
+
+
 							</div>
 							<div class="ml-footer">
 								<p class="mt-footer">

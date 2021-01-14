@@ -985,7 +985,7 @@ h3,
 .h-flex-show {
     padding-top: 1em;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     flex-wrap: wrap;
 }
 
@@ -1301,9 +1301,10 @@ footer {
     text-decoration: underline;
 }
 
-.ml-footer p {
+.page a {
     color: white;
     margin-bottom: inherit;
+    text-decoration: none;
 }
 
 .fleche {
