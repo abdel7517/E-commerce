@@ -6,7 +6,6 @@ use App\Entity\Image;
 use App\Entity\Product;
 use App\Entity\Category;
 use App\Entity\ImageMain;
-
 use App\Form\CategoryType;
 use App\Form\Product3Type;
 use App\Service\Cart\Cart;
@@ -253,6 +252,7 @@ class ProductController extends AbstractController
 
 
     /**
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Route("/{id}/edit", name="product_edit")
      */
     public function edit(Request $request, Product $product): Response
@@ -264,30 +264,38 @@ class ProductController extends AbstractController
         $formImage->handleRequest($request);
 
 
+        if($formImage->isSubmitted() && $formImage->isValid())
+        {  
+            $imageMain = $formImage->get('image')->getData();
+
+            $fichier = md5(uniqid() );
+            $nom = $fichier .'.'. $imageMain->guessExtension();
+            $imageMain->move($this->getParameter('images_directory'), $nom);
+            $img = new Imagemain();
+            $img->setName($nom);
+            $product->setImage($img);
+
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($product);
+            $entityManager->flush();
+            return $this->categoryPage();
+
+
+        }
         if ($form->isSubmitted() && $form->isValid()) {
 
             $this->getDoctrine()->getManager()->flush();
 
             return $this->categoryPage();
         }
-        // if($formImage->isSubmitted() && $formImage->isValid())
-        // {  
-        //     $entityManager = $this->getDoctrine()->getManager();
-
-        //     $ProductsRepo = $entityManager->getRepository(Product::class);
-
-        //     // Récupération de l'utilisateur (donc automatiquement géré par Doctrine)
-        //     $productRepo = $ProductsRepo->find($product->getId());
-
-        //     $productRepo->setImage($formImage->get);
-
-
-        // }
+       
 
         return $this->render('product/edit.html.twig', [
             'product' => $product,
             'form' => $form->createView(),
-            'formImage' => $formImage->createView()
+            'formImage' => $formImage->createView(),
+            'id' => $product->getId()
         ]);
     }
 
@@ -321,6 +329,6 @@ class ProductController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('product_index');
+        return $this->redirectToRoute('MyApp_index');
     }
 }

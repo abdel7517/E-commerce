@@ -10,6 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
@@ -34,6 +35,10 @@ class ProductEditType extends AbstractType
             ->add('PriceML',   CheckboxType::class, [
                 'label'    => 'Prix au mètre linéaire',
                 'required' => false,
+            ])
+            ->add('PriceOfML',  TextType::class,  [
+                'label'    => 'Prix du mètre linéaire',
+                'required' => false
             ]);
            
     }

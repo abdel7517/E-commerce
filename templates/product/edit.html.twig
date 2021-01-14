@@ -14,8 +14,7 @@
 		<div class="flex justify">
 
 			{{ include('product/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
-
-			{{ form_start(formImage) }}
+			{{ form_start(formImage, {'action': path('product_edit', {'id' : id}), 'method': 'POST'} ) }}
 			<button class="btn">
 				{{ button_label|default('Modifier les images') }}
 			</button>

@@ -65,6 +65,11 @@ class Product
      */
     private $PriceML=true;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $PriceOfML;
+
 
 
     
@@ -223,6 +228,18 @@ class Product
     public function setPriceML(bool $PriceML): self
     {
         $this->PriceML = $PriceML;
+
+        return $this;
+    }
+
+    public function getPriceOfML(): ?string
+    {
+        return $this->PriceOfML;
+    }
+
+    public function setPriceOfML(?string $PriceOfML): self
+    {
+        $this->PriceOfML = $PriceOfML;
 
         return $this;
     }

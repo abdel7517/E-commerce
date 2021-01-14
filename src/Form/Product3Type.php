@@ -30,7 +30,7 @@ class Product3Type extends AbstractType
             ->add('image', FileType::class,
             ['data_class' => null,'multiple' => false, 'mapped'=>false, 'label' => 'images principale', ])
             ->add('images', FileType::class, 
-            ['data_class' => null, 'multiple'=>true, 'mapped'=>false, 'label' => 'autres image', ])
+            ['data_class' => null, 'multiple'=>true, 'mapped'=>false, 'label' => 'autres image','required'=> false ])
             ->add('categorie', EntityType::class, [
             
                 'class' => Category::class,
@@ -44,6 +44,9 @@ class Product3Type extends AbstractType
             ->add('PriceML',   CheckboxType::class, [
                 'label'    => 'Prix au mètre linéaire',
                 'required' => false,
+            ])
+            ->add('PriceOfML',    [
+                'label'    => 'Prix du mètre linéaire',
             ]);
            
     }
