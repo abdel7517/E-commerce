@@ -60,6 +60,11 @@ class Product
      */
     private $mainCategory;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $PriceML=true;
+
 
 
     
@@ -206,6 +211,18 @@ class Product
     public function setMainCategory(string $mainCategory): self
     {
         $this->mainCategory = $mainCategory;
+
+        return $this;
+    }
+
+    public function getPriceML(): ?bool
+    {
+        return $this->PriceML;
+    }
+
+    public function setPriceML(bool $PriceML): self
+    {
+        $this->PriceML = $PriceML;
 
         return $this;
     }

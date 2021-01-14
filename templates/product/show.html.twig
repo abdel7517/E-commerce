@@ -69,6 +69,9 @@
 					<p id="price" class="font-size TC">
 						{{ product.price }}
 						€
+						{% if product.PriceML == true %}
+							/ML
+						{% endif %}
 					</p>
 					<p class=" TC">
 						<a href=" {{ path('cart_add', {'id': product.id, 'category': 'produit'}) }} " class="font-size">

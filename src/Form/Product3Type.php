@@ -2,16 +2,18 @@
 
 namespace App\Form;
 
-use App\Entity\AllCategory;
 use App\Entity\Product;
 use App\Entity\Category;
+use App\Entity\AllCategory;
 use App\Entity\MainCategory;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class Product3Type extends AbstractType
@@ -38,7 +40,11 @@ class Product3Type extends AbstractType
                 'data_class' => null,
                 'mapped'=>false,
             ])
-            ->add('reference');
+            ->add('reference')
+            ->add('PriceML',   CheckboxType::class, [
+                'label'    => 'Prix au mètre linéaire',
+                'required' => false,
+            ]);
            
     }
 
