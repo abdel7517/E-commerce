@@ -10,118 +10,151 @@
 	<br>
 	<section class="order">
 		<div id="myCalendar" class="vanilla-calendar"></div>
+		<p>
+			<a href=" {{ path('admin_index', { 'date': 'all'}) }} ">
+				Voir toutes mes commandes
+			</a>
+		</p>
 
-		{% set i = 1 %}
-		{% for order in orders %}
-			<div class='history'>
-				<p>
-					Commande n°
-					{{ i }}
-					datant du
-					{{ order.date|date("d/m/y") }}
-				</p>
-				<table>
-					<th>
-						code de commande
-					</th>
-					<th>
-						email
-					</th>
-					<th>
-						nom
-					</th>
-					<th>
-						n° de rue
-					</th>
-					<th>
-						voie
-					</th>
-					<th>
-						code postal
-					</th>
-					<th>
-						pays
-					</th>
-					<th>
-						récup.
-					</th>
-					<th>
-						Produit(reference)
-					</th>
-					<th>
-						Prix
-					</th>
-					<th>
-						Quantité
-					</th>
-					<th>
-						Total
-					</th>
+		{% if orders|length > 0  %}
 
-					<tbody>
-						<tr>
-							<td>
-								{{ order.orderCode }}
-							</td>
-							<td>
-								{{ order.user.email }}
-							</td>
-							<td>
-								{{ order.name}}
-							</td>
-							<td>
-								{{order.numberAdress}}
-							</td>
-							<td>
-								{{order.nameAdress}}
-							</td>
-							<td>
-								{{order.postalCode}}
-							</td>
-							<td>
-								{{order.country}}
-							</td>
-							<td>
-								{{order.expedition}}
-							</td>
-							{% for cart in order.cart %}
+			{% set i = 1 %}
+			{% for order in orders %}
+				<div class='history'>
+					<p>
+						Commande n°
+						{{ i }}
+						datant du
+						{{ order.date|date("d/m/Y") }}
+					</p>
+					<table>
+						<th>
+							code de commande
+						</th>
+						<th>
+							email
+						</th>
+						<th>
+							nom
+						</th>
+						<th>
+							n° de rue
+						</th>
+						<th>
+							voie
+						</th>
+						<th>
+							code postal
+						</th>
+						<th>
+							pays
+						</th>
+						<th>
+							récup.
+						</th>
 
-								<td>
-									{{ cart.product.reference}}
-								</td>
-								<td>
-									{{cart.product.price}}
-								</td>
-								<td>
-									{{cart.quantity}}
-								</td>
-								<td>
-									{{cart.quantity * cart.product.price}}
-								</td>
-							</tr>
-						{% endfor %}
-						{% if order.expedition == 'livraison' %}
+						<tbody>
 							<tr>
 								<td>
-									Livraison
+									{{ order.orderCode }}
 								</td>
 								<td>
-									90€
+									{{ order.user.email }}
 								</td>
 								<td>
-									1
+									{{ order.name}}
 								</td>
 								<td>
-									90€
+									{{order.numberAdress}}
+								</td>
+								<td>
+									{{order.nameAdress}}
+								</td>
+								<td>
+									{{order.postalCode}}
+								</td>
+								<td>
+									{{order.country}}
+								</td>
+								<td>
+									{{order.expedition}}
 								</td>
 							</tr>
-						{% endif %}
-					</tbody>
-				</table>
-			</div>
-			{% set i = i + 1 %}
-			<br>
-		{% endfor %}
+							{% if order.expedition == 'livraison' %}
+								<tr>
+									<td>
+										Livraison
+									</td>
+									<td>
+										90€
+									</td>
+									<td>
+										1
+									</td>
+									<td>
+										90€
+									</td>
+								</tr>
+							{% endif %}
+						</tbody>
+					</table>
+					<table>
+						<th>
+							Produit(reference)
+						</th>
+						<th>
+							Prix
+						</th>
+						<th>
+							Quantité
+						</th>
+						<th>
+							Total
+						</th>
+						<tbody>
+						{% set total = 0 %}
+							{% for cart in order.cart %}
+								<tr>
+
+									<td>
+										{{ cart.product.reference}}
+									</td>
+									<td>
+										{{cart.product.price}}
+									</td>
+									<td>
+										{{cart.quantity}}
+									</td>
+									<td>
+										{{cart.quantity * cart.product.price}}
+									</td>
+									{% set total =  (cart.quantity * cart.product.price) + total %}
+								</tr>
+							{% endfor %}
+						</tbody>
+						<tfoot class='foot-facture'>
+							<td colspan="3" class="text-right border-none" scope="row">
+								Total :
+							</td>
+							<td>
+								<span id="total">
+									{{ total }}
+								</span>
+								€
+							</td>
+						</tfoot>
+					</table>
+				</div>
+				{% set i = i + 1 %}
+				<br>
+			{% endfor %}
+		{% else %}
+			<p>
+				Aucune commande le
+				{{ date|date("d/m/Y") }}
+				: (
+			</p>
+		{% endif %}
 	</section>
 	{% block js %}
 

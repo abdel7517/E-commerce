@@ -19,22 +19,22 @@ Class OrderType extends AbstractType
     {
 
         $builder
-            ->add('name', null , ['label'=> false, 'attr' => ['placeholder' => 'Votre nom','class' => 'input' ]])
-            ->add('numberAdress', IntegerType::class, ['label'=> false, 'attr' => ['placeholder' => '4', 'class' => 'input']])
-            ->add('nameAdress', null, ['label'=> false, 'attr' => ['placeholder' => 'Rue Marguerite Long','class' => 'input']])
-            ->add('postalCode', IntegerType::class, ['label'=> false, 'attr' => ['placeholder' => '75017', 'class' => 'input']])
+            ->add('name', null , ['label'=> false, 'attr' => ['placeholder' => 'Nom et Prénom','class' => 'input' ]])
+            ->add('numberAdress', IntegerType::class, ['label'=> false, 'attr' => ['placeholder' => 'Numéro de voie', 'class' => 'input']])
+            ->add('nameAdress', null, ['label'=> false, 'attr' => ['placeholder' => 'Nom de la voie','class' => 'input']])
+            ->add('postalCode', IntegerType::class, ['label'=> false, 'attr' => ['placeholder' => 'Code Postal', 'class' => 'input']])
             ->add('country', null, ['label'=> false, 'attr' => ['placeholder' => 'Pays', 'class' => 'input', 'class' => 'input']])
-            ->add('expedition', ChoiceType::class, [
-                'row_attr' => ['class' => 'choice input'],
-                'required'=>true,
-                'mapped'=>false,
-                'label'=> false, 
-                'choices'  => [
-                    'Récupération en boutique Rue Marcel Dassault 93140 Bondy' => "récupération",
-                    // 'Livraison en Île-de-France : 90 € ' => 'livraison',
-                ],
-            ]);
-            
+            // ->add('expedition', ChoiceType::class, [
+            //     'row_attr' => ['class' => 'choice input'],
+            //     'required'=>true,
+            //     'mapped'=>false,
+            //     'label'=> false, 
+            //     'choices'  => [
+            //         'Vos articles seront disponibles dans notre boutique' => "récupération",
+            //         // 'Livraison en Île-de-France : 90 € ' => 'livraison',
+            //     ],
+            // ]);
+            ;
            
             
             

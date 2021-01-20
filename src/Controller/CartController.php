@@ -170,7 +170,8 @@ class CartController extends AbstractController
             $order->setCountry($form->get('country')->getData());
             $order->setDate(new DateTime());
             $order->setCart($this->cart->getCart());
-            $order->setExpedition($form->get('expedition')->getData());
+            // $order->setExpedition($form->get('expedition')->getData());
+            $order->setExpedition('récupération');
             $order->setOrderCode($orderCode);
             $order->setState(0);
 

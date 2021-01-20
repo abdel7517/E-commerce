@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 
+use DateTime;
 use App\Service\Cart\Cart;
 use App\Controller\ProductController;
 use App\Repository\ProductRepository;
@@ -34,13 +35,57 @@ class AdminController extends AbstractController
     }
 
      /**
-     * @Route("/", name="admin_index")
+     * @Route("/{date}", name="admin_index")
     */
-    public function index(): Response
+    public function index($date = null): Response
     {
+        // Code fonctionnel
+        // $entityManager = $this->getDoctrine()->getManager();
+        // $orders = $entityManager->getRepository("App\Entity\Order")->findByState(1);
 
         $entityManager = $this->getDoctrine()->getManager();
-        $orders = $entityManager->getRepository("App\Entity\Order")->findByState(1);
+
+        if($date == 'all' ){
+            $orders = $entityManager->getRepository("App\Entity\Order")->findByState(1);
+            return $this->render('admin/index.html.twig', [
+                'products' => $this->productRepository->findAll(),
+                'nbProduct'=>  $this->cart->getNbOfArticle(),
+                'categories'=> $this->allCategoryRepository->findAll(),
+                'orders' => $orders,
+                'date' => 'Toutes les commandes',
+            ]);
+            
+            }
+
+        if($date == null ){
+            $now = new \DateTime();
+            $orders = $entityManager->getRepository("App\Entity\Order")->getByDate($now);   
+            return $this->render('admin/index.html.twig', [
+                'products' => $this->productRepository->findAll(),
+                'nbProduct'=>  $this->cart->getNbOfArticle(),
+                'categories'=> $this->allCategoryRepository->findAll(),
+                'orders' => $orders,
+                'date' => $now
+            ]);
+        }
+
+        $format = 'Y-m-d';
+        $date = DateTime::createFromFormat($format, $date);
+
+        $orders = $entityManager->getRepository("App\Entity\Order")->getByDate($date);   
+            return $this->render('admin/index.html.twig', [
+                'products' => $this->productRepository->findAll(),
+                'nbProduct'=>  $this->cart->getNbOfArticle(),
+                'categories'=> $this->allCategoryRepository->findAll(),
+                'orders' => $orders,
+                'date' => $date
+            ]);
+
+
+
+     
+
+
 
         return $this->render('admin/index.html.twig', [
             'products' => $this->productRepository->findAll(),

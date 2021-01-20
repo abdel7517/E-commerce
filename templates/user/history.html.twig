@@ -21,10 +21,13 @@
 			{% for order in orders %}
 				<div class='history'>
 					<p>
-						Commande n°
 						{{ i }}
+						- Numéro de commande :
+						{{ order.orderCode }}
+
+
 						datant du
-						{{ order.date|date("d/m/y") }}
+						{{ order.date|date("d/m/Y") }}
 					</p>
 					<table>
 						<th>

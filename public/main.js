@@ -19,7 +19,8 @@ let myCalendar = new VanillaCalendar({
     months: ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],
     shortWeekday: ['Lun', 'Mar', 'Mer', 'Jeu', 'Vend', 'Sam', 'Dim'],
     onSelect: (data, elem) => {
-        // let date = formatDate(data.date);
+        let date = formatDate(data.date);
+        window.location.href = "http://localhost:8000/admin/" + date;
         //  Mettre la date 
     }
 })

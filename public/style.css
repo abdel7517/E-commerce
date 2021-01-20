@@ -1244,7 +1244,7 @@ form[name=registration_form] div {
 
 
 /*
-Conf paiment 
+  Conf paiment 
 */
 
 .thank {
@@ -1269,11 +1269,15 @@ Conf paiment
 /* user index */
 
 .user-index {
-    height: 20em;
+    height: 13em;
     justify-content: center;
     align-items: center;
     width: 100%;
     text-align: center;
+}
+
+.user-p{
+    margin-top: 7em;
 }
 
 .text-history {
@@ -1483,7 +1487,6 @@ aside {
     justify-content: center;
     align-items: center;
     text-align: left;
-    margin-left: 1em;
     width: 66%;
     text-align: center;
 }
@@ -1658,6 +1661,11 @@ form {
     padding: 1em;
     margin: 1em;
 }
+
+.foot-facture, .header-facture{
+    background: grey;
+}
+
 
 
 /* login page  */

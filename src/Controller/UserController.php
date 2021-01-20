@@ -115,11 +115,12 @@ class UserController extends AbstractController
         $request = Request::createFromGlobals();
         
         if($request->isMethod('POST')){
+
             $mail = $_POST['mail'];
             $user = $this->userRepo->findOneBy(['email' => $mail]);
             if($user !== null ){
 
-                $l = $this->generateUrl('user_mailSetPass', ['mail' => $user->getId()], UrlGenerator::ABSOLUTE_URL);
+                $l = $this->generateUrl('user_mailSetPass', ['id' => $user->getId()], UrlGenerator::ABSOLUTE_URL);
                 $this->mailer->setPass($mail, $l );
                 return $this->render('user/forgotPass.html.twig', ['nbProduct'=> $this->cart->getNbOfArticle(), 'message'=> 'Un mail de reinitialisation à eté envoyer']);
             }
