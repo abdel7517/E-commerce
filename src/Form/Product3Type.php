@@ -46,7 +46,7 @@ class Product3Type extends AbstractType
                 'label'    => 'Prix au mètre linéaire',
                 'required' => false,
             ])
-            ->add('PriceOfML', StringType::class,   [
+            ->add('PriceOfML', null,   [
                 'label'    => 'Prix du mètre linéaire',
             ]);
            
