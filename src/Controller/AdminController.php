@@ -35,28 +35,69 @@ class AdminController extends AbstractController
     }
 
      /**
-     * @Route("/{date}", name="admin_index")
+     * @Route("/{date}/{orderCode}/{ready}", name="admin_index")
     */
-    public function index($date = null): Response
+    public function index($date = null,string $orderCode = null, string $ready = null , Request $request): Response
     {
-        // Code fonctionnel
-        // $entityManager = $this->getDoctrine()->getManager();
-        // $orders = $entityManager->getRepository("App\Entity\Order")->findByState(1);
 
         $entityManager = $this->getDoctrine()->getManager();
 
-        if($date == 'all' ){
+         // find all orders 
+         if($date == 'all' ){
             $orders = $entityManager->getRepository("App\Entity\Order")->findByState(1);
+            if($ready == 'true'){
+                $orders = $entityManager->getRepository("App\Entity\Order")->findOrderNotReady();
+                return $this->render('admin/index.html.twig', [
+                    'products' => $this->productRepository->findAll(),
+                    'nbProduct'=>  $this->cart->getNbOfArticle(),
+                    'categories'=> $this->allCategoryRepository->findAll(),
+                    'orders' => $orders,
+                    'date' => 's commandes non traitées',
+                ]);
+            }
             return $this->render('admin/index.html.twig', [
                 'products' => $this->productRepository->findAll(),
                 'nbProduct'=>  $this->cart->getNbOfArticle(),
                 'categories'=> $this->allCategoryRepository->findAll(),
                 'orders' => $orders,
-                'date' => 'Toutes les commandes',
+                'date' => ' toutes les commandes',
             ]);
-            
             }
+            
+            // record order like ready
+        if($orderCode !== null){
+            $order = $entityManager->getRepository("App\Entity\Order")->findByOrderCode($orderCode);
+            $order[0]->setReady(true);
+            $entityManager->flush();
+            $date = $order[0]->getDate();
+            return $this->render('admin/index.html.twig', [
+                'products' => $this->productRepository->findAll(),
+                'nbProduct'=>  $this->cart->getNbOfArticle(),
+                'categories'=> $this->allCategoryRepository->findAll(),
+                'orders' => $order,
+                'date' => ' numéro de commande : ' . $orderCode . ' daté du '. $date->format('d-m-yy')
+            ]);
+        }
 
+        // find order by her orderCode
+        if($request->isMethod('post')){
+            $orderCode = $request->get('SingleOrderCode');
+            $orders = $entityManager->getRepository("App\Entity\Order")->findByOrderCode($orderCode);
+            $date = $orders[0]->getDate();
+
+            return $this->render('admin/index.html.twig', [
+                'products' => $this->productRepository->findAll(),
+                'nbProduct'=>  $this->cart->getNbOfArticle(),
+                'categories'=> $this->allCategoryRepository->findAll(),
+                'orders' => $orders,
+                'date' => ' numéro de commande : ' . $orderCode . ' daté du '. $date->format('d-m-yy')
+            ]);
+        }
+
+       
+
+
+        // for the fist connexion to this route, give the orders for the day 
         if($date == null ){
             $now = new \DateTime();
             $orders = $entityManager->getRepository("App\Entity\Order")->getByDate($now);   
@@ -65,12 +106,12 @@ class AdminController extends AbstractController
                 'nbProduct'=>  $this->cart->getNbOfArticle(),
                 'categories'=> $this->allCategoryRepository->findAll(),
                 'orders' => $orders,
-                'date' => $now
+                'date' =>' '.  $now->format('d-m-yy')
             ]);
         }
 
-        $format = 'Y-m-d';
-        $date = DateTime::createFromFormat($format, $date);
+
+        $date = DateTime::createFromFormat('Y-m-d', $date);
 
         $orders = $entityManager->getRepository("App\Entity\Order")->getByDate($date);   
             return $this->render('admin/index.html.twig', [
@@ -78,12 +119,12 @@ class AdminController extends AbstractController
                 'nbProduct'=>  $this->cart->getNbOfArticle(),
                 'categories'=> $this->allCategoryRepository->findAll(),
                 'orders' => $orders,
-                'date' => $date
+                'date' => ' '. $date->format('d-m-yy')
             ]);
 
 
 
-     
+        
 
 
 
@@ -91,7 +132,7 @@ class AdminController extends AbstractController
             'products' => $this->productRepository->findAll(),
             'nbProduct'=>  $this->cart->getNbOfArticle(),
             'categories'=> $this->allCategoryRepository->findAll(),
-            'orders' => $orders
+            'orders' => ' '. $orders
         ]);
     } 
 

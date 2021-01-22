@@ -73,6 +73,11 @@ class Order
      */
     private $orderCode;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $ready;
+
    
 
     public function getId(): ?int
@@ -208,6 +213,18 @@ class Order
     public function setOrderCode(string $orderCode): self
     {
         $this->orderCode = $orderCode;
+
+        return $this;
+    }
+
+    public function getReady(): ?bool
+    {
+        return $this->ready;
+    }
+
+    public function setReady(?bool $ready): self
+    {
+        $this->ready = $ready;
 
         return $this;
     }

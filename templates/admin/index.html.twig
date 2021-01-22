@@ -15,18 +15,36 @@
 				Voir toutes mes commandes
 			</a>
 		</p>
+		<p>
+			<a href=" {{ path('admin_index', { 'date': 'all', 'ready' : 'true', 'orderCode' : 'null'}) }} ">
+				Commande en attente de traitement
+			</a>
+		</p>
+		<p>
+			Cherchez une commande par numéro de commande
+		</p>
+		<div class="input-group">
+			<form action=" {{ path('admin_index') }} " method='post'>
+				<div class="form-outline">
+					<input type="search" id="form1" class="form-control" name='SingleOrderCode'/>
+					<label class="form-label" for="form1"></label>
+				</div>
+				<button type="submit" class="btn btn-primary">
+					<i class="fas fa-search">
+						Cherchez
+					</i>
+				</button>
+			</form>
+		</div>
+			<h1 class='h1-admin' >
+						Commandes pour le{{date }}
+					</h1>
 
 		{% if orders|length > 0  %}
 
-			{% set i = 1 %}
 			{% for order in orders %}
 				<div class='history'>
-					<p>
-						Commande n°
-						{{ i }}
-						datant du
-						{{ order.date|date("d/m/Y") }}
-					</p>
+				
 					<table>
 						<th>
 							code de commande
@@ -112,7 +130,7 @@
 							Total
 						</th>
 						<tbody>
-						{% set total = 0 %}
+							{% set total = 0 %}
 							{% for cart in order.cart %}
 								<tr>
 
@@ -144,15 +162,18 @@
 							</td>
 						</tfoot>
 					</table>
+					{% if order.ready != true %}
+						<a href=" {{ path('admin_index', { 'orderCode': order.orderCode, 'date' : 'null' }) }} "  class="btn btn-primary">Prévenir le client de la disponibilté de la commande </a>
+					{% else %}
+						<p>Le client est prévenue que la commande est prête</p>
+					{% endif %}
 				</div>
-				{% set i = i + 1 %}
 				<br>
 			{% endfor %}
 		{% else %}
 			<p>
-				Aucune commande le
-				{{ date|date("d/m/Y") }}
-				: (
+				Aucune commande pour le
+				{{ date}}
 			</p>
 		{% endif %}
 	</section>

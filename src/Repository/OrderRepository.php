@@ -86,6 +86,34 @@ class OrderRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+    public function findByOrderCode(string $orderCode)
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT p
+            FROM App\Entity\Order p
+            WHERE  p.orderCode = :val'
+        )->setParameter('val', $orderCode);
+
+
+        return $query->getResult();
+    }
+
+    public function findOrderNotReady()
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT p
+            FROM App\Entity\Order p
+            WHERE  p.ready is null'
+        );
+
+
+        return $query->getResult();
+    }
+
         public function getByDate(\Datetime $date)
     {
         $from = new \DateTime($date->format("Y-m-d")." 00:00:00");

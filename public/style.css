@@ -1655,7 +1655,9 @@ textarea {
 
 
 /* admin */
-
+.h1-admin{
+    width: 100% !important;
+}
 form {
     border: 2px solid black;
     padding: 1em;
