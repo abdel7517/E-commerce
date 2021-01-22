@@ -35,6 +35,67 @@ class AdminController extends AbstractController
     }
 
      /**
+     * @Route("/category", name="admin_category", methods={"GET"})
+     */
+    public function categoryPage()
+    {
+        return $this->render("admin/allCategory.html.twig", 
+        ['nbProduct'=>  $this->cart->getNbOfArticle(),
+        'categories'=> $this->categoryRepository->findAll()]);
+    }
+    
+
+     /**
+     * @Route("/category/{category}", name="admin_product_category", methods={"GET"})
+     */
+    public function productOfCategory(string $category): Response
+    {
+        return $this->render('admin/productCategory.html.twig', [
+            'products' => $this->productRepository->findBy(["categorie" => $category]),
+            'nbProduct'=>  $this->cart->getNbOfArticle(),
+            'categories'=> $this->categoryRepository->findAll(),
+            'category'=> $category
+            ]);
+    }
+
+    /**
+     * @Route("/add", name="admin_add")
+    */
+    public function add(Request $request)
+    {
+       return $this->serviceProduct->add($request);
+    }   
+
+   
+    
+    /**
+     * @Route("/newCategory", name="admin_edit_category")
+     */
+    public function editCategorie(Request $request)
+    {
+       
+        return $this->product->editCategorie($request);
+
+        
+    }
+
+    
+     /**
+     * @Route("/product/{id}/{category}", name="admin_show_product", methods={"GET"})
+     */
+    public function show(int $id, string $category = "produit"): Response
+    {
+        return $this->render('admin/show.html.twig', [
+            'product' => $this->productRepository->findOneBy(["id"=> $id]),
+            'nbProduct'=>  $this->cart->getNbOfArticle(),
+            'categories'=> $this->categoryRepository->findAll(),
+            'category'=> $category
+
+        ]);
+    }
+
+
+     /**
      * @Route("/{date}/{orderCode}/{ready}", name="admin_index")
     */
     public function index($date = null,string $orderCode = null, string $ready = null , Request $request): Response
@@ -84,6 +145,7 @@ class AdminController extends AbstractController
             $orderCode = $request->get('SingleOrderCode');
             $orders = $entityManager->getRepository("App\Entity\Order")->findByOrderCode($orderCode);
             $date = $orders[0]->getDate();
+
 
             return $this->render('admin/index.html.twig', [
                 'products' => $this->productRepository->findAll(),
@@ -137,68 +199,6 @@ class AdminController extends AbstractController
     } 
 
 
-      /**
-     * @Route("/category", name="admin_category", methods={"GET"})
-     */
-    public function categoryPage()
-    {
-        return $this->render("admin/allCategory.html.twig", 
-        ['nbProduct'=>  $this->cart->getNbOfArticle(),
-        'categories'=> $this->categoryRepository->findAll()]);
-    }
-
-     /**
-     * @Route("/category/{category}", name="admin_product_category", methods={"GET"})
-     */
-    public function productOfCategory(string $category): Response
-    {
-        return $this->render('admin/productCategory.html.twig', [
-            'products' => $this->productRepository->findBy(["categorie" => $category]),
-            'nbProduct'=>  $this->cart->getNbOfArticle(),
-            'categories'=> $this->categoryRepository->findAll(),
-            'category'=> $category
-            ]);
-    }
-    
-
-    
-
-
-    /**
-     * @Route("/add", name="admin_add")
-    */
-    public function add(Request $request)
-    {
-       return $this->serviceProduct->add($request);
-    }   
-
-   
-    
-    /**
-     * @Route("/newCategory", name="admin_edit_category")
-     */
-    public function editCategorie(Request $request)
-    {
-       
-        return $this->product->editCategorie($request);
-
-        
-    }
-
-    
-     /**
-     * @Route("/product/{id}/{category}", name="admin_show_product", methods={"GET"})
-     */
-    public function show(int $id, string $category = "produit"): Response
-    {
-        return $this->render('admin/show.html.twig', [
-            'product' => $this->productRepository->findOneBy(["id"=> $id]),
-            'nbProduct'=>  $this->cart->getNbOfArticle(),
-            'categories'=> $this->categoryRepository->findAll(),
-            'category'=> $category
-
-        ]);
-    }
-
+     
     
 }
