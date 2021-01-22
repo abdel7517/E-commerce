@@ -6,6 +6,7 @@ use App\Entity\Product;
 use App\Entity\Category;
 use App\Entity\AllCategory;
 use App\Entity\MainCategory;
+use Doctrine\DBAL\Types\StringType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -45,7 +46,7 @@ class Product3Type extends AbstractType
                 'label'    => 'Prix au mètre linéaire',
                 'required' => false,
             ])
-            ->add('PriceOfML',    [
+            ->add('PriceOfML', StringType::class,   [
                 'label'    => 'Prix du mètre linéaire',
             ]);
            
