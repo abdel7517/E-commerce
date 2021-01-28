@@ -85,6 +85,7 @@ class AdminController extends AbstractController
      */
     public function show(int $id, string $category = "produit"): Response
     {
+       
         return $this->render('admin/show.html.twig', [
             'product' => $this->productRepository->findOneBy(["id"=> $id]),
             'nbProduct'=>  $this->cart->getNbOfArticle(),
@@ -92,6 +93,23 @@ class AdminController extends AbstractController
             'category'=> $category
 
         ]);
+    }
+
+    /**
+     * @Route("/customProject", name="admin_show_customProject", methods={"GET"})
+     */
+    public function customProject(): Response
+    { 
+        
+        $entityManager = $this->getDoctrine()->getManager();
+        // request for custom project
+            $orders = $entityManager->getRepository("App\Entity\CustomProject")->findAll();
+                return $this->render('admin/customProject.html.twig', [
+                    'products' => $this->productRepository->findAll(),
+                    'nbProduct'=>  $this->cart->getNbOfArticle(),
+                    'categories'=> $this->allCategoryRepository->findAll(),
+                    'orders' => $orders,
+                ]);
     }
 
 
@@ -124,6 +142,7 @@ class AdminController extends AbstractController
                 'date' => ' toutes les commandes',
             ]);
             }
+          
             
             // record order like ready
         if($orderCode !== null){

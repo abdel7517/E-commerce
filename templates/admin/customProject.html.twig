@@ -1,0 +1,46 @@
+{% extends "admin/baseAdmin.html.twig" %}
+{% block banniere %}{% endblock %}
+{% block content %} 
+	{% for order in orders %}
+	<table>
+		<th>
+			Type de client
+		</th>
+		<th>
+			nom
+		</th>
+		<th>
+			mail
+		</th>
+		<th>
+			tel
+		</th>
+		<th>
+			mess
+		</th>
+
+		<tbody>
+			<tr>
+				<td>
+					{{ order.typeClient }}
+				</td>
+				<td>
+					{{ order.nom }}
+				</td>
+				<td>
+					{{ order.mail}}
+				</td>
+				<td>
+					{{order.phone}}
+				</td>
+				<td>
+					{{order.mess}}
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	{% for img in order.img %}
+        <img src=" {{'https://www.staffdeco.fr/asset/imgSurMesure/' ~ img  }} " alt="">
+	{% endfor %}
+{% endfor %}
+{% endblock %}

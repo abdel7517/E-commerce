@@ -21,6 +21,11 @@
 			</a>
 		</p>
 		<p>
+			<a href=" {{ path('admin_show_customProject') }} ">
+				Projets sur mesure
+			</a>
+		</p>
+		<p>
 			Cherchez une commande par numéro de commande
 		</p>
 		<div class="input-group">
@@ -37,7 +42,7 @@
 			</form>
 		</div>
 			<h1 class='h1-admin' >
-						Commandes pour le{{date }}
+						Commandes pour le{{date}}
 					</h1>
 
 		{% if orders|length > 0  %}
