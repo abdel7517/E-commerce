@@ -100,7 +100,6 @@ class AdminController extends AbstractController
      */
     public function customProject(): Response
     { 
-        
         $entityManager = $this->getDoctrine()->getManager();
         // request for custom project
             $orders = $entityManager->getRepository("App\Entity\CustomProject")->findAll();

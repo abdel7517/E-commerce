@@ -6,6 +6,9 @@
 	{% for order in orders %}
 	<table>
 		<th>
+			Jour
+		</th>
+		<th>
 			Type de client
 		</th>
 		<th>
@@ -23,6 +26,9 @@
 
 		<tbody>
 			<tr>
+			<td>
+				{{ order.day|date("d/m/Y") }}
+			</td>
 				<td>
 					{{ order.typeClient }}
 				</td>
