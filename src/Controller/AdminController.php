@@ -96,19 +96,61 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/customProject", name="admin_show_customProject", methods={"GET"})
+     * @Route("/customProject/{date}/{ready}", name="admin_show_customProject", methods={"GET"})
      */
-    public function customProject(): Response
+    public function customProject($date = null,string $ready = null  ): Response
     { 
         $entityManager = $this->getDoctrine()->getManager();
-        // request for custom project
-            $orders = $entityManager->getRepository("App\Entity\CustomProject")->findAll();
+
+        // find all request 
+        if($date == 'all' ){
+            // find request not processed
+            if($ready == 'true'){
+                $orders = $entityManager->getRepository("App\Entity\Order")->findOrderNotReady();
                 return $this->render('admin/customProject.html.twig', [
                     'products' => $this->productRepository->findAll(),
                     'nbProduct'=>  $this->cart->getNbOfArticle(),
                     'categories'=> $this->allCategoryRepository->findAll(),
                     'orders' => $orders,
+                    'date' => 's commandes non traitées',
                 ]);
+            }
+
+            // find all request 
+            $orders = $entityManager->getRepository("App\Entity\CustomProject")->findAll();
+            return $this->render('admin/customProject.html.twig', [
+                'products' => $this->productRepository->findAll(),
+                'nbProduct'=>  $this->cart->getNbOfArticle(),
+                'categories'=> $this->allCategoryRepository->findAll(),
+                'orders' => $orders,
+                'date' => ' toutes les commandes',
+            ]);
+            }
+
+            // for the fist connexion to this route, give the orders for the day 
+            if($date == null ){
+                $now = new \DateTime();
+                $orders = $entityManager->getRepository("App\Entity\CustomProject")->getByDate($now);   
+                return $this->render('admin/customProject.html.twig', [
+                    'products' => $this->productRepository->findAll(),
+                    'nbProduct'=>  $this->cart->getNbOfArticle(),
+                    'categories'=> $this->allCategoryRepository->findAll(),
+                    'orders' => $orders,
+                    'date' =>' '.  $now->format('d-m-yy')
+                ]);
+            }
+
+            $date = DateTime::createFromFormat('Y-m-d', $date);
+
+            $orders = $entityManager->getRepository("App\Entity\CustomProject")->getByDate($date);   
+            return $this->render('admin/customProject.html.twig', [
+                'products' => $this->productRepository->findAll(),
+                    'nbProduct'=>  $this->cart->getNbOfArticle(),
+                    'categories'=> $this->allCategoryRepository->findAll(),
+                    'orders' => $orders,
+                    'date' => ' '. $date->format('d-m-yy')
+                ]);
+      
     }
 
 

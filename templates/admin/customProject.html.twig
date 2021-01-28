@@ -1,8 +1,16 @@
 {% extends "admin/baseAdmin.html.twig" %}
+{% block lib %}
+	<link rel="stylesheet" href="{{asset('lib/vanilla-calendar/css/vanilla-calendar-min.css')}}">
+	<script src="{{asset('lib/vanilla-calendar/js/vanilla-calendar-min.js')}}"></script>
+{% endblock %}
 {% block banniere %}{% endblock %}
 {% block content %} 
+
 	<div class="request">
-	
+		<div id="myCalendar" class="vanilla-calendar"></div>
+	<p>
+		<a href=" {{ path('admin_show_customProject', { 'date': 'all' }) }} ">Tous les jours </a>
+	</p>
 	{% for order in orders %}
 	<table>
 		<th>
@@ -51,4 +59,7 @@
         <img src=" {{'https://www.staffdeco.fr/asset/imgSurMesure/' ~ img  }} " alt="">
 	{% endfor %}
 {% endfor %}</div>
+{% endblock %}
+{% block js %}
+			<script src=" {{ asset('customMain.js') }} "></script>
 {% endblock %}
