@@ -19,7 +19,7 @@ let myCalendar = new VanillaCalendar({
     shortWeekday: ['Lun', 'Mar', 'Mer', 'Jeu', 'Vend', 'Sam', 'Dim'],
     onSelect: (data, elem) => {
         let date = formatDate(data.date);
-        window.location.href = "http://localhost:8000/admin/customProject/" + date;
+        window.location.href = "https://boutique.staffdeco.fr/admin/customProject/" + date;
         //  Mettre la date 
     }
 })
