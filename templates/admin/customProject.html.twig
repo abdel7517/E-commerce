@@ -1,6 +1,8 @@
 {% extends "admin/baseAdmin.html.twig" %}
 {% block banniere %}{% endblock %}
 {% block content %} 
+	<div class="request">
+	
 	{% for order in orders %}
 	<table>
 		<th>
@@ -42,6 +44,5 @@
 	{% for img in order.img %}
         <img src=" {{'https://www.staffdeco.fr/asset/imgSurMesure/' ~ img  }} " alt="">
 	{% endfor %}
-	<br>
-{% endfor %}
+{% endfor %}</div>
 {% endblock %}
