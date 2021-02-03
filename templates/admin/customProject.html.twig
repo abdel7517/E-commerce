@@ -56,7 +56,8 @@
 		</tbody>
 	</table>
 	{% for img in order.img %}
-        <img src=" {{'https://www.staffdeco.fr/asset/imgSurMesure/' ~ img  }} " alt="">
+	<a href=" {{'https://www.staffdeco.fr/asset/imgSurMesure/' ~ img  }}" target='_blank'>Image</a>
+        {# <img src=" {{'https://www.staffdeco.fr/asset/imgSurMesure/' ~ img  }} " alt=""> #}
 	{% endfor %}
 {% endfor %}</div>
 {% endblock %}
