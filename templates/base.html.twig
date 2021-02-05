@@ -64,6 +64,17 @@
 							Contact
 						</a>
 					</li>
+					<li  id="search" >
+								<div class="container-search">
+									<div class="search-wrapper">
+										<div class="input-holder">
+											<input type="text" class="search-input" placeholder="reference produit" />
+											<button  class="search-icon" onclick="searchToggle(this, event);"><span></span></button>
+										</div>
+										<span class="close" onclick="searchToggle(this, event);"></span>
+									</div>
+								</div>
+							</li>
 				</ul>
 				<!-- Links -->
 			</div>
@@ -97,6 +108,7 @@
 			{% block navBar %}
 				<!--/.Navbar-->
 				<div class="main-content-wrapper d-flex clearfix">
+
 					<nav class="justify-content-center nav-top ">
 						<ul class='flex-nav'>
 							<img src="{{ asset('img/logoStaffdeco.png') }}" alt="logo staffdeco" class="logo ">
@@ -135,9 +147,7 @@
 							</li>
 							<li class="nav-item ">
 								<a class="nav-link" href=" {{ path('user_index') }} ">
-									<span>
 										Mon Compte
-									</span>
 									{# <img src=" {{ asset('img/account.png') }} " alt="" class="cart"> #}
 								</a>
 							</li>
@@ -149,14 +159,25 @@
 									</span>
 								</a>
 							</li>
-
-
+							<li  id="search" >
+								<div class="container-search">
+									<div class="search-wrapper">
+										<div class="input-holder">
+											<input type="text" class="search-input" placeholder="reference produit" />
+											<button  class="search-icon" onclick="searchToggle(this, event);"><span></span></button>
+										</div>
+										<span class="close" onclick="searchToggle(this, event);"></span>
+									</div>
+								</div>
+							</li>
 						</ul>
 						<div class="ornement">
-							<img src=" {{asset('img/angle.png')}} " alt="logo staffdeco" class="angle logo ">
+							<img src=" {{asset('img/angle.png')}} " alt="logo staffdeco" class="angle">
+						</div>
+				
 						</div>
 					</nav>
-				</div>
+				
 			{% endblock %}
 
 
@@ -257,7 +278,7 @@
 							</div>
 						</footer>
 					{% endblock %}
-
+	
 					<script src=" {{ asset('lib/bootstrap/js/bootstrap.min.js') }} "></script>
 					<script src=" {{ asset('lib/jquery/js/jquery-2.2.4.min.js') }} "></script>
 					<script src=" {{ asset('cookie.js') }} "></script>

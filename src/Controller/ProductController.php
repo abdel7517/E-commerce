@@ -90,11 +90,11 @@ class ProductController extends AbstractController
 
 
     /**
-     * @Route("/search", name="product_search", methods={"GET"})
+     * @Route("/search/{search}", name="product_search", methods={"GET"})
      */
-    public function search(Request $request)
+    public function search(Request $request, $search)
     {
-        $product = $this->productRepository->findByValue($request->get('search'));
+        $product = $this->productRepository->findByValue($search);
         return $this->render(
             'product/search.html.twig',
             [

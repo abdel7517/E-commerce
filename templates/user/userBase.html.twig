@@ -1,0 +1,77 @@
+{% extends "base.html.twig" %}
+
+	{% block navBar %}
+				<!--/.Navbar-->
+				<div class="main-content-wrapper d-flex clearfix">
+					<nav class="justify-content-center nav-top ">
+						<ul class='flex-nav' id='flex-nav'>
+							<img  src="{{ asset('img/logoStaffdeco.png') }}" alt="logo staffdeco" class="logo ">
+
+
+							<li class="nav-item  ">
+								<a class="nav-link " href="https://www.staffdeco.fr/index.html">
+									Accueil
+								</a>
+							</li>
+
+							<li class="nav-item">
+								<a class="nav-link" href="https://www.staffdeco.fr/presentation.html">
+									Présentation
+								</a>
+							</li>
+
+							<li class="nav-item">
+								<a class="nav-link " href="https://boutique.staffdeco.fr/">
+									Produits
+								</a>
+							</li>
+
+							<li class="nav-item">
+								<a class="nav-link" href="https://www.staffdeco.fr/realisations.html">
+									Réalisations
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="https://www.staffdeco.fr/surMesure.php">Sur Mesure</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="https://www.staffdeco.fr/contact.html">
+									Contact
+								</a>
+							</li>
+							<li class="nav-item ">
+								<a class="nav-link un" href=" {{ path('user_index') }} ">
+									<span>
+										Mon Compte
+									</span>
+									{# <img src=" {{ asset('img/account.png') }} " alt="" class="cart"> #}
+								</a>
+							</li>
+							<li class="nav-item ">
+								<a class="nav-link" href=" {{ path('cart_index') }} ">
+									<img src=" {{ asset('img/cart.png') }} " alt="" class="cart">
+									<span >
+										{{ nbProduct }}
+									</span>
+								</a>
+							</li>
+							<li  id='search'>
+								<div class="container-search">
+									<div class="search-wrapper">
+										<div class="input-holder">
+											<input type="text" class="search-input" placeholder="reference produit" />
+											<button class="search-icon" onclick="searchToggle(this, event);"><span></span></button>
+										</div>
+										<span class="close" onclick="searchToggle(this, event);"></span>
+									</div>
+								</div>
+							</li>
+						</ul>
+						<div class="ornement">
+							<img src=" {{asset('img/angle.png')}} " alt="logo staffdeco" class="angle  ">
+						</div>
+				
+						</div>
+					</nav>
+				
+			{% endblock %}

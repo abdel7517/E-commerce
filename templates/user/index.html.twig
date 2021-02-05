@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends "user/userBase.html.twig" %}
 
 
 	{% block banniere %}
@@ -19,8 +19,8 @@
 						</section>
 					{% endblock %}
 {% block content %}
-	<div class=" user-index">
-	<p class='user-p'>
+	<div class=" alone">
+	<p >
 			<a href=" {{ path('app_logout') }} " class="text-history">
 				Déconnexion
 				<i class="fas fa-history"></i>

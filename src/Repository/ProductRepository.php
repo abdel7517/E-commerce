@@ -30,14 +30,14 @@ class ProductRepository extends ServiceEntityRepository
         $query = $entityManager->createQuery(
             'SELECT p
             FROM App\Entity\Product p
-            WHERE p.name = :val OR p.reference = :val 
+            WHERE  p.reference = :val 
             ORDER BY p.price ASC'
         )->setParameter('val', $value);
 
-        if(empty($query->getResult()))
-        {
-            return $this->findAll();
-        }
+        // if(empty($query->getResult()))
+        // {
+        //     return $this->findAll();
+        // }
         // returns an array of Product objects
         return $query->getResult();
     }

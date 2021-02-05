@@ -69,3 +69,51 @@ function purecookieDismiss() {
 }
 
 window.onload = function() { cookieConsent(); };
+
+
+// --- search --- 
+
+function searchToggle(obj, evt){
+  var container = $(obj).closest('.search-wrapper');
+  var search = $('#search');
+  var nav = $('.nav-item');
+  var logo = $('.logo');
+  const mediaQuery = window.matchMedia('(max-width: 993px)');
+  const mediaQuery2 = window.matchMedia('(max-width: 373px)');
+
+
+      if(!container.hasClass('active')){
+
+            if (!mediaQuery.matches) {
+              nav.addClass('none');
+            }
+            if (mediaQuery2.matches) {
+              search.css('position', 'relative');
+              search.css('right', '1.5em');
+            }
+            container.addClass('active');
+            evt.preventDefault();
+          }
+
+        else if(container.hasClass('active') && $(obj).closest('.input-holder').length == 0){
+
+          if (!mediaQuery.matches) {
+            nav.removeClass('none');
+          }
+          if (mediaQuery2.matches) {
+            search.css('right', 'inherit');
+          }
+          container.removeClass('active');
+          // clear input
+          container.find('.search-input').val("");
+
+      }
+       
+          if(container.find('.search-input').val() !== ""){
+
+              window.location = "http://localhost:8000/product/search/"+ container.find('.search-input').val();
+          }
+     
+      
+
+}
