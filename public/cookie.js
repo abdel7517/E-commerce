@@ -111,7 +111,7 @@ function searchToggle(obj, evt){
        
           if(container.find('.search-input').val() !== ""){
 
-              window.location = "http://localhost:8000/product/search/"+ container.find('.search-input').val();
+              window.location = "https://boutique.staffdeco.fr/product/search/"+ container.find('.search-input').val();
           }
      
       
