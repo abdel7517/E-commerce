@@ -3,7 +3,7 @@
 var purecookieTitle = "Cookies."; // Title
 var purecookieDesc = "En continuant la navigation, vous acceptez l'utilisation des cookies."; // Description
 var purecookieLink = '<a href="https://www.staffdeco.fr/mentionsLegales.html" target="_blank">En savoir plus</a>'; // Cookiepolicy link
-var purecookieButton = "Je comprend"; // Button text
+var purecookieButton = "Je comprends"; // Button text
 // ---        --- //
 
 
