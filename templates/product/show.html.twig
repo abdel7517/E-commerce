@@ -86,6 +86,15 @@
 					{% endif %}
 
 				</p>
+
+				<p class=" TC" >
+					{% if product.avaibility > 0 %} 
+					Disponible sous	{{product.avaibility}} semaines 
+					{% else %}
+					En stock
+					{% endif %}
+				</p>
+				
 				<p class=" TC">
 					<a href=" {{ path('cart_add', {'id': product.id, 'category': 'produit'}) }} " class="font-size">
 						<button class='btn btn-primary btn-add'>
@@ -95,6 +104,7 @@
 
 					</a>
 				</p>
+					
 
 				<p class='TC description'>
 					Description:

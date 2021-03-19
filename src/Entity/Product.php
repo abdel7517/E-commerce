@@ -70,6 +70,11 @@ class Product
      */
     private $PriceOfML;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $avaibility;
+
 
 
     
@@ -240,6 +245,18 @@ class Product
     public function setPriceOfML(?string $PriceOfML): self
     {
         $this->PriceOfML = $PriceOfML;
+
+        return $this;
+    }
+
+    public function getAvaibility(): ?int
+    {
+        return $this->avaibility;
+    }
+
+    public function setAvaibility(?int $avaibility): self
+    {
+        $this->avaibility = $avaibility;
 
         return $this;
     }

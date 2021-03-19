@@ -48,7 +48,10 @@ class Product3Type extends AbstractType
             ])
             ->add('PriceOfML', null,   [
                 'label'    => 'Prix du mètre linéaire',
-            ]);
+            ])
+            ->add('avaibility', NumberType::class, [
+                'label'    => 'Délais de fabrication ( en semaine )',
+            ] );
            
     }
 
