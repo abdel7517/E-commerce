@@ -20,7 +20,7 @@
 			</section>
 		{% endblock %}
 		{% block content %}
-			<div class="center">
+			<div class="center alone">
 				<form method="post">
 					{% if error %}
 						<div class="alert alert-danger">
@@ -43,11 +43,11 @@
 					<label for="inputEmail">
 						Email
 					</label>
-					<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
+					<input type="email" value="{{ last_username }}" name="email" id="inputEmail"  required autofocus>
 					<label for="inputPassword">
 						Mot de passe
 					</label>
-					<input type="password" name="password" id="inputPassword" class="form-control" required>
+					<input type="password" name="password" id="inputPassword"  required>
 
 					<input
 					type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
@@ -66,9 +66,12 @@
 					<button class="btn btn-lg btn-primary" id="btn-log" type="submit">
 						Se Connecter
 					</button>
-					<a href=" {{ path('app_register') }} ">
-						Pas de compte ?
-					</a>
+					<p>
+						<a href=" {{ path('app_register') }} ">
+							Pas de compte ?
+						</a>
+					</p>
+
 					<p>
 						<a href=" {{ path('user_setPass') }} ">Mot de passe oublié ?  </a>
 					</p>

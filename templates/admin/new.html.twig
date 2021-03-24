@@ -8,12 +8,17 @@
 			Ajoutez un produit
 		</h1>
 
-		<div>
 
-			{{ include('product/_form.html.twig') }}
-			<p>
-				La première image choisit sera c'elle affichez dans la page produits
-			</p>
+	
+	<div>
+		{{ form_start(form,  {'id': 'form_add_product'}) }}
+			{{ form_widget(form) }}
+	
+			<div id="cara"></div>
+			<div onClick='add()' >Ajoutez une caractéristique</div>
+			<button class="btn btn-primary btn-add">{{ button_label|default('Valider') }}</button>
+		{{ form_end(form) }}			
+		
 
 			<a href="{{ path('admin_index') }}">
 				Retour
@@ -23,7 +28,51 @@
 					Gérez mes categories
 				</button>
 			</a>
-		</div>
+	</div>
+{# 
+<pre>
+	{{ dump(t) }}
+</pre>
+
+{% for filtre in t %}
+	<pre>
+		{{ dump(filtre) }}
+	</pre>
+{% endfor %}
+
 	</section>
+{% block js %}
+<script  type="text/javascript">
+
+let filtres = [];
+{% set i = 0 %}
+
+{% set ifiltreValue = 0 %}
+{% for categoryName, arrayWithFiltresArray in t %}
+
+	{% set index = loop.index %}
+	let arrayFiltre{{index}} = [];
+
+	{% for filtreArray in arrayWithFiltresArray %}
+	let filtreValue{{ifiltreValue}} = {};
+
+		{% for filtreName, value in filtreArray %}
+			let array{{i}} = filtreValue{{ifiltreValue}}["{{filtreName}}"] = "{{value}}";
+			filtreValue{{categoryName}} = array{{i}};
+		{% set i = i+1 %}
+		{% endfor %}
+	
+	arrayFiltre{{index }}= filtreValue{{ifiltreValue}};
+	{% set ifiltreValue = ifiltreValue+1 %}
+	{% endfor %}
+
+	filtres.push(arrayFiltre{{index}});
+console.log('{{categoryName}}')
+
+{% endfor %}
+console.log(filtres);
+</script> #}
+{# <script src=" {{ asset('cookie.js') }} "></script>
+{% endblock %} #}
 
 {% endblock %}

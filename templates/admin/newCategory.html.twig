@@ -1,4 +1,7 @@
 {% extends 'admin/baseAdmin.html.twig' %}
+{% block lib %}
+				<link rel="stylesheet" href="{{asset('lib/rangeSlider/css/ion.rangeSlider.min.css')}}">
+{% endblock %}
 {% block banniere %}
 {% endblock %}
 {% block title %}
@@ -22,7 +25,16 @@
 
 			<div>
 				Ajoutez une catégories segondaire
-				{{ include('product/_form.html.twig') }}
+				{{ form_start(form) }}
+					{{ form_widget(form) }}
+					<input type="text" name="filtre[]" id="" placeholder='Intitulé du filtre'>	
+					<input type="text" name="unit[]" id="" placeholder='Unité (€, cm, m ..)' >	
+					<input type="text" name="min[]" id="" placeholder='Unité min' >	
+					<input type="text" name="max[]" id="" placeholder='Unité max' >	
+					<div id='addCategory' onClick='addCategory()'>Ajoutez une caractéristiques</div>
+					<div id="otherCategory"></div>
+					<button class="btn">{{ button_label|default('Valider') }}</button>
+				{{ form_end(form) }}			
 			</div>
 
 			{{ form_start(formD) }}
@@ -53,5 +65,13 @@
 				éditer produit
 			</button>
 		</a>
+		
+    
 	</div>
+
+{% endblock %}
+{% block js %}
+		<script src=" {{ asset('lib/rangeSlider/js/ion.rangeSlider.js') }} "></script>
+		<script src=" {{ asset('lib/rangeSlider/js/main.js') }} "></script>
+
 {% endblock %}

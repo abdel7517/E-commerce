@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Service\Cart\Cart;
 use App\Repository\ProductRepository;
-use App\Repository\AllCategoryRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,13 +12,12 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class LoginController extends AbstractController
 {
 
-    protected $productRepository, $cart, $allCategoryRepository;
+    protected $productRepository, $cart;
 
-    public function __construct(ProductRepository $productRepository, Cart $cart, AllCategoryRepository $allCategoryRepository)
+    public function __construct(ProductRepository $productRepository, Cart $cart)
     {
         $this->productRepository = $productRepository;
         $this->cart = $cart;
-        $this->allCategoryRepository = $allCategoryRepository;
         
     }
 
@@ -44,8 +42,6 @@ class LoginController extends AbstractController
         return $this->render('security/login.html.twig', 
         ['last_username' => $lastUsername, 'error' => $message,
         'nbProduct'=>  $this->cart->getNbOfArticle(),
-        'categories'=> $this->allCategoryRepository->findAll()
-
         
         ]);
     }

@@ -2,27 +2,21 @@
 
 namespace App\Controller;
 
-use App\Entity\Order;
 use App\Service\Cart\Cart;
-use App\Controller\AdminController;
 use App\Controller\ProductController;
-use App\Repository\AllCategoryRepository;
 use App\Repository\MainCategoryRepository;
-use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MyAppController extends AbstractController
 {
 
-    protected $cart, $allCategoryRepository, $mainCategoryRepository, $productController;
+    protected $cart,  $mainCategoryRepository, $productController;
 
-    public function __construct(Cart $cart, AllCategoryRepository $allCategoryRepository, MainCategoryRepository $mainCategoryRepository, ProductController $productController)
+    public function __construct(Cart $cart,  MainCategoryRepository $mainCategoryRepository, ProductController $productController)
     {
         $this->cart = $cart;
-        $this->allCategoryRepository = $allCategoryRepository;
         $this->mainCategoryRepository = $mainCategoryRepository;
         $this->productController = $productController;
     }
@@ -57,7 +51,6 @@ class MyAppController extends AbstractController
             "cart/good.html.twig",
             [
                 'nbProduct' => $this->cart->getNbOfArticle(),
-                'categories' => $this->allCategoryRepository->findAll(),
                 'mainCategory' => $this->mainCategoryRepository->findAll(),
                 'orderCode' => $orderCode,
                 'id' => $ID,
@@ -76,7 +69,6 @@ class MyAppController extends AbstractController
             "cart/noGood.html.twig",
             [
                 'nbProduct' => $this->cart->getNbOfArticle(),
-                'categories' => $this->allCategoryRepository->findAll(),
                 'mainCategory' => $this->mainCategoryRepository->findAll(),
             ]
         );
@@ -100,8 +92,8 @@ class MyAppController extends AbstractController
     public function admin()
     {
            return $this->render("admin/index.html.twig", 
-            ['nbProduct'=> $this->cart->getNbOfArticle(),
-            'categories'=> $this->allCategoryRepository->findAll()]);
+            ['nbProduct'=> $this->cart->getNbOfArticle()
+            ]);
 
     }
 

@@ -17,7 +17,7 @@
 			</section>
 		{% endblock %}
 		{% block content %}
-		<p> {{ message }} </p>
+		<p class='TC category'> {{ message }} </p>
 			<form action=" {{ path('user_setPass', ) }} " method="post" >
                 <input type="text" placeholder='Votre Mail'  name='mail' >
                 <button type="submit" class='btn btn-primary'>Envoyer</button>

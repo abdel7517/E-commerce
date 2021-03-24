@@ -21,7 +21,7 @@ class ProductEditImageType extends AbstractType
 
         $builder
             ->add('image', FileType::class,
-            ['data_class' => null,'multiple' => false, 'mapped'=>false, 'label' => 'images principale'])
+            ['data_class' => null,'multiple' => false, 'mapped'=>false, 'label' => 'images principale','required' => false])
             ->add('images', FileType::class, 
             ['data_class' => null, 'multiple'=>true, 'mapped'=>false, 'label' => 'autres image', 'required' => false]);
             

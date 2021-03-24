@@ -23,7 +23,6 @@ class ProductEditType extends AbstractType
 
         $builder
             ->add('name')
-            ->add('description')
             ->add('price', NumberType::class)
             ->add('categories', EntityType::class, [
                 'class' => Category::class,

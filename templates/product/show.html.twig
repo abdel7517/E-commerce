@@ -28,15 +28,15 @@
 
 			<section class="h-flex-show padding">
 				<div id="images-containers">
-					<a href="{{ asset('/uploads/'~ product.image.name ) }}" data-lightbox="img" data-title="{{product.categorie}}" class="link-preview" title="Voir" class="link-preview">
-						<img class="border" id="imageMain" src=" {{ asset('/uploads/'~ product.image.name ) }} " alt="" srcset="" width="150px">
+					<a href="{{ asset('/uploads/'~ product.imageMain ) }}" data-lightbox="img" data-title="{{product.categorie}}" class="link-preview" title="Voir" class="link-preview">
+						<img class="border" id="imageMain" src=" {{ asset('/uploads/'~ product.imageMain ) }} " alt="" srcset="" width="150px">
 					</a>
 					<div class="flex container-img-others">
 
-						{% for image in product.images %}
+						{% for index, nameImage in product.complementaryImage %}
 							<div>
-								<a href="{{ asset('/uploads/'~ image.name ) }} " data-lightbox="img" data-title="{{product.categorie}}" class="link-preview" title="Voir" class="link-preview">
-									<img class="border other-img" id="images" src=" {{ asset('/uploads/'~ image.name ) }} " git alt="">
+								<a href="{{ asset('/uploads/'~ nameImage ) }} " data-lightbox="img" data-title="{{product.categorie}}" class="link-preview" title="Voir" class="link-preview">
+									<img class="border other-img" id="images" src=" {{ asset('/uploads/'~ nameImage ) }} " git alt="">
 								</a>
 							</div>
 						{% endfor %}
@@ -106,21 +106,33 @@
 				</p>
 					
 
-				<p class='TC description'>
-					Description:
+				<p class='TC '>
+					Caractéristiques
 					<br>
-					{{ product.description }}
+					
 				</p>
+				<table class="table table-striped table-show">
+
+				<tbody>
+				{% for nameOfCar, car in product.description %}
+					<tr>
+						<th scope="row">{{ nameOfCar }}</th>
+						<td>{{	car	}}</td>
+					</tr>
+						{% endfor %}
+				</tbody>
+		</table>
 			</div>
 
 
 		</section>
+
 		<a href="{{ path('product_products', {'category_product': product.categorie, 'main_category': product.mainCategory}) }}" class='to_back'>
 			<i class="fas fa-long-arrow-alt-left"></i>
 			Retour
 		</a>
 
-
+		
 		{% if is_granted('ROLE_ADMIN') %}
 			<a href="{{ path('product_edit', {'id': product.id}) }}">
 				editer

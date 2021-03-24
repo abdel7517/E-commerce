@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -24,20 +23,20 @@ class Product
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="array")
      */
-    private $description;
+    private $description = [];
 
     /**
      * @ORM\Column(type="float")
      */
     private $price;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="product", orphanRemoval=true, cascade = {"persist", "remove"})
-     */
-    private $Images;
 
+   /**
+     * @ORM\Column(type="string")
+     */
+    private $imageMain;
   
 
     /**
@@ -50,10 +49,11 @@ class Product
      */
     private $reference;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\ImageMain", mappedBy="product", orphanRemoval=true, cascade={"persist", "remove"})
+
+     /**
+     * @ORM\Column(type="array")
      */
-    private $Image;
+    private $complementaryImage = [];
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -70,24 +70,12 @@ class Product
      */
     private $PriceOfML;
 
-    /**
+     /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $avaibility;
 
-
-
-    
-
-   
-
-
-
-
-    
-
-  
-
+ 
 
     
 
@@ -114,17 +102,19 @@ class Product
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getDescription(): ?array
     {
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(array $description): self
     {
         $this->description = $description;
 
         return $this;
     }
+
+
 
     public function getPrice(): ?float
     {
@@ -138,37 +128,19 @@ class Product
         return $this;
     }
 
-    /**
-     * @return Collection|Image[]
-     */
-    public function getImages(): Collection
+    public function getImageMain(): ?string
     {
-        return $this->Images;
+        return $this->imageMain;
     }
 
-    public function addImage( $image): self
+    public function setImageMain(string $imageMain): self
     {
-        if (!$this->Images->contains($image)) 
-        {
-            $this->Images[] = $image;
-            $image->setProduct($this);
-        }
+        $this->imageMain = $imageMain;
 
         return $this;
     }
 
-    public function removeImage(Image $image): self
-    {
-        if ($this->Images->contains($image)) {
-            $this->Images->removeElement($image);
-            // set the owning side to null (unless already changed)
-            if ($image->getProduct() === $this) {
-                $image->setProduct(null);
-            }
-        }
-
-        return $this;
-    }
+    
 
     
     public function getCategorie(): ?string
@@ -195,23 +167,18 @@ class Product
         return $this;
     }
 
-    public function getImage(): ?Imagemain
+    public function getComplementaryImage(): ?array
     {
-        return $this->Image;
+        return $this->complementaryImage;
     }
 
-    public function setImage(?Imagemain $imagemain): self
+    public function setComplementaryImage(array $complementaryImage): self
     {
-        $this->Image = $imagemain;
-
-        // set (or unset) the owning side of the relation if necessary
-        $newProduct = null === $imagemain ? null : $this;
-        if ($imagemain->getProduct() !== $newProduct) {
-            $imagemain->setProduct($newProduct);
-        }
+        $this->complementaryImage = $complementaryImage;
 
         return $this;
     }
+
 
     public function getMainCategory(): ?string
     {
@@ -263,18 +230,4 @@ class Product
 
 
 
-
-   
-
-  
-
-    
- 
-
-   
-
-
- 
-
-   
 }

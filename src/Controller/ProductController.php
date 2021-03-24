@@ -2,12 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Image;
 use App\Entity\Product;
 use App\Entity\Category;
-use App\Entity\ImageMain;
-use App\Form\CategoryType;
-use App\Form\Product3Type;
 use App\Service\Cart\Cart;
 use App\Entity\ImageCategory;
 use App\Entity\MainCategory;
@@ -16,15 +12,12 @@ use App\Form\ProductEditImageType;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
 use App\Service\Product\ServiceProduct;
-use Container1EzGezZ\getProductService;
-use App\Repository\AllCategoryRepository;
 use App\Repository\MainCategoryRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Test\FormInterface;
 
 /**
  * @Route("/product")
@@ -32,7 +25,7 @@ use Symfony\Component\Form\Test\FormInterface;
 class ProductController extends AbstractController
 {
 
-    protected $productRepository, $cart,  $categoryRepository, $serviceProduct, $mainCategoryRepository;
+    protected $productRepository, $cart,  $categoryRepository, $serviceProduct, $mainCategoryRepository, $t;
 
     public function __construct(ServiceProduct $serviceProduct, ProductRepository $productRepository, Cart $cart, CategoryRepository $categoryRepository, MainCategoryRepository $mainCategoryRepository)
     {
@@ -110,19 +103,98 @@ class ProductController extends AbstractController
      */
     public function productOfCategory(string $category_product, String $main_category): Response
     {
+        if(count($_GET) > 0 ){
+            
+            $productFiltred= [];
+            $productInFiltering = [];
+            $cara = [];
+            $i = 0;
+            $listFiltre = [];
+            $products = $this->productRepository->findBy(["categorie" =>  $category_product,"mainCategory" => $main_category]);
+            // create array of filtre 
+            foreach( $_GET as $key => $value){
+                $keyClened = str_replace("_", " ", $key);
+                $listFiltre[ucfirst($keyClened)] = $value;
+            }
+            
 
-        return $this->render('product/products.html.twig', [
-            'products' => $this->productRepository->findBy(
-                [
-                    "categorie" =>  $category_product,
-                    "mainCategory" => $main_category
-                ]
-            ),
-            'nbProduct' =>  $this->cart->getNbOfArticle(),
-            'categories' => $this->categoryRepository->findAll(),
-            'category' =>  $category_product,
-            'main_category' => $main_category,
-        ]);
+            foreach($products as $product){
+                $description = $product->getDescription();
+                foreach($description as $filtre => $value){
+                    // delete accent, space and to lower case of filtre 
+                    $accents = array('Š'=>'S', 'š'=>'s', 'Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A','Â'=>'A', 'Ã'=>'A', 'Ä'=>'A', 'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E','Ê'=>'E','Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I', 'Ï'=>'I', 'Ñ'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O','Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U','Ú'=>'U', 'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y','Þ'=>'B','ß'=>'Ss', 'à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a', 'å'=>'a','æ'=>'a','ç'=>'c','è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i', 'ï'=>'i','ð'=>'o', 'ñ'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o','ö'=>'o', 'ø'=>'o', 'ù'=>'u','ú'=>'u', 'û'=>'u', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y','Ğ'=>'G', 'İ'=>'I', 'Ş'=>'S', 'ğ'=>'g', 'ı'=>'i', 'ş'=>'s', 'ü'=>'u','ă'=>'a', 'Ă'=>'A', 'ș'=>'s', 'Ș'=>'S', 'ț'=>'t', 'Ț'=>'T');
+
+                    $filtre_without_accents = strtr($filtre, $accents);
+
+                    // check if we find the filtre activate on description of product 
+                    $filtreFinded = array_key_exists($filtre_without_accents, $listFiltre);
+                    // var_dump($filtre_without_accents);
+                    // var_dump($listFiltre);
+                    // exit;
+                    if($filtreFinded){
+
+                        $valueInInt = intval($value);
+                        $valuesOfFiltre = explode('-', $listFiltre[$filtre_without_accents]);
+                        $valueOfFiltreMin = $valuesOfFiltre[0];
+                        $valueOfFiltreMax = $valuesOfFiltre[1];
+                        if( $valueOfFiltreMin <= $valueInInt && $valueOfFiltreMax >= $valueOfFiltreMax ){
+                            if(count($productInFiltering) > 0){
+                                foreach($productInFiltering as $productAlreadyTested){
+                                    $productTested = $productAlreadyTested['product'];
+                                    if($product->getId() ==  $productTested->getId()){
+
+                                        $testSuccededInint = intval($productAlreadyTested['testSucceded']);
+                                        $productAlreadyTested['testSucceded'] = $testSuccededInint+1;
+                                        $productInFiltering[$i] = $productAlreadyTested;
+                                    }
+                                    else{
+                                        $productTested = ['product'=> $product, 'testSucceded' => 1];
+                                        $productInFiltering[] = $productTested;
+                                        }
+                                    $i++;
+                                    }
+                            }else{
+                                $productTested = ['product'=> $product, 'testSucceded' => 1];
+                                $productInFiltering[] = $productTested;
+                                }
+                         
+                        }
+                    }
+                }
+            }
+
+            foreach($productInFiltering as $productAlreadyTested){
+                if($productAlreadyTested['testSucceded'] >= count($listFiltre)){
+                    $productFiltred[] = $productAlreadyTested['product'];
+                }
+            }
+            return $this->render('product/products.html.twig', [
+                'products' => $productFiltred,
+                'nbProduct' =>  $this->cart->getNbOfArticle(),
+                'categories' => $this->categoryRepository->findAll(),
+                'category' =>  $this->categoryRepository->findOneBy(['name' => $category_product ]),
+                'main_category' => $main_category,
+                'filtre' => true
+
+                
+            ]);
+
+        }
+        else{
+            return $this->render('product/products.html.twig', [
+                'products' => $this->productRepository->findBy(
+                    [
+                        "categorie" =>  $category_product,
+                        "mainCategory" => $main_category
+                    ]
+                ),
+                'nbProduct' =>  $this->cart->getNbOfArticle(),
+                'categories' => $this->categoryRepository->findAll(),
+                'category' =>  $this->categoryRepository->findOneBy(['name' => $category_product ]),
+                'main_category' => $main_category,
+                
+            ]);
+        }
     }
 
 
@@ -140,11 +212,7 @@ class ProductController extends AbstractController
         $formDeleteMainCategory = $this->deleteMainCategory($request);
 
 
-        if (($form->isSubmitted() && $form->isValid()) || ($formD->isSubmitted()  &&  $formD->isValid())) {
-            return $this->redirectToRoute('admin_add');
-        }
-
-
+    
 
         return $this->render('admin/newCategory.html.twig', [
             'form' => $form->createView(),
@@ -211,17 +279,38 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $image =  $form->get('image')->getData();
             $fichier = md5(uniqid() . '.' . $image->guessExtension());
             $image->move($this->getParameter('images_directory'), $fichier);
             $img = new ImageCategory();
             $img->setName($fichier);
             $category->setImage($img);
+
             $category->setMainCategory($form->get('categoriesPrincipale')->getData()->getName());
+
+            $filtre = $request->get('filtre');
+            $unit = $request->get('unit');
+            $min = $request->get('min');
+            $max = $request->get('max');
+
+
+            $oldFiltreArray = array();
+            for($i=0; $i< sizeof($filtre); $i++){
+                $filtreArray = [];
+                $filtreArray['filtre'] = $filtre[$i];
+                $filtreArray['unit'] = $unit[$i];
+                $filtreArray['min'] = $min[$i];
+                $filtreArray['max'] = $max[$i];                
+                $oldFiltreArray[] = $filtreArray;
+            }
+
+            $category->setFiltre($oldFiltreArray);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($category);
             $entityManager->flush();
+
         }
 
         return $form;
@@ -267,35 +356,74 @@ class ProductController extends AbstractController
         if($formImage->isSubmitted() && $formImage->isValid())
         {  
             $imageMain = $formImage->get('image')->getData();
+            $imageComplementary = $formImage->get('images')->getData();
 
-            $fichier = md5(uniqid() );
-            $nom = $fichier .'.'. $imageMain->guessExtension();
-            $imageMain->move($this->getParameter('images_directory'), $nom);
-            $img = new Imagemain();
-            $img->setName($nom);
-            $product->setImage($img);
+
+            if($imageMain !== null){
+
+                $fichier = md5(uniqid() );
+                $nom = $fichier .'.'. $imageMain->guessExtension();
+                $imageMain->move($this->getParameter('images_directory'), $nom);
+                $product->setImageMain($nom);
+            }
+
+            if(count($imageComplementary) > 0 ){
+                $arrayOfComplementaryImage = [];
+
+                foreach ($imageComplementary as $image) {
+                    
+                    $fichier = md5(uniqid() );
+                    $imgName = $fichier .'.'. $image->guessExtension();
+                    $image->move($this->getParameter('images_directory'), $imgName);
+                    $arrayOfComplementaryImage[] = $imgName;
+                }
+
+                foreach($product->getComplementaryImage() as $imgName ){
+                    $arrayOfComplementaryImage[] = $imgName;
+                }
+                $product->setComplementaryImage($arrayOfComplementaryImage);
+            }
 
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($product);
             $entityManager->flush();
-            return $this->categoryPage();
 
+            return $this->render('product/edit.html.twig', [
+                'product' => $product,
+                'form' => $form->createView(),
+                'formImage' => $formImage->createView(),
+            ]);
 
         }
         if ($form->isSubmitted() && $form->isValid()) {
+            $nameCar = $request->get('name');
+            $car = $request->get('cara');
+
+            $description = array();
+            
+            for( $i=0; $i< sizeof($nameCar); $i++){
+                $name = $nameCar[$i];
+                $description[$name] = $car[$i];
+            }
+
+            $product->setDescription($description);
 
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->categoryPage();
+            return $this->render('product/edit.html.twig', [
+                'product' => $product,
+                'form' => $form->createView(),
+                'formImage' => $formImage->createView(),
+            ]);
         }
+
        
 
         return $this->render('product/edit.html.twig', [
             'product' => $product,
             'form' => $form->createView(),
             'formImage' => $formImage->createView(),
-            'id' => $product->getId()
         ]);
     }
 
@@ -330,5 +458,35 @@ class ProductController extends AbstractController
         }
 
         return $this->redirectToRoute('MyApp_index');
+    }
+
+    /**
+     * @Security("is_granted('ROLE_ADMIN')")
+     * @Route("/delete/img/api/{prod}/{imgName}", name="deleteImgComplementary")
+     */
+    public function deleteImg( Product $prod, string $imgName){
+
+        $arrayImg = $prod->getComplementaryImage() ;
+        foreach($arrayImg as $key => $img){
+            if($img == $imgName){
+                unset($arrayImg[$key]);
+            }
+
+            $prod->setComplementaryImage($arrayImg);
+        }
+
+
+        $this->getDoctrine()->getManager()->flush();
+
+       return $this->redirectToRoute('product_edit', [
+           'id'=>$prod->getId()
+       ]);
+    }
+
+    /**
+     * @Route("/search", name="search")
+     */
+    public function filtre(){
+
     }
 }

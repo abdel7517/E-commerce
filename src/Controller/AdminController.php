@@ -73,10 +73,7 @@ class AdminController extends AbstractController
      */
     public function editCategorie(Request $request)
     {
-       
         return $this->product->editCategorie($request);
-
-        
     }
 
     
@@ -224,7 +221,7 @@ class AdminController extends AbstractController
             $now = new \DateTime();
             $orders = $entityManager->getRepository("App\Entity\Order")->getByDate($now);   
             return $this->render('admin/index.html.twig', [
-                'products' => $this->productRepository->findAll(),
+                // 'products' => $this->productRepository->findAll(),
                 'nbProduct'=>  $this->cart->getNbOfArticle(),
                 'categories'=> $this->allCategoryRepository->findAll(),
                 'orders' => $orders,

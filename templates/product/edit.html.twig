@@ -12,9 +12,30 @@
 		</h1>
 
 		<div class="flex justify">
+			{{ form_start(form) }}
+				{{ form_widget(form) }}
+				{% for key, value in product.description %}
+					<div id="otherCara"> 
+						<div id='{{ loop.index }}'>
+							<input type="text" name="name[]" id="" value='{{ key }}'>	
+							<input type="text" name="cara[]" id="" value='{{ value }}'>
+							<div onclick="del({{ loop.index }})">suprimer</div>	
+						</div>										
+					</div>
+				{% endfor %}
+				<div id="cara"></div>
+				<div id='add' onClick='add()' >Ajoutez une caractéristiques</div>
+				<button class="btn">{{ button_label|default('Valider') }}</button>
+			{{ form_end(form) }}
+			{{ form_start(formImage, {'action': path('product_edit', {'id' : product.id}), 'method': 'POST'} ) }}
+			{{ form_row(formImage.image)}}
+			<img src=" {{ asset('uploads/' ~ product.imageMain) }} " alt="">
+			{{ form_row(formImage.images)}}
+			{% for imageName in product.complementaryImage %}
+			<img src=" {{ asset('uploads/' ~ imageName) }} " alt=""> 
+			<a href=" {{ path('deleteImgComplementary', { 'prod': product.id, 'imgName': imageName } ) }} ">suprimer</a>
 
-			{{ include('product/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
-			{{ form_start(formImage, {'action': path('product_edit', {'id' : id}), 'method': 'POST'} ) }}
+			{% endfor %}
 			<button class="btn">
 				{{ button_label|default('Modifier les images') }}
 			</button>
@@ -22,7 +43,8 @@
             
 		</div>
 
-		<a href="{{ path('MyApp_index') }}">
+
+		<a href="{{ path('product_show', {'id': product.id, 'main_category': product.mainCategory }) }}">
 			<button class="btn">
 				Retour
 			</button>

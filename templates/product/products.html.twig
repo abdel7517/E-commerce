@@ -1,5 +1,10 @@
 {% extends "base.html.twig" %}
-
+{% block title %}
+	{{category.name}}
+{% endblock %}
+{% block lib %}
+	<link rel="stylesheet" href="{{asset('lib/rangeSlider/css/ion.rangeSlider.min.css')}}">
+{% endblock %}
 {% block banniere %}
 	<!-- banniere -->
 	<section class="h-flex">
@@ -18,13 +23,33 @@
 			</section>
 		{% endblock %}
 		{% block content  %}
+			<div></div>
 			<div
-				class="container-main">
+				class="container-main-products">
 				{# <p class='under-tittle tl'>
-									Le Staff est un matériau qui va vous permettre de réaliser des décors avec une extrême finesse. Nous vous proposons un large choix de produits et pouvons également personnaliser selon vos envies. N’hésitez pas à consulter notre catalogue en bas de page.
-								</p> #}
+													Le Staff est un matériau qui va vous permettre de réaliser des décors avec une extrême finesse. Nous vous proposons un large choix de produits et pouvons également personnaliser selon vos envies. N’hésitez pas à consulter notre catalogue en bas de page.
+												</p> #}
+
+				{# <div id='filter'>
+					<div id="filtresActivate"></div>
+					{% for filtre in category.filtre %}
+						<p class='filtre_name'>
+							{{ filtre.filtre  }}
+						</p>
+						<input type="text" class="filtre-{{ loop.index }} {{ loop.index }}"/>
+						<input type="text" id='input_from_{{ loop.index }}' class='input_filtre'>
+						<input type="text" id='input_to_{{ loop.index }}' class='input_filtre'>
+						<button class='btn btn-lg btn-primary btn-filtre' onclick="search('{{loop.index}}','{{ filtre.filtre }}')">
+							Chercher
+						</button>
+
+					{% endfor %}
+				</div>
+				
+				<img src=" {{ asset('img/filtre.png') }} " id="picto-filtre"> #}
 
 				<section class="products flex">
+
 
 					{% for product in products %}
 
@@ -33,7 +58,7 @@
 							<div class=" overlay-image _ax container-img-product">
 								<a href=" {{ path('product_show', {'id': product.id }) }} ">
 
-									<img class=" image _ay img-produits-produits rosace-produit" src=" {{ asset('uploads/'~ product.image.name) }} " alt="Alt text"/>
+									<img class=" image _ay img-produits-produits rosace-produit" src=" {{ asset('uploads/'~ product.imageMain) }} " alt="Alt text"/>
 									<div class=" text _2 eyes">
 										<img src=" {{ asset('img/oeil.svg') }} " alt="" srcset="">
 									</div>
@@ -56,9 +81,30 @@
 							</div>
 						</div>
 
-
+					{% else %}
+						<p>
+							aucun produit trouvé ...
+						</p>
 					{% endfor %}
+
 
 				</section>
 			</div>
+		{% endblock %}
+		{% block js %}
+			<script type="text/javascript">
+				let filtres = [];
+				{% for filtre in category.filtre %}
+					let filtreArray{{loop.index }} = [];
+					filtreArray{{loop.index }}['filtre'] = '{{ filtre.filtre }}';
+					filtreArray{{loop.index }}['unit'] = '{{ filtre.unit }}';
+					filtreArray{{loop.index }}['min'] = '{{ filtre.min }}';
+					filtreArray{{loop.index }}['max'] = '{{ filtre.max }}';
+					filtres.push(filtreArray{{loop.index }});
+				{% endfor %}
+			</script>
+			<script src=" {{ asset('lib/rangeSlider/js/ion.rangeSlider.js') }} "></script>
+			<script src=" {{ asset('lib/rangeSlider/js/main.js') }} "></script>
+			<script src=" {{ asset('filter-mobile.js') }} "></script>
+
 		{% endblock %}

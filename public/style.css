@@ -1,6 +1,9 @@
 /*
 DRY
 */
+::selection{
+    background: rgb(223, 191, 109) !important;
+}
 
 input {
     color: black !important;
@@ -26,6 +29,7 @@ h1 {
 
 a {
     font-size: inherit !important;
+    text-decoration: none !important;
 }
  .alone{
      height: 31em;
@@ -81,6 +85,7 @@ a {
     max-width: 304px;
     margin: auto;
 }
+
 
 
 /* update template*/
@@ -286,6 +291,7 @@ a {
         width: 100%  !important;
     }
 }
+
 
 @media only screen and (max-width: 675px) {
     .rosace {
@@ -991,10 +997,34 @@ h3,
     background-color: #6c757d !important;
 }
 
-
 /*
     Product page
 */
+.container-main-products
+{
+    width: 90%;
+    margin: auto;
+    margin-bottom: 1em;
+    display: flex;
+}
+
+.irs{
+    margin-bottom: 1em;
+}
+
+.filtreActivate 
+{
+    font-size: 0.55em !important ;
+}
+.filtre_name{
+    TEXT-ALIGN: CENTER;
+    margin-bottom: 0px;
+    margin-top: 1.5em;
+}
+.input_filtre{
+    display: none;
+}
+
 
 .single-products-catagory .hover-content p {
     color: black !important;
@@ -1177,7 +1207,6 @@ form[name=order] {
     background: white;
     padding: 1em;
     border-radius: 1em;
-    width: 100%;
     border: none !important;
 }
 
@@ -1217,6 +1246,11 @@ form[name=registration_form] {
 
 form[name=registration_form] div {
     text-align: center;
+}
+
+.form-control{
+    width: 50% !;
+    margin: auto;
 }
 
 .btn-primary {
@@ -1373,6 +1407,11 @@ footer {
     font-size: 1.31em;
 }
 
+.container-main-products * {
+    font-size: 1.31em;
+    
+}
+
 .container-main {
     width: 70%;
     margin: auto;
@@ -1441,6 +1480,12 @@ aside {
 
 /* categorys */
 
+
+#picto-filtre{
+    width: 50px;
+    margin: auto;
+    display: none;
+}
 .overlay-image {
     position: relative;
 }
@@ -1538,6 +1583,32 @@ aside {
     display: inline-block;
 }
 
+/* filtre animation mobile */
+
+
+ 
+
+/* media category */
+@media only screen and (max-width: 850px) {
+    .container-main-products{
+        flex-direction: column;
+    }
+
+    #picto-filtre, #cont-picto-filtre{
+        display: block;
+    }
+    #filter{
+        width: 100% !important;
+        margin: auto;
+        text-align: center;
+        margin-top: inherit !important;
+        margin-bottom: 2em;
+        display: none;
+    }
+
+}
+
+
 
 /* .rosace-produit {
     margin-top: 0.22em;
@@ -1560,6 +1631,13 @@ aside {
 
 .products {
     justify-content: center !important;
+    align-items: center;
+    width: 100%;
+}
+
+#filter{
+    width: 20%;
+    margin-top: 2em;
 }
 
 .texte-produits {
@@ -1688,7 +1766,7 @@ textarea {
     width: 100% !important;
 }
 form {
-    border: 2px solid black;
+    text-align: center;
     padding: 1em;
     margin: 1em;
 }
@@ -1703,7 +1781,6 @@ form {
 
 #btn-log {
     width: 175px !important;
-    margin-top: 1em !important;
 }
 
 

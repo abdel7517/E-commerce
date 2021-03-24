@@ -2,14 +2,12 @@
 
 namespace App\Service\Product;
 
-use App\Entity\Image;
-use App\Entity\ImageMain;
 use App\Entity\Product;
-use App\Form\Product3Type;
 use App\Service\Cart\Cart;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\VarDumper\VarDumper;
 
 class ServiceProduct extends AbstractController
 {
@@ -25,17 +23,31 @@ class ServiceProduct extends AbstractController
         $product = new Product();
         $form = $this->createForm("App\Form\Product3Type", $product);
         $form->handleRequest($request);
+       
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->setImages($form, $product);
            
             $categoryName =  $form->get('categorie')->getData();
 
+            $nameCar = $request->get('name');
+            $car = $request->get('cara');
+
+            $description = array();
+            
+           if($nameCar !== null){
+                for( $i=0; $i< sizeof($nameCar); $i++){
+                    $name = $nameCar[$i];
+                    $description[$name] = $car[$i];
+                }
+           }
+
             $name = $categoryName->getName();
             $categoryMain = $categoryName->getMainCategory();
 
             $product->setMainCategory($categoryMain);
             $product->setCategorie($name);
+            $product->setDescription($description);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($product);
@@ -47,10 +59,22 @@ class ServiceProduct extends AbstractController
                 'nbProduct' => $this->cart->getNbOfArticle(),
             ]);
         }
+
+        
+        // get the caracteritique of categorys 
+        $categoryRepo = $this->getDoctrine()->getRepository('App\Entity\Category')->findAll();
+        $listOfCaracteristic = [];
+        foreach($categoryRepo as $category){
+            $nameCategory = $category->getName();
+            $listOfCaracteristic[$nameCategory] = $category->getFiltre();
+        }
+
+
         return $this->render('admin/new.html.twig', [
             'product' => $product,
             'form' => $form->createView(),
             'nbProduct' => $this->cart->getNbOfArticle(),
+            't' => $listOfCaracteristic
 
         ]);
     }
@@ -58,27 +82,27 @@ class ServiceProduct extends AbstractController
     
     public function setImages(FormInterface $form, $product ){
         $images = $form->get('images')->getData();
+        $arrayOfComplementaryImage = array();
 
             foreach ($images as $image) {
                 $fichier = md5(uniqid() );
                 $nom = $fichier .'.'. $image->guessExtension();
                 $image->move($this->getParameter('images_directory'), $nom);
-                $img = new Image();
-                $img->setName($nom);
-                $product->addImage($img);
+                $arrayOfComplementaryImage[] = $nom;
             }
+            $product->setComplementaryImage($arrayOfComplementaryImage);
 
             $imageMain = $form->get('image')->getData();
 
             $fichier = md5(uniqid() );
             $nom = $fichier .'.'. $imageMain->guessExtension();
             $imageMain->move($this->getParameter('images_directory'), $nom);
-            $img = new Imagemain();
-            $img->setName($nom);
-            $product->setImage($img);
+            $product->setImageMain($nom);
 
             
 
 
     }
+
+  
 }

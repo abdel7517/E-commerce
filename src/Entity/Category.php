@@ -37,6 +37,11 @@ class Category
      */
     private $description;
 
+    /**
+     * @ORM\Column(type="array")
+     */
+    private $filtre = [];
+
   
 
     public function getId(): ?int
@@ -88,6 +93,18 @@ class Category
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getFiltre(): ?array
+    {
+        return $this->filtre;
+    }
+
+    public function setFiltre(array $filtre): self
+    {
+        $this->filtre = $filtre;
 
         return $this;
     }

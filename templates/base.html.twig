@@ -4,14 +4,16 @@
 		<head>
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-			<link rel="stylesheet" href="{{asset('style.css')}}">
+			<link rel="stylesheet" href="{{asset('style.css?'~ 'now'|date('U') )}}" >
 			<link rel="stylesheet" href="{{asset('lib/bootstrap/css/bootstrap.min.css')}}">
 			{% block lib %}
 			{% endblock %}
 			<meta name="format-detection" content="telephone=no">
-			<title>
-				Staff Déco
-			</title>
+				<title>
+			{% block title %}
+				Boutique
+			{% endblock %}
+			   </title>
 			<!-- Global site tag (gtag.js) - Google Analytics -->
 			<script async src="https://www.googletagmanager.com/gtag/js?id=G-P9XHY3SBR1"></script>
 			<script>

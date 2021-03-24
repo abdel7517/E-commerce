@@ -7,7 +7,6 @@ use App\Service\Cart\Cart;
 use App\Form\RegistrationFormType;
 use App\Repository\ProductRepository;
 use App\Security\AppAuthAuthenticator;
-use App\Repository\AllCategoryRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,13 +17,12 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class RegistrationController extends AbstractController
 {
 
-    protected $productRepository, $cart, $allCategoryRepository;
+    protected $productRepository, $cart;
 
-    public function __construct(ProductRepository $productRepository, Cart $cart, AllCategoryRepository $allCategoryRepository)
+    public function __construct(ProductRepository $productRepository, Cart $cart)
     {
         $this->productRepository = $productRepository;
         $this->cart = $cart;
-        $this->allCategoryRepository = $allCategoryRepository;
         
     }
     
@@ -62,7 +60,6 @@ class RegistrationController extends AbstractController
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
             'nbProduct'=>  $this->cart->getNbOfArticle(),
-            'categories'=> $this->allCategoryRepository->findAll()
 
 
         ]);
