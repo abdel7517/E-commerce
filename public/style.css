@@ -377,6 +377,9 @@ a {
         width: 12em !important;
         height: 12em !important;
     }
+    .p-3{
+        padding: inherit !important;
+    }
 }
 
 @media only screen and (max-width: 500px) {
@@ -1185,6 +1188,7 @@ td {
     text-align: center;
     vertical-align: middle;
     border: 1px solid;
+    font-size: 0.9em;
 }
 
 .back-white {

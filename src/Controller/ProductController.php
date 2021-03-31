@@ -51,20 +51,7 @@ class ProductController extends AbstractController
         );
     }
 
-    // /**
-    //  * @Route("/category/{category}", name="product_category", methods={"GET"})
-    //  */
-    // public function categoryPage(String $category)
-    // {
-    //     return $this->render(
-    //         "category/category.html.twig",
-    //         [
-    //             'nbProduct' =>  $this->cart->getNbOfArticle(),
-    //             'categories' => $this->categoryRepository->findByMainCategory($category),
-    //             'categorie' => $category
-    //         ]
-    //     );
-    // }
+ 
 
 
    /**
@@ -483,10 +470,4 @@ class ProductController extends AbstractController
        ]);
     }
 
-    /**
-     * @Route("/search", name="search")
-     */
-    public function filtre(){
-
-    }
 }

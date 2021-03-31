@@ -3,6 +3,7 @@
 namespace App\Service\Product;
 
 use App\Entity\Product;
+use App\Entity\PromoCode;
 use App\Service\Cart\Cart;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,6 +24,25 @@ class ServiceProduct extends AbstractController
         $product = new Product();
         $form = $this->createForm("App\Form\Product3Type", $product);
         $form->handleRequest($request);
+        $promoCode = new PromoCode();
+        $formPromoCode = $this->createForm("App\Form\PromoCodeType", $promoCode);
+        $formPromoCode->handleRequest($request);
+        $formPromoCodeDelete = $this->createForm("App\Form\PromoCodeDeleteType", $promoCode);
+        $formPromoCodeDelete->handleRequest($request);
+
+        if ($formPromoCodeDelete->isSubmitted() && $formPromoCodeDelete->isValid()) {
+            $this->deletePromoCode($request, $formPromoCodeDelete);
+            
+        }
+
+        if ($formPromoCode->isSubmitted() && $formPromoCode->isValid()) {
+            
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($promoCode);
+            $entityManager->flush();
+            
+        }
+
        
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -57,6 +77,7 @@ class ServiceProduct extends AbstractController
                 'product' => $product,
                 'form' => $form->createView(),
                 'nbProduct' => $this->cart->getNbOfArticle(),
+                'formPromoCode' => $formPromoCode->createView()
             ]);
         }
 
@@ -74,7 +95,9 @@ class ServiceProduct extends AbstractController
             'product' => $product,
             'form' => $form->createView(),
             'nbProduct' => $this->cart->getNbOfArticle(),
-            't' => $listOfCaracteristic
+            'formPromoCode' => $formPromoCode->createView(),
+            'formPromoCodeDelete' => $formPromoCodeDelete->createView()
+
 
         ]);
     }
@@ -84,25 +107,30 @@ class ServiceProduct extends AbstractController
         $images = $form->get('images')->getData();
         $arrayOfComplementaryImage = array();
 
-            foreach ($images as $image) {
-                $fichier = md5(uniqid() );
-                $nom = $fichier .'.'. $image->guessExtension();
-                $image->move($this->getParameter('images_directory'), $nom);
-                $arrayOfComplementaryImage[] = $nom;
-            }
-            $product->setComplementaryImage($arrayOfComplementaryImage);
-
-            $imageMain = $form->get('image')->getData();
-
+        foreach ($images as $image) {
             $fichier = md5(uniqid() );
-            $nom = $fichier .'.'. $imageMain->guessExtension();
-            $imageMain->move($this->getParameter('images_directory'), $nom);
-            $product->setImageMain($nom);
+            $nom = $fichier .'.'. $image->guessExtension();
+            $image->move($this->getParameter('images_directory'), $nom);
+            $arrayOfComplementaryImage[] = $nom;
+        }
+        $product->setComplementaryImage($arrayOfComplementaryImage);
 
-            
+        $imageMain = $form->get('image')->getData();
 
+        $fichier = md5(uniqid() );
+        $nom = $fichier .'.'. $imageMain->guessExtension();
+        $imageMain->move($this->getParameter('images_directory'), $nom);
+        $product->setImageMain($nom);
 
     }
 
-  
+    public function deletePromoCode($request, $form){
+        $entityManager = $this->getDoctrine()->getManager();
+        $code = $form->get('promoCode')->getData();
+
+        $promoCodeRepo = $this->getDoctrine()->getRepository('App\Entity\PromoCode')->findOneBy(['Code' => $code->getCode() ]);
+
+        $entityManager->remove($promoCodeRepo);
+        $entityManager->flush();
+    }  
 }

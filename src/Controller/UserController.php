@@ -65,7 +65,7 @@ class UserController extends AbstractController
         
         // $user = $entityManager->getRepository(User::class)->find($user_id);
         // $orders = $user->getOrders();
-        $orders = $this->orderRepository->findById($user_id, 1);
+        $orders = $this->orderRepository->findBy([ 'user'=> $user_id,'state' => 1], ["date"=>'DESC']);
 
 
         return $this->render('user/history.html.twig', [

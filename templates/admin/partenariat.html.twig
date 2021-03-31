@@ -1,0 +1,167 @@
+{% extends "admin/baseAdmin.html.twig" %}
+{% block lib %}
+	<link rel="stylesheet" href="{{asset('lib/vanilla-calendar/css/vanilla-calendar-min.css')}}">
+	<script src="{{asset('lib/vanilla-calendar/js/vanilla-calendar-min.js')}}"></script>
+{% endblock %}
+{% block content %}
+	<div id="myCalendar" class="vanilla-calendar"></div>
+		<p>
+	<form action=" {{ path('admin_partenariat') }} " method="post" id='form_code' >
+		<label for="code">
+			Choisir un code promo:
+		</label>
+
+		<select name="code" id='code'>
+			{% if promoCodeSelected is defined %}
+				{% for code in promoCode %}
+					{% if promoCodeSelected == code %}
+						<option value="{{code.code}}" selected>
+							{{code.code}}
+						</option>
+					{% else %}
+						<option value="{{code.code}}">
+							{{code.code}}
+						</option>
+					{% endif %}
+				{% endfor %}
+			{% else %}
+				{% for code in promoCode %}
+					<option value="{{code.code}}">
+						{{code.code}}
+					</option>
+				{% endfor %}
+			{% endif %}
+		</select>
+		<button class='btn btn-primary'>
+			Envoyer
+		</button>
+	</form>
+
+	<section>
+		{% if error is defined  %}
+			<p>
+				{{ error }}
+			</p>
+		{% endif %}
+		{% set CA = 0 %}
+		{% if orders is defined %}
+			{% for order in orders %}
+				{% set total = 0 %}
+				<h2>
+					Numéro de commande :
+					{{ order.orderCode}}
+
+				</h2>
+				<table class="table table-bordered">
+					<tr scope="row">
+						<th scope="col">
+							Reference de commande
+						</th>
+						<th scope="col">
+							produit
+							<br>
+							(reference)
+						</th>
+						<th scope="col">
+							Prix
+						</th>
+						<th scope="col">
+							Quantité
+						</th>
+						<th scope="col">
+							Total
+						</th>
+					</tr>
+					<tbody>
+						{% for cart in order.cart %}
+							<tr>
+
+								{% set total = total + (cart.quantity * cart.product.price) %}
+
+								<td>
+									{{ cart.product.reference}}
+								</td>
+								<td>
+									{{cart.product.price}}
+								</td>
+								<td>
+									{{cart.quantity}}
+								</td>
+								<td>
+									{{total}}
+								</td>
+
+							</tr>
+						{% endfor %}
+						<tr class='recup' id="livraison">
+							<td>
+								Livraison
+							</td>
+							<td>
+								90 €
+							</td>
+							<td>
+								1
+							</td>
+							<td>
+								90 €
+							</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td colspan="3" class="text-right border-none" scope="row">
+								Total :
+							</td>
+							<td>
+								<span id="total">
+									{{ total }}
+									{% set CA = total + CA  %}
+
+								</span>
+								€
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3" class="text-right border-none" scope="row">
+								Reduction de
+								{{ promoCodeSelected.reduction }}
+								% pour le code
+								{{ promoCodeSelected.code }}
+								:
+							</td>
+							<td>
+								<span id="total">
+									{{ (total * (promoCodeSelected.reduction/100))|number_format(2) }}
+								</span>
+								€
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="3" class="text-right border-none" scope="row">
+								Total :
+							</td>
+							<td>
+								<span id="total">
+									{{ (total -( total * (promoCodeSelected.reduction/100)))|number_format(2) }}
+								</span>
+								€
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+
+
+			{% endfor %}
+		</section>
+		<h2>
+			Chiffre d'affaire total du partenaire :
+			{{ (CA -   ( CA * (promoCodeSelected.reduction/100)))|number_format(2) }}
+		</h2>
+	{% endif %}
+{% endblock %}
+
+{% block js %}
+		<script src=" {{ asset('lib/vanilla-calendar/js/partenariat.js') }} "></script>
+{% endblock %}

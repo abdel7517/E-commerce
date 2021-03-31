@@ -29,6 +29,19 @@ class MyAppController extends AbstractController
         return $this->productController->categoryPage();
     }
 
+        
+    
+    /** 
+     * @Route("/admin", name="MyApp_admin")
+     */
+    public function admin()
+    {
+        return $this->render("admin/index.html.twig", 
+        ['nbProduct'=> $this->cart->getNbOfArticle()
+        ]);
+        
+    }
+    
     /**
      * @Route("/good/{orderCode}", name="MyApp_good")
     */
@@ -36,8 +49,8 @@ class MyAppController extends AbstractController
     {
         $entityManager = $this->getDoctrine()->getManager();
         $ID = $request->get('t');
-
-
+    
+    
         $orders = $entityManager->getRepository("App\Entity\Order")->findByValue($orderCode);
         foreach($orders as $order){
             $order->setState(1);
@@ -46,7 +59,7 @@ class MyAppController extends AbstractController
             
         }
     
-
+    
         return $this->render(
             "cart/good.html.twig",
             [
@@ -57,14 +70,14 @@ class MyAppController extends AbstractController
             ]
         );
     }
-
-
+    
+    
      /**
      * @Route("/noGood", name="MyApp_noGood")
      */
     public function noGood(Request $request)
     {
-
+    
         return $this->render(
             "cart/noGood.html.twig",
             [
@@ -73,28 +86,4 @@ class MyAppController extends AbstractController
             ]
         );
     }
-
-
-    /** 
-     * @Route("/produits", name="MyApp_produit")
-     */
-    public function produit()
-    {
-           return $this->render("produit.html.twig");
-    }
-
-
-  
-
-    /** 
-     * @Route("/admin", name="MyApp_admin")
-     */
-    public function admin()
-    {
-           return $this->render("admin/index.html.twig", 
-            ['nbProduct'=> $this->cart->getNbOfArticle()
-            ]);
-
-    }
-
 }

@@ -8,6 +8,7 @@ use Stripe\Stripe;
 use App\Entity\User;
 use App\Entity\Order;
 use App\Form\OrderType;
+use App\Entity\PromoCode;
 use App\Service\Cart\Cart;
 use App\Service\Contact\Mail;
 use App\Repository\CategoryRepository;
@@ -15,20 +16,22 @@ use Symfony\Component\VarDumper\VarDumper;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 class CartController extends AbstractController
 {
 
-    protected $allCategoryRepository, $cart, $stripeClient, $client, $mailer;
+    protected $allCategoryRepository, $cart, $stripeClient, $client, $mailer, $session;
 
-    public function __construct(CategoryRepository $allCategoryRepository, Cart $cart, HttpClientInterface $client, Mail $mailer)
+    public function __construct(CategoryRepository $allCategoryRepository, Cart $cart, HttpClientInterface $client, Mail $mailer, SessionInterface $session)
     {
         $this->allCategoryRepository = $allCategoryRepository;
         $this->cart = $cart;
         $this->client = $client;
         $this->mailer = $mailer;
+        $this->session = $session;
     }
 
 
@@ -88,7 +91,39 @@ class CartController extends AbstractController
                 'action' => $this->generateUrl('cart_pay'),
             ]
         );
+       
+        if($request->request->get('promoCode')){
 
+            $this->session->remove('promoCode');
+            $promoCode = $request->request->get('promoCode');
+
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $promoCodeRepo = $entityManager->getRepository(PromoCode::class)->findOneBY(['Code'=>$promoCode]);
+            
+            if($promoCodeRepo !== null){
+                $this->session->set('promoCode', $promoCodeRepo );
+
+                return $this->render('cart/order.html.twig', [
+                    'registrationForm' => $form->createView(),
+                    'nbProduct' =>  $this->cart->getNbOfArticle(),
+                    'categories' => $this->allCategoryRepository->findAll(),
+                    'form_livraison' => $form->createView(),
+                    'items' =>  $this->cart->getCart(),
+                    'total' => $this->cart->getTotalCart(),
+                    'promoCode' => $this->cart->getPromoCode()
+                ]);
+            }else{
+                return $this->render('cart/order.html.twig', [
+                    'registrationForm' => $form->createView(),
+                    'nbProduct' =>  $this->cart->getNbOfArticle(),
+                    'categories' => $this->allCategoryRepository->findAll(),
+                    'form_livraison' => $form->createView(),
+                    'items' =>  $this->cart->getCart(),
+                    'total' => $this->cart->getTotalCart(),
+                    'error'=> 'Code promo non valide']);
+            }
+        }
 
         return $this->render('cart/order.html.twig', [
             'registrationForm' => $form->createView(),
@@ -97,6 +132,7 @@ class CartController extends AbstractController
             'form_livraison' => $form->createView(),
             'items' =>  $this->cart->getCart(),
             'total' => $this->cart->getTotalCart(),
+
         ]);
     }
 
@@ -160,7 +196,6 @@ class CartController extends AbstractController
 
         $user = $entityManager->getRepository(User::class)->find($user_id);
 
-
         if ($form->isSubmitted() && $form->isValid()) {
 
             $order->setName($form->get('name')->getData());
@@ -170,6 +205,7 @@ class CartController extends AbstractController
             $order->setCountry($form->get('country')->getData());
             $order->setDate(new DateTime());
             $order->setCart($this->cart->getCart());
+            !empty($this->cart->getPromoCode()) ?  $order->setPromoCode($this->cart->getPromoCode()) : '';
             // $order->setExpedition($form->get('expedition')->getData());
             $order->setExpedition('récupération');
             $order->setOrderCode($orderCode);
@@ -192,5 +228,10 @@ class CartController extends AbstractController
         return $this->redirectToRoute('MyApp_good', ['orderCode' => $orderCode]);
         // return $this->redirect($url);
 
+        $this->session->remove('promoCode');
+
+
     }
+
+
 }

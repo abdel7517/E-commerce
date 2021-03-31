@@ -17,71 +17,108 @@
 			</section>
 		{% endblock %}
 		{% block content %}
-			{% set i = 1 %}
-			{% for order in orders %}
-				<div class='history'>
-					<p>
-						{{ i }}
-						- Numéro de commande :
-						{{ order.orderCode }}
+
+			{% if orders|length > 0 %}
+
+				{% set i = 1 %}
+				{% for order in orders %}
+					<div class='history'>
+						<p>
+							{{ i }}
+							- Numéro de commande :
+							{{ order.orderCode }}
 
 
-						datant du
-						{{ order.date|date("d/m/Y") }}
-					</p>
-					<table>
-						<th>
-							Produit
-							<br>
-							(reference)
-						</th>
-						<th>
-							Prix
-						</th>
-						<th>
-							Quantité
-						</th>
-						<th>
-							Total
-						</th>
-						<tbody>
+							datant du
+							{{ order.date|date("d/m/Y") }}
+						</p>
+						<table>
+							<th>
+								Produit
+								<br>
+								(reference)
+							</th>
+							<th>
+								Prix
+							</th>
+							<th>
+								Quantité
+							</th>
+							<th>
+								Total
+							</th>
+							<tbody>
 
-							{% for cart in order.cart %}
-								<tr>
-									<td>
-										{{ cart.product.reference}}
-									</td>
-									<td>
-										{{cart.product.price}}
-									</td>
-									<td>
-										{{cart.quantity}}
-									</td>
-									<td>
-										{{cart.quantity * cart.product.price}}
-									</td>
-								</tr>
-							{% endfor %}
-							{% if order.expedition == 'livraison' %}
-								<tr>
-									<td>
-										Livraison
-									</td>
-									<td>
-										90€
-									</td>
-									<td>
-										1
-									</td>
-									<td>
-										90€
-									</td>
-								</tr>
-							{% endif %}
-						</tbody>
-					</table>
-				</div>
-				{% set i = i + 1 %}
-				<br>
-			{% endfor %}
+								{% for cart in order.cart %}
+									<tr>
+										<td>
+											{{ cart.product.reference}}
+										</td>
+										<td>
+											{{cart.product.price}}
+										</td>
+										<td>
+											{{cart.quantity}}
+										</td>
+										<td>
+											{{cart.quantity * cart.product.price}}
+										</td>
+									</tr>
+								{% endfor %}
+								{% if order.expedition == 'livraison' %}
+									<tr>
+										<td>
+											Livraison
+										</td>
+										<td>
+											90€
+										</td>
+										<td>
+											1
+										</td>
+										<td>
+											90€
+										</td>
+									</tr>
+								{% endif %}
+								{% if order.promoCode|length > 0 %}
+									<tr>
+										<td colspan="3" class="text-right border-none" scope="row">
+											Reduction de
+											{{ order.promoCode.reduction}}% pour le code
+											{{ order.promoCode.code }}
+											:
+										</td>
+										<td>
+											<span id="total">
+												{{ (total * (order.promoCode.reduction/100))|number_format(2) }}
+											</span>
+											€
+										</td>
+									</tr>
+									<tr>
+											<td colspan="3" class="text-right border-none" scope="row">
+											Total :
+										</td>
+										<td>
+											<span id="total">
+												{{ (total -( total * (order.promoCode.reduction/100)))|number_format(2) }}
+											</span>
+											€
+										</td>
+										</tr>
+								{% endif %}
+							</tbody>
+						</table>
+					</div>
+					{% set i = i + 1 %}
+					<br>
+				{% endfor %}
+			{% else %}
+				<p class='TC alone'>
+					Surprise, c'est vide !
+				</p>
+			{% endif %}
+
+
 		{% endblock %}

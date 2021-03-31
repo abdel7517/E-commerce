@@ -78,6 +78,11 @@ class Order
      */
     private $ready;
 
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $promoCode = [];
+
    
 
     public function getId(): ?int
@@ -225,6 +230,18 @@ class Order
     public function setReady(?bool $ready): self
     {
         $this->ready = $ready;
+
+        return $this;
+    }
+
+    public function getPromoCode(): ?array
+    {
+        return $this->promoCode;
+    }
+
+    public function setPromoCode(?array $promoCode): self
+    {
+        $this->promoCode = $promoCode;
 
         return $this;
     }

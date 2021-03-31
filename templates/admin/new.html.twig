@@ -4,30 +4,46 @@
 {% endblock %}
 {% block content %}
 	<section>
-		<h1>
-			Ajoutez un produit
-		</h1>
 
 
 	
 	<div>
 		{{ form_start(form,  {'id': 'form_add_product'}) }}
+		<h2>
+			Ajoutez un produit
+		</h2>
 			{{ form_widget(form) }}
 	
 			<div id="cara"></div>
 			<div onClick='add()' >Ajoutez une caractéristique</div>
 			<button class="btn btn-primary btn-add">{{ button_label|default('Valider') }}</button>
-		{{ form_end(form) }}			
-		
+		{{ form_end(form) }}
 
-			<a href="{{ path('admin_index') }}">
-				Retour
-			</a>
 			<a href=" {{ path('admin_edit_category') }} ">
 				<button class="btn">
 					Gérez mes categories
 				</button>
 			</a>
+
+		{{ form_start(formPromoCode,  {'id': 'form_add_product'}) }}
+			<h2>Ajoutez un code promo </h2>
+			{{ form_widget(formPromoCode) }}
+	
+			<button class="btn btn-primary btn-add">{{ button_label|default('Valider') }}</button>
+		{{ form_end(formPromoCode) }}	
+				
+		{{ form_start(formPromoCodeDelete,  {'id': 'form_add_product'}) }}
+	<H3>Supprimer un code promo </H3>
+			{{ form_widget(formPromoCodeDelete) }}
+	
+			<button class="btn btn-primary btn-add">{{ button_label|default('Valider') }}</button>
+		{{ form_end(formPromoCodeDelete) }}	
+		
+
+			<a href="{{ path('admin_index') }}">
+				Retour
+			</a>
+		
 	</div>
 {# 
 <pre>

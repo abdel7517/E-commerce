@@ -25,6 +25,11 @@
 				Projets sur mesure
 			</a>
 		</p>
+			<p>
+			<a href=" {{ path('admin_partenariat') }} ">
+				Partenariat
+			</a>
+		</p>
 		<p>
 			Cherchez une commande par numéro de commande
 		</p>
@@ -41,15 +46,16 @@
 				</button>
 			</form>
 		</div>
-			<h1 class='h1-admin' >
-						Commandes pour le{{date}}
-					</h1>
+		<h1 class='h1-admin'>
+			Commandes pour le
+			{{date}}
+		</h1>
 
 		{% if orders|length > 0  %}
 
 			{% for order in orders %}
 				<div class='history'>
-				
+
 					<table>
 						<th>
 							code de commande
@@ -156,21 +162,55 @@
 							{% endfor %}
 						</tbody>
 						<tfoot class='foot-facture'>
-							<td colspan="3" class="text-right border-none" scope="row">
-								Total :
-							</td>
-							<td>
-								<span id="total">
-									{{ total }}
-								</span>
-								€
-							</td>
+							<tr>
+								<td colspan="3" class="text-right border-none" scope="row">
+									Total :
+								</td>
+								<td>
+									<span id="total">
+										{{ total }}
+									</span>
+									€
+								</td>
+							</tr>
+							{% if order.promoCode|length > 0 %}
+								<tr>
+									<td colspan="3" class="text-right border-none" scope="row">
+										Reduction de
+										{{ order.promoCode.reduction}}
+										% pour le code
+										{{ order.promoCode.code }}
+										:
+									</td>
+									<td>
+										<span id="total">
+											{{ (total * (order.promoCode.reduction/100))|number_format(2) }}
+										</span>
+										€
+									</td>
+								</tr>
+								<tr>
+									<td colspan="3" class="text-right border-none" scope="row">
+										Total :
+									</td>
+									<td>
+										<span id="total">
+											{{ (total -( total * (order.promoCode.reduction/100)))|number_format(2) }}
+										</span>
+										€
+									</td>
+								</tr>
+							{% endif %}
 						</tfoot>
 					</table>
 					{% if order.ready != true %}
-						<a href=" {{ path('admin_index', { 'orderCode': order.orderCode, 'date' : 'null' }) }} "  class="btn btn-primary">Prévenir le client de la disponibilté de la commande </a>
+						<a href=" {{ path('admin_index', { 'orderCode': order.orderCode, 'date' : 'null' }) }} " class="btn btn-primary">
+							Prévenir le client de la disponibilté de la commande
+						</a>
 					{% else %}
-						<p>Le client est prévenue que la commande est prête</p>
+						<p>
+							Le client est prévenue que la commande est prête
+						</p>
 					{% endif %}
 				</div>
 				<br>
@@ -183,7 +223,6 @@
 		{% endif %}
 	</section>
 	{% block js %}
-
-		<script src=" {{ asset('main.js') }} "></script>
+		<script src=" {{ asset('lib/vanilla-calendar/js/main.js') }} "></script>
 	{% endblock %}
 {% endblock %}

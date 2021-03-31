@@ -120,5 +120,17 @@ class Cart extends AbstractController
         }
         $this->session->set("panier",$panier);
     }
+
+    public function getPromoCode(){
+        $promoCode = $this->session->get('promoCode');
+        if($this->session->get('promoCode') !== null)
+        {
+            $promoCodeToReturn = [];
+            $promoCodeToReturn['code'] = $promoCode->getCode();
+            $promoCodeToReturn['reduction'] = $promoCode->getReduction();
+            return $promoCodeToReturn;
+        }
+        return null;
+    }
 }
 ?>

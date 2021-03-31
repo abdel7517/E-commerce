@@ -66,7 +66,65 @@ class AdminController extends AbstractController
        return $this->serviceProduct->add($request);
     }   
 
-   
+     
+     /**
+     * @Route("/partenariat/{promoCode}/{date}", name="admin_partenariat")
+     */
+    public function partenariat( $promoCode = null,  $date = null, Request $request){
+      
+        $entityManager = $this->getDoctrine()->getManager();
+        $promoCodeRepo = $this->getDoctrine()->getRepository('App\Entity\PromoCode')->findAll();
+        $orderRepo = $this->getDoctrine()->getRepository('App\Entity\order')->findAll();
+
+        if($promoCode !== null ){
+            $promoCodeSelected = $promoCode;
+            $promoCodeSelectedRepo = $this->getDoctrine()->getRepository('App\Entity\PromoCode')->findOneBy(['Code' => $promoCodeSelected]);
+            $orderRepo;
+            if($date !== null)
+            {
+                $date = DateTime::createFromFormat('Y-m-d', $date);
+                $orderRepo = $this->getDoctrine()->getRepository('App\Entity\Order')->getByDate($date);
+
+            }
+            else{
+                
+                $orderRepo = $this->getDoctrine()->getRepository('App\Entity\Order')->findAll();
+            }
+    
+            $orderWithCodeSelected = [];
+
+            foreach($orderRepo as $order){
+                $promoCodeArray = $order->getPromoCode();
+                if(!empty($order->getPromoCode())){
+                    if( $promoCodeArray['code'] === $promoCodeSelected ){
+                        $orderWithCodeSelected[] = $order;
+                    }
+                }
+            }
+           
+            if(count($orderWithCodeSelected) > 0 ){
+                return $this->render('admin/partenariat.html.twig', [
+                    'orders'=>$orderWithCodeSelected,
+                    'promoCodeSelected' => $promoCodeSelectedRepo,
+                    'nbProduct'=>  $this->cart->getNbOfArticle(),
+                    'promoCode' => $promoCodeRepo,    
+                ]);
+            }
+            return $this->render('admin/partenariat.html.twig', [
+                'promoCodeSelected' => $promoCodeSelected,
+                'nbProduct'=>  $this->cart->getNbOfArticle(),
+                'promoCode' => $promoCodeRepo,    
+                'error' => 'Aucune commande utilise ce code promo '
+            ]);
+        }
+
+        return $this->render('admin/partenariat.html.twig', [
+            'promoCode' => $promoCodeRepo,
+            'nbProduct'=>  $this->cart->getNbOfArticle(),
+
+        ]);
+
+    }
     
     /**
      * @Route("/newCategory", name="admin_edit_category")
@@ -152,9 +210,9 @@ class AdminController extends AbstractController
 
 
      /**
-     * @Route("/{date}/{orderCode}/{ready}", name="admin_index")
+     * @Route("/{date}/{orderCode}/{ready}/{promoCode}", name="admin_index")
     */
-    public function index($date = null,string $orderCode = null, string $ready = null , Request $request): Response
+    public function index($date = null,string $orderCode = null, string $ready = null , $promoCode = null ,  Request $request): Response
     {
 
         $entityManager = $this->getDoctrine()->getManager();
