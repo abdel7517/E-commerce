@@ -2,11 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
-use App\Entity\Order;
-use App\Entity\Category;
 use App\Service\Cart\Cart;
-use Stripe\BaseStripeClient;
 use App\Service\Contact\Mail;
 use App\Repository\UserRepository;
 use App\Repository\OrderRepository;
@@ -69,7 +65,7 @@ class UserController extends AbstractController
 
 
         return $this->render('user/history.html.twig', [
-            'items'=>  $this->cart->getCart(),
+         'items'=>  $this->cart->getCart(),
          'total'=> $this->cart->getTotalCart(),
          'nbProduct'=> $this->cart->getNbOfArticle(),
          'categories'=> $this->allCategoryRepository->findAll(),

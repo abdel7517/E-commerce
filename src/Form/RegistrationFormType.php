@@ -21,7 +21,8 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', null, ['label'=> false, 'attr' => ['placeholder' => 'Votre mail','class' => 'input' ]])
+            ->add('email', null, ['label'=> false, 'attr' => ['placeholder' => 'Votre mail','class' => 'input',
+            ]])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'label'=> false, 'attr' => ['placeholder' => 'Votre nom' ],
@@ -48,6 +49,9 @@ class RegistrationFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'attr' => array(
+                'class' => 'flex-column-center'
+            )
         ]);
     }
 }
