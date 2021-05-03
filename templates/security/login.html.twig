@@ -1,6 +1,5 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}
+{% block title %}Authentification
 {% endblock %}
 {% block banniere %}
 	<!-- banniere -->
@@ -19,63 +18,129 @@
 
 			</section>
 		{% endblock %}
+
+{% block navBar %}
+<div class="main-content-wrapper d-flex clearfix">
+
+					<nav class="justify-content-center nav-top ">
+						<ul class='flex-nav'>
+							<img src="{{ asset('img/logoStaffdeco.png') }}" alt="logo staffdeco" class="logo ">
+
+
+							<li class="nav-item  ">
+								<a class="nav-link " href="https://www.staffdeco.fr/index.html">
+									Accueil
+								</a>
+							</li>
+
+							<li class="nav-item">
+								<a class="nav-link" href="https://www.staffdeco.fr/presentation.html">
+									Présentation
+								</a>
+							</li>
+
+							<li class="nav-item">
+								<a class="nav-link" href="https://boutique.staffdeco.fr/">
+									Produits
+								</a>
+							</li>
+
+							<li class="nav-item">
+								<a class="nav-link" href="https://www.staffdeco.fr/realisations.html">
+									Réalisations
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="https://www.staffdeco.fr/surMesure.php">Sur Mesure</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="https://www.staffdeco.fr/contact.html">
+									Contact
+								</a>
+							</li>
+							<li class="nav-item ">
+								<a class="nav-link un" href=" {{ path('user_index') }} ">
+										Mon Compte
+									{# <img src=" {{ asset('img/account.png') }} " alt="" class="cart"> #}
+								</a>
+							</li>
+							<li class="nav-item ">
+								<a class="nav-link" href=" {{ path('cart_index') }} ">
+									<img src=" {{ asset('img/cart.png') }} " alt="" class="cart">
+									<span>
+										{{ nbProduct }}
+									</span>
+								</a>
+							</li>
+							<li  id="search" >
+								<div class="container-search">
+									<div class="search-wrapper">
+										<div class="input-holder">
+											<input type="text" class="search-input" placeholder="reference produit" />
+											<button  class="search-icon" onclick="searchToggle(this, event);"><span></span></button>
+										</div>
+										<span class="close" onclick="searchToggle(this, event);"></span>
+									</div>
+								</div>
+							</li>
+						</ul>
+						<div class="ornement">
+							<img src=" {{asset('img/angle.png')}} " alt="logo staffdeco" class="angle">
+						</div>
+				
+						</div>
+					</nav>
+{% endblock %}
+
 		{% block content %}
-			<div class="center alone">
-				<form method="post">
-					{% if error %}
-						<div class="alert alert-danger">
-							{{ error }}
-						</div>
-					{% endif %}
+		
 
-					{% if app.user %}
-						<div class="mb-3">
-							Vous êtes connecté en temps que :
-							{{ app.user.username }}
-							,
-							<a href="{{ path('app_logout') }}">
-								Logout
-							</a>
-						</div>
-					{% endif %}
+	</div>
+		{% if error %}
+			<div class="alert TC">
+				{{ error }}
+			</div>
+		{% endif %}
 
-					
-					<label for="inputEmail">
-						Email
-					</label>
-					<input type="email" value="{{ last_username }}" name="email" id="inputEmail"  required autofocus>
-					<label for="inputPassword">
-						Mot de passe
-					</label>
-					<input type="password" name="password" id="inputPassword"  required>
+		{% if app.user %}
+			<div class="mb-3">
+				Vous êtes connecté en temps que :
+				{{ app.user.username }}
+				,
+				<a href="{{ path('app_logout') }}">
+					Logout
+				</a>
+			</div>
+		{% endif %}
+<form class="flex-column-center"  method='POST'>
+  <!-- Email input -->
+  <div class="form-outline mb-4 justify-content-center w-50">
+    <label class="form-label" for="form1Example1">Adresse mail</label>
+    <input type="email" value="{{ last_username }}" name="email" id="form1Example1" class="form-control" />
+  </div>
 
-					<input
-					type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-					{#
-								        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-								        See https://symfony.com/doc/current/security/remember_me.html
-								
-								        <div class="checkbox mb-3">
-								            <label>
-								                <input type="checkbox" name="_remember_me"> Remember me
-								            </label>
-								        </div>
-								    #}
+  <!-- Password input -->
+  <div class="form-outline mb-4 w-50">
+    <label class="form-label" for="form1Example2">Mot de passe</label>
+    <input type="password" name="password" id="form1Example2" class="form-control" />
+	<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+  </div>
 
-					<button class="btn btn-lg btn-primary" id="btn-log" type="submit">
-						Se Connecter
-					</button>
-					<p>
+  <!-- 2 column grid layout for inline styling -->
+  <div class="row mb-4">
+    
+
+      <!-- Simple link -->
 						<a href=" {{ path('app_register') }} ">
 							Pas de compte ?
 						</a>
-					</p>
-
-					<p>
 						<a href=" {{ path('user_setPass') }} ">Mot de passe oublié ?  </a>
-					</p>
-				</form>
-			</div>
+  </div>
+
+  <!-- Submit button -->
+  <button type="submit" class="btn btn-primary btn-block">Se connecter</button>
+</form>
+		
 
 		{% endblock %}
